@@ -1,0 +1,44 @@
+{
+    "sonidos": {
+        "accion": {
+            "golpear": [
+                {
+                    "archivo": "./son/scorpion/golpear1.wav"
+                },
+				{
+                    "archivo": "./son/scorpion/golpear2.wav"
+                },
+				{
+                    "archivo": "./son/scorpion/golpear3.wav"
+                }
+            ],
+            "golpeado": [
+                {
+                    "archivo": "./son/scorpion/golpeado1.wav"                    
+                },
+				{
+                    "archivo": "./son/scorpion/golpeado2.wav"                    
+                },
+				{
+                    "archivo": "./son/scorpion/golpeado3.wav"                    
+                },
+				{
+                    "archivo": "./son/scorpion/golpeado4.wav"                    
+                }
+            ],            
+			"ataque": [
+                {
+                    "archivo": "./son/scorpion/ataque1.wav"
+                },
+				{
+                    "archivo": "./son/scorpion/ataque2.wav"
+                }				
+            ],
+			"saltar": [
+                {
+                    "archivo": "./son/scorpion/saltar.wav"
+                }			
+            ],
+        }
+    }
+}

@@ -1,0 +1,50 @@
+{
+    "sonidos": {
+        "accion": {
+            "golpear": [
+                {
+                    "archivo": "./son/liukang/golpear1.wav"
+                },
+				{
+                    "archivo": "./son/liukang/golpear2.wav"
+                },
+				{
+                    "archivo": "./son/liukang/golpear3.wav"
+                }
+            ],
+            "golpeado": [
+                {
+                    "archivo": "./son/liukang/golpeado1.wav"                    
+                },
+				{
+                    "archivo": "./son/liukang/golpeado2.wav"                    
+                },
+				{
+                    "archivo": "./son/liukang/golpeado3.wav"                    
+                },
+				{
+                    "archivo": "./son/liukang/golpeado4.wav"                    
+                }
+            ],            
+			"ataque": [
+                {
+                    "archivo": "./son/liukang/ataque1.wav"
+                },
+				{
+                    "archivo": "./son/liukang/ataque2.wav"
+                },
+				{
+                    "archivo": "./son/liukang/ataque3.wav"
+                },
+				{
+                    "archivo": "./son/liukang/ataque4.wav"
+                }
+            ],
+			"saltar": [
+                {
+                    "archivo": "./son/liukang/saltar.wav"
+                }			
+            ],
+        }
+    }
+}

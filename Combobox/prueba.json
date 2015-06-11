@@ -1,0 +1,301 @@
+{
+    "ventana": {
+        "anchopx": 800,
+        "altopx": 600,
+        "ancho": 200
+    },
+    "escenario": {
+        "ancho": 1000.5,
+        "alto": 150,
+        "ypiso": 15
+    },
+    "capas": [
+        {
+            "imagen_fondo": "ima/bkg/r_bkg.png",
+            "ancho": 200
+        },
+        {
+            "imagen_fondo": "ima/bkg/r_4.png",
+            "ancho": 260
+        },
+        {
+            "imagen_fondo": "ima/bkg/r_3.png",
+            "ancho": 395
+        },
+        {
+            "imagen_fondo": "ima/bkg/r_2.png",
+            "ancho": 500
+        },
+        {
+            "imagen_fondo": "ima/bkg/r_1.png",
+            "ancho": 1212
+        }
+    ],
+    "personajes": [
+        {
+            "ancho": 80,
+            "alto": 90,
+            "zindex": 1,
+            "orientacion": "DER",
+            "sprites": "ima/sprites/LiuKangMK3U.png",
+            "sonidos": "son/liukang/liukang.json",
+            "fatality": "ima/fatality/liukang.json",
+            "CaminarParaAdelante": "CaminarParaAdelante",
+            "CaminarParaAtras": "CaminarParaAtras",
+            "Quieto": "Quieto",
+            "Salto": "Salto",
+            "SaltoDiagonal": "SaltoDiagonal",
+            "Caida": "Caida",
+            "nombre": "Liu Kang"
+        },
+        {
+            "ancho": 80,
+            "alto": 90,
+            "zindex": 1,
+            "orientacion": "DER",
+            "sprites": "ima/sprites/ScorpionMK3U.png",
+            "sonidos": "son/scorpion/scorpion.json",
+            "fatality": "ima/fatality/scorpion.json",
+            "CaminarParaAdelante": "CaminarParaAdelante",
+            "CaminarParaAtras": "CaminarParaAtras",
+            "Quieto": "Quieto",
+            "Salto": "Salto",
+            "SaltoDiagonal": "SaltoDiagonal",
+            "Caida": "Caida",
+            "nombre": "Scorpion"
+        }
+    ],
+
+    "pelea": {
+        "rounds": 3,
+        "tiempo": 99
+    },
+
+
+    "color_alternativo": {
+        "h_inicial": -20, // scopion 40 a 70 , liu kang -20 a 5
+        "h_final": 5,
+        "desplazamiento": 220 //x360 original, 54 verde, 100 verdeazulado, 144 celeste, 162 azul,
+        // 304 rojo, 330 naranja
+
+    },
+    "control_1": {
+        "arriba": "up",
+        "abajo": "down",
+        "izquierda": "left",
+        "derecha": "right",
+        "defensa": "z",
+        "golpe_bajo": "x",
+        "golpe_alto": "c",
+        "patada_baja": "v",
+        "patada_alta": "b",
+        "arma": "n",
+        "salir": "esc",
+        "reiniciar": "r",
+        "reiniciar_pelea": "f1"
+    },
+
+    "control_2": {
+        "arriba": "w",
+        "abajo": "s",
+        "izquierda": "a",
+        "derecha": "d",
+        "defensa": "j",
+        "golpe_bajo": "k",
+        "golpe_alto": "l",
+        "patada_baja": "i",
+        "patada_alta": "o",
+        "arma": "u",
+        "salir": "esc",
+        "reiniciar": "r",
+        "reiniciar_pelea": "f1"
+    },
+	
+	"combo_1": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "adelante"
+            },
+            {
+                "movimiento": "adelante"
+            },
+            {
+                "movimiento": "GB"
+            }
+        ]
+    },
+	"combo_2": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "atras"
+            },
+            {
+                 "movimiento": "atras"
+            },
+            {
+                "movimiento": "defensa"
+            }
+        ]
+    },
+	"combo_3": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "adelante"
+            },
+            {
+                 "movimiento": "adelante"
+            },
+            {
+                "movimiento": "PB"
+            }
+        ]
+    },
+	"combo_4": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "abajo"
+            },
+            {
+                 "movimiento": "adelante"
+            },
+            {
+                "movimiento": "defensa"
+            }
+        ]
+    },
+	"combo_5": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "abajo"
+            },
+            {
+                 "movimiento": "atras"
+            },
+            {
+                "movimiento": "GB"
+            }
+        ]
+    },
+	"combo_6": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "abajo"
+            },
+            {
+                 "movimiento": "atras"
+            },
+            {
+                "movimiento": "defensa"
+            }
+        ]
+    },
+	"combo_7": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "abajo"
+            },
+            {
+                 "movimiento": "adelante"
+            },
+            {
+                "movimiento": "GB"
+            }
+        ]
+    },
+	"combo_8": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "atras"
+            },
+            {
+                 "movimiento": "atras"
+            },
+            {
+                "movimiento": "PB"
+            }
+        ]
+    },
+	"combo_9": {
+        "error": 0,
+        "tiempo": 3000,
+        "movimientos": [
+            {
+                "movimiento": "atras"
+            },
+            {
+                 "movimiento": "adelante"
+            },
+            {
+                "movimiento": "PA"
+            },
+			{
+                "movimiento": "atras"
+            }
+        ]
+    },
+	
+	"combo_10": {
+        "error": 5,
+        "tiempo": 2000,
+        "movimientos": [
+            {
+                "movimiento": "arriba"
+            },
+            {
+                "movimiento": "abajo"
+            },
+            {
+                "movimiento": "GA"
+            },
+            {
+                "movimiento": "arriba"
+            }
+        ]
+    },
+	"combo_11": {
+        "error": 5,
+        "tiempo": 2000,
+        "movimientos": [
+            {
+                "movimiento": "atras"
+            },
+            {
+                "movimiento": "atras"
+            },
+            {
+                "movimiento": "GA"
+            }
+        ]
+    },
+	"combo_12": {
+        "error": 5,
+        "tiempo": 2000,
+        "movimientos": [
+            {
+                "movimiento": "abajo"
+            },
+            {
+                "movimiento": "abajo"
+            },
+            {
+                "movimiento": "GA"
+            }
+        ]
+    }
+}

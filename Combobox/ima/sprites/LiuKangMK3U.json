@@ -1,0 +1,1720 @@
+{
+    "sprites": {
+        "imagen": "ima/sprites/LiuKangMK3U.png",
+        "coordenadas": {
+            "SaltoGolpeado": {
+                "sensores": [
+                    {
+                        "x": 34,
+                        "y": 84,
+                        "ancho": 100,
+                        "alto": 66,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 2160,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1980,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1800,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1620,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1440,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+
+            "AgachadoDefensa": {
+                "sensores": [
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 180,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "AgachadoDefensaGolpeado": {
+                "sensores": [
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 180,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "AgachadoGolpeado": {
+                "sensores": [
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 360,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Defensa": {
+                "sensores": [
+                    {
+                        "x": 34,
+                        "y": 64,
+                        "ancho": 32,
+                        "alto": 61,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 180,
+                        "y": 720,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 720,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "DefensaGolpeado": {
+                "sensores": [
+                    {
+                        "x": 34,
+                        "y": 64,
+                        "ancho": 32,
+                        "alto": 61,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 180,
+                        "y": 720,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 720,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 720,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Caminar": {
+                "sensores": [
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 70,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1260,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "CaminarAtras": {
+                "sensores": [
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 70,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 0,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 900,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+
+                ]
+            },
+            "Golpeado": {
+                "sensores": [
+                    {
+                        "x": 56,
+                        "y": 71,
+                        "ancho": 56,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 59,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 360,
+                        "y": 1080,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1080,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 1080,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "PatadaAlta": {
+                "sensores": [
+                    {
+                        "x": 148,
+                        "y": 60,
+                        "ancho": 14,
+                        "alto": 13,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 124,
+                        "y": 70,
+                        "ancho": 17,
+                        "alto": 15,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 56,
+                        "y": 71,
+                        "ancho": 56,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 59,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 720,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1260,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "GolpeAlto2": {
+                "sensores": [
+                    {
+                        "x": 96,
+                        "y": 60,
+                        "ancho": 23,
+                        "alto": 30,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 121,
+                        "y": 52,
+                        "ancho": 17,
+                        "alto": 18,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 73,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 360,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "GolpeAlto": {
+                "sensores": [
+                    {
+                        "x": 110,
+                        "y": 60,
+                        "ancho": 23,
+                        "alto": 30,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 140,
+                        "y": 52,
+                        "ancho": 17,
+                        "alto": 18,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 76,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 900,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Arma": {
+                "sensores": [
+                    {
+                        "x": 62,
+                        "y": 50,
+                        "ancho": 60,
+                        "alto": 130,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 360,
+                        "y": 1620,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1620,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 1620,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1620,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 1620,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "PatadaBaja": {
+                "sensores": [
+                    {
+                        "x": 149,
+                        "y": 95,
+                        "ancho": 14,
+                        "alto": 13,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 112,
+                        "y": 90,
+                        "ancho": 34,
+                        "alto": 50,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 56,
+                        "y": 71,
+                        "ancho": 56,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 59,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 900,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 1800,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "GolpeBajo": {
+                "sensores": [
+                    {
+                        "x": 84,
+                        "y": 72,
+                        "ancho": 65,
+                        "alto": 18,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 79,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 360,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "GolpeBajo2": {
+                "sensores": [
+                    {
+                        "x": 96,
+                        "y": 72,
+                        "ancho": 65,
+                        "alto": 18,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 90,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 900,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 1980,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Quieto": {
+                "sensores": [
+                    {
+                        "x": 62,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 70,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1440,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1440,
+                        "y": 2160,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Salto": {
+                "sensores": [
+                    {
+                        "x": 56,
+                        "y": 87,
+                        "ancho": 62,
+                        "alto": 89,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+
+                    {
+                        "x": 180,
+                        "y": 2340,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "SaltoDiagonal": {
+                "sensores": [
+                    {
+                        "x": 62,
+                        "y": 112,
+                        "ancho": 68,
+                        "alto": 65,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1080,
+                        "y": 2520,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 2520,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 2520,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 2520,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 2520,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 2520,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 2520,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Agacharse": {
+                "sensores": [
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 0,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Gancho": {
+                "sensores": [
+                    {
+                        "x": 90,
+                        "y": 45,
+                        "ancho": 51,
+                        "alto": 80,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1260,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "AgachadoGolpeBajo": {
+                "sensores": [
+                    {
+                        "x": 107,
+                        "y": 110,
+                        "ancho": 40,
+                        "alto": 28,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 32,
+                        "alto": 35,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1800,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1620,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1440,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1620,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1800,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "SaltoGolpe": {
+                "sensores": [
+                    {
+                        "x": 20,
+                        "y": 80,
+                        "ancho": 100,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 110,
+                        "y": 85,
+                        "ancho": 50,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    }
+
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 540,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "SaltoPatada": {
+                "sensores": [
+                    {
+                        "x": 20,
+                        "y": 80,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 80,
+                        "y": 85,
+                        "ancho": 50,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    }
+
+                ],
+                "secuenciaSprites": [
+
+                    {
+                        "x": 1080,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "SaltoDiagonalPatada": {
+                "sensores": [
+                    {
+                        "x": 20,
+                        "y": 90,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 95,
+                        "y": 105,
+                        "ancho": 60,
+                        "alto": 60,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    }
+
+                ],
+                "secuenciaSprites": [
+
+                    {
+                        "x": 1620,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1620,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1620,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "AgachadoPatadaBaja": {
+                "sensores": [
+                    {
+                        "x": 101,
+                        "y": 145,
+                        "ancho": 51,
+                        "alto": 25,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 900,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "AgachadoPatadaAlta": {
+                "sensores": [
+                    {
+                        "x": 104,
+                        "y": 90,
+                        "ancho": 40,
+                        "alto": 25,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1440,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1440,
+                        "y": 540,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Toma1": {
+                "sensores": [
+                    {
+                        "x": 62,
+                        "y": 50,
+                        "ancho": 60,
+                        "alto": 130,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 2160,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Toma2": {
+                "sensores": [
+                    {
+                        "x": 20,
+                        "y": 90,
+                        "ancho": 80,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 105,
+                        "y": 145,
+                        "ancho": 30,
+                        "alto": 30,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+					{
+                        "x": 95,
+                        "y": 105,
+                        "ancho": 30,
+                        "alto": 30,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1080,
+                        "y": 1080,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 1080,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 1080,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 1080,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+			"Toma6": {
+                "sensores": [
+                    {
+                        "x": 20,
+                        "y": 90,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 105,
+                        "y": 145,
+                        "ancho": 30,
+                        "alto": 30,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    }
+					
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x":2190,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
+            "Disparo": {
+                "sensores": [
+                    {
+                        "x": 0,
+                        "y": 0,
+                        "ancho": 60,
+                        "alto": 50,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 988,
+                        "y": 796,
+                        "ancho": 42,
+                        "alto": 34
+                    },
+                    {
+                        "x": 878,
+                        "y": 796,
+                        "ancho": 110,
+                        "alto": 34
+                    },
+                    {
+                        "x": 731,
+                        "y": 796,
+                        "ancho": 147,
+                        "alto": 34
+                    },
+                    {
+                        "x": 540,
+                        "y": 796,
+                        "ancho": 191,
+                        "alto": 34
+                    }
+                ]
+            },
+            "Terminado": {
+                "sensores": [
+                    {
+                        "x": 66,
+                        "y": 71,
+                        "ancho": 45,
+                        "alto": 105,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 77,
+                        "y": 51,
+                        "ancho": 28,
+                        "alto": 20,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1800,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1620,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1440,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 2700,
+                        "ancho": 288,
+                        "alto": 180
+                    }
+                ]
+            }
+        }
+    }
+}

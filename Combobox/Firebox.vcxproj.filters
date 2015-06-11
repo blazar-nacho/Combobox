@@ -1,0 +1,978 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\lib">
+      <UniqueIdentifier>{32440950-e1c5-4ff5-bb55-b2a967ddfffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\lib\SDL_ttf">
+      <UniqueIdentifier>{80999dea-2cd1-4b2c-984f-005ef0756dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\include">
+      <UniqueIdentifier>{32227f9c-a9e9-411e-8bc6-65e58fb45b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\include\json">
+      <UniqueIdentifier>{c161f832-80ff-47e2-91ea-434c7897bee4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\include\SDL">
+      <UniqueIdentifier>{30994d5d-9093-43bd-bb34-a1c4f6cea1fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ima">
+      <UniqueIdentifier>{aaf9bd37-e01b-46bf-8e5e-2ffcdd678830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ima\bkg">
+      <UniqueIdentifier>{968389d1-8295-42ba-9765-ebf1fb757cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ima\sprites">
+      <UniqueIdentifier>{4419627b-8be6-474a-8bf7-7b2cfa19b56c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ima\ttf">
+      <UniqueIdentifier>{ecc8998a-eaf5-447c-8d7f-df5e93a7c318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\lib\SDL_mixer">
+      <UniqueIdentifier>{4ba3728b-4056-437c-996a-4097d9aa39e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\son">
+      <UniqueIdentifier>{471fbe61-8af7-4121-8d75-7c3c97b46b2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\son\scorpion">
+      <UniqueIdentifier>{9e797a87-4c48-4a9c-a95c-47c9bce867a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\son\liukang">
+      <UniqueIdentifier>{a3b9bd60-5e1f-4a3b-92e5-25421540cce9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\ima\fatality">
+      <UniqueIdentifier>{a27e8359-76fe-4ac5-9083-8675789f8fae}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+    <Text Include="Botones del controlador.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="implementar.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="PosiblesTEST.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.jpeg.txt">
+      <Filter>Resource Files\lib</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.png.txt">
+      <Filter>Resource Files\lib</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.tiff.txt">
+      <Filter>Resource Files\lib</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.webp.txt">
+      <Filter>Resource Files\lib</Filter>
+    </Text>
+    <Text Include="lib\LICENSE.zlib.txt">
+      <Filter>Resource Files\lib</Filter>
+    </Text>
+    <Text Include="lib\SDL_mixer\LICENSE.FLAC.txt">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </Text>
+    <Text Include="lib\SDL_mixer\LICENSE.mikmod.txt">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </Text>
+    <Text Include="lib\SDL_mixer\LICENSE.modplug.txt">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </Text>
+    <Text Include="lib\SDL_mixer\LICENSE.ogg-vorbis.txt">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </Text>
+    <Text Include="lib\SDL_mixer\LICENSE.smpeg.txt">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Constantes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controlador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControladorDeTomas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversorAString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversorDeEventos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cuerpo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Escenario.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FechayHora.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Firebox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ManejadorULogicas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MatizColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MortalFigther.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mundo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pelea.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Personaje.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Toma.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Validador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidadorDeCapas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidadorDeEscenario.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidadorDelColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidadorDelControlador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidadorDePelea.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidadorDePersonajes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidadorDeTomas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidadorDeVentana.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ventana.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vista.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Capa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL_image.h">
+      <Filter>Resource Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL_ttf.h">
+      <Filter>Resource Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\features.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\forwards.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\json.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\reader.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\value.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\version.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\writer.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\assertions.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\autolink.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\json\config.h">
+      <Filter>Resource Files\include\json</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_audio.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_bits.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_blendmode.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_clipboard.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_config.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_cpuinfo.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_endian.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_error.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_events.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_filesystem.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_gamecontroller.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_gesture.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_haptic.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_hints.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_joystick.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_keyboard.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_keycode.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_loadso.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_log.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_main.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_messagebox.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_mouse.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_mutex.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_name.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_opengl.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_opengles.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_opengles2.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_pixels.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_platform.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_power.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_quit.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_rect.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_render.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_revision.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_rwops.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_scancode.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_shape.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_stdinc.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_surface.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_system.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_syswm.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_assert.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_common.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_compare.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_crc32.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_font.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_fuzzer.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_harness.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_images.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_log.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_md5.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_test_random.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_thread.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_timer.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_touch.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_types.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_version.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_video.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\begin_code.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\close_code.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_assert.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_atomic.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Movimiento.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControladorAutomatico.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ControladorDeMouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventoDeMouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Round.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Modo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Modo1vs1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Modo1vsCom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModoPractica.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModoDeJuego.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sonido.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL\SDL_mixer.h">
+      <Filter>Resource Files\include\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="Fatality.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Firebox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Escenario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FechayHora.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MatizColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mundo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pelea.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Personaje.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sensor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprites.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Toma.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Validador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDeCapas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDeEscenario.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDelColor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDelControlador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDePelea.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDePersonajes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDeTomas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidadorDeVentana.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Ventana.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vista.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Capa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controlador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ControladorDeTomas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversorAString.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversorDeEventos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cuerpo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Movimiento.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ControladorAutomatico.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ControladorDeMouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventoDeMouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Round.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modo1vs1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Modo1vsCom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModoPractica.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModoDeJuego.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sonido.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fatality.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="prueba.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="pruebaDefecto.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="sprites.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="SDL2_image.dll" />
+    <None Include="SDL2_ttf.dll" />
+    <None Include="zlib1.dll" />
+    <None Include="jsoncpp.dll" />
+    <None Include="libpng16-16.dll" />
+    <None Include="SDL2.dll" />
+    <None Include="lib\SDL_ttf\libfreetype-6.dll">
+      <Filter>Resource Files\lib\SDL_ttf</Filter>
+    </None>
+    <None Include="lib\SDL_ttf\SDL2_ttf.dll">
+      <Filter>Resource Files\lib\SDL_ttf</Filter>
+    </None>
+    <None Include="lib\SDL_ttf\zlib1.dll">
+      <Filter>Resource Files\lib\SDL_ttf</Filter>
+    </None>
+    <None Include="ima\sprites\player_default.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
+    <None Include="ima\sprites\player1.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
+    <None Include="ima\sprites\reloj.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
+    <None Include="ima\sprites\ScorpionMK3U.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
+    <None Include="ima\sprites\KenSF.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
+    <None Include="ima\sprites\LiuKangMK3U.json">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </None>
+    <None Include="lib\SDL_mixer\smpeg2.dll">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </None>
+    <None Include="lib\SDL_mixer\libFLAC-8.dll">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </None>
+    <None Include="lib\SDL_mixer\libmikmod-2.dll">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </None>
+    <None Include="lib\SDL_mixer\libmodplug-1.dll">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </None>
+    <None Include="lib\SDL_mixer\libogg-0.dll">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </None>
+    <None Include="lib\SDL_mixer\libvorbis-0.dll">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </None>
+    <None Include="lib\SDL_mixer\libvorbisfile-3.dll">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </None>
+    <None Include="SDL2_mixer.dll" />
+    <None Include="son\scorpion\scorpion.json">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </None>
+    <None Include="smpeg2.dll" />
+    <None Include="son\liukang\liukang.json">
+      <Filter>Resource Files\son\liukang</Filter>
+    </None>
+    <None Include="ima\fatality\liukang.json">
+      <Filter>Resource Files\ima\fatality</Filter>
+    </None>
+    <None Include="ima\fatality\scorpion.json">
+      <Filter>Resource Files\ima\fatality</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\jsoncpp.lib">
+      <Filter>Resource Files\lib</Filter>
+    </Library>
+    <Library Include="lib\SDL2.lib">
+      <Filter>Resource Files\lib</Filter>
+    </Library>
+    <Library Include="lib\SDL2_image.lib">
+      <Filter>Resource Files\lib</Filter>
+    </Library>
+    <Library Include="lib\SDL2main.lib">
+      <Filter>Resource Files\lib</Filter>
+    </Library>
+    <Library Include="lib\SDL2test.lib">
+      <Filter>Resource Files\lib</Filter>
+    </Library>
+    <Library Include="lib\SDL_ttf\SDL2_ttf.lib">
+      <Filter>Resource Files\lib\SDL_ttf</Filter>
+    </Library>
+    <Library Include="lib\SDL_mixer\SDL2_mixer.lib">
+      <Filter>Resource Files\lib\SDL_mixer</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="ima\ttf\Vera.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraBd.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraBI.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraIt.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraMoBd.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraMoBI.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraMoIt.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraMono.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraSe.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+    <Font Include="ima\ttf\VeraSeBd.ttf">
+      <Filter>Resource Files\ima\ttf</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ima\sprites\player_default.png">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+    <Image Include="ima\sprites\player1.png">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+    <Image Include="ima\sprites\player2.png">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+    <Image Include="ima\sprites\Reloj.gif">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+    <Image Include="ima\sprites\ScorpionMK3U.png">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+    <Image Include="ima\sprites\KenSF.png">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+    <Image Include="ima\sprites\LiuKangMK3U.png">
+      <Filter>Resource Files\ima\sprites</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_p3.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_p4.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\fight Hd.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\flaweesVictory.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\Lifebar.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\liukang.jpg">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\LiuKangDamage.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\logo.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\mainmenu.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\multiRound.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\netherealm.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_1.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_2.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_3.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_4.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\p_bkg.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\piramide.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\r_1.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\r_2.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\r_3.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\r_4.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\r_bkg.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\round1.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\roundDanger.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\roundWin.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\scorpion.jpg">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\subzero.jpg">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_1.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_2.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_3.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_4.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\t_bkg.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\texturaVerde.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\toasty.gif">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\1p_bkg.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\barraDeVida.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\barraDeVidaRoja.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_bkg.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_capa.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_p1.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\bkg\default_p2.png">
+      <Filter>Resource Files\ima\bkg</Filter>
+    </Image>
+    <Image Include="ima\fatality\scorpion.png">
+      <Filter>Resource Files\ima\fatality</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="son\scorpion\ataque1.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\ataque2.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\golpeado.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\golpeado1.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\golpeado2.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\golpeado3.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\golpeado4.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\golpear1.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\golpear2.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\golpear3.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\scorpion\saltar.wav">
+      <Filter>Resource Files\son\scorpion</Filter>
+    </Media>
+    <Media Include="son\liukang\ataque1.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\ataque2.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\ataque3.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\ataque4.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\golpeado1.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\golpeado2.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\golpeado3.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\golpeado4.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\golpear1.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\golpear2.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\golpear3.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+    <Media Include="son\liukang\saltar.wav">
+      <Filter>Resource Files\son\liukang</Filter>
+    </Media>
+  </ItemGroup>
+</Project>

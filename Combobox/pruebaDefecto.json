@@ -1,0 +1,109 @@
+{
+    "ventana": {
+        "anchopx": 800,
+        "altopx": 600,
+        "ancho": 200
+    },
+    "escenario": {
+        "ancho": 1000.5,
+        "alto": 150,
+        "ypiso": 15
+    },
+    "capas": [
+        {
+            "imagen_fondo": "ima/bkg/default_bkg.png",
+            "ancho": 200
+        },
+        {
+            "imagen_fondo": "ima/bkg/default_p4.png",
+            "ancho": 260
+        },
+        {
+            "imagen_fondo": "ima/bkg/default_p3.png",
+            "ancho": 395
+        },
+        {
+            "imagen_fondo": "ima/bkg/default_p2.png",
+            "ancho": 500
+        },
+        {
+            "imagen_fondo": "ima/bkg/default_p1.png",
+            "ancho": 1212
+        }
+    ],
+    "personajes": [
+        {
+            "ancho": 80,
+            "alto": 90,
+            "zindex": 1,
+            "orientacion": "DER",
+            "sprites": "ima/sprites/player_default.png",
+            "CaminarParaAdelante": "CaminarParaAdelante",
+            "CaminarParaAtras": "CaminarParaAtras",
+            "Quieto": "Quieto",
+            "Salto": "Salto",
+            "SaltoDiagonal": "SaltoDiagonal",
+            "Caida": "Caida",
+            "nombre": "Scorpion"
+        },
+        {
+            "ancho": 80,
+            "alto": 90,
+            "zindex": 1,
+            "orientacion": "DER",
+            "sprites": "ima/sprites/player_default.png",
+            "CaminarParaAdelante": "CaminarParaAdelante",
+            "CaminarParaAtras": "CaminarParaAtras",
+            "Quieto": "Quieto",
+            "Salto": "Salto",
+            "SaltoDiagonal": "SaltoDiagonal",
+            "Caida": "Caida",
+            "nombre": "Scorpion"
+
+        }
+    ],
+    "pelea": 
+        { 
+           "fighters": "Scorpion VS Scorpion"
+        },
+    
+
+    "color_alternativo": 
+        {
+          "h_inicial": 40,
+          "h_final": 70,
+          "desplazamiento": 30
+
+        },
+    
+    "control_1": {
+        "arriba": "up",
+        "abajo": "down",
+        "izquierda": "left",
+        "derecha": "right",
+        "defensa": "z",
+        "golpe_bajo": "x",
+        "golpe_alto": "c",
+        "patada_baja": "v",
+        "patada_alta": "b",
+        "arma": "n",
+        "salir": "esc",
+        "reiniciar": "r"
+    },
+
+    "control_2": {
+        "arriba": "w",
+        "abajo": "s",
+        "izquierda": "a",
+        "derecha": "d",
+        "defensa": "j",
+        "golpe_bajo": "k",
+        "golpe_alto": "l",
+        "patada_baja": "i",
+        "patada_alta": "o",
+        "arma": "u",
+        "salir": "esc",
+        "reiniciar": "r"
+    }
+
+}
