@@ -27,9 +27,12 @@ public:
 	Cuerpo* getCuerpo(size_t pos);
 	Sensor* getProyectil(size_t pos);
 	Sensor* sensorEngloba(Sensor* sensorUno, Sensor* sensorDos);
+	bool huboToma();
+	Toma* getToma();
 	void reiniciar();
 
 private:
+	Toma* ultimaToma;
 	vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;

@@ -42,6 +42,15 @@ void Mundo::reiniciar(){
 	cambioGolpeAlto = false;
 }
 
+bool Mundo::huboToma(){
+	if (ultimaToma != nullptr) return true;
+	return false;
+}
+
+Toma* Mundo::getToma(){
+	return ultimaToma;
+}
+
 Cuerpo* Mundo::getCuerpo(size_t pos)
 {
 	if (pos < Cuerpos.size())
@@ -61,6 +70,7 @@ Sensor* Mundo::getProyectil(size_t pos)
 
 int Mundo::Paso(float difTiempo)
 {
+	ultimaToma = nullptr;
 	int estadoJuego = CONTINUAR;
 	for (unsigned int i = 0; i < Cuerpos.size(); i++)
 	{
@@ -766,6 +776,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 
 	//COMBO 1---PODER (ARMA ARROJABLE)
 	if ((unaToma->getNombre() == NOMBRE_COMBO_1) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
+		ultimaToma = unaToma;
 		nuevoEstado.accion = ARMA_ARROJABLE;
 		unCuerpo->getSensoresProyectil().at(0)->activarSensor();
 		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
@@ -773,6 +784,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 
 	//COMBO 5---
 	if (unaToma->getNombre() == NOMBRE_COMBO_5 && (unCuerpo->getRefPersonaje()->getNombre() == "Liu Kang")){
+		ultimaToma = unaToma;
 		nuevoEstado.accion = BICICLETA;
 
 		if (!invertido){
@@ -789,6 +801,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 
 	//COMBO 6---
 	if ((unaToma->getNombre() == NOMBRE_COMBO_6) && (unCuerpo->getRefPersonaje()->getNombre() == "Liu Kang")){
+		ultimaToma = unaToma;
 		nuevoEstado.accion = FLYKICK;
 
 		if (!invertido){
@@ -806,6 +819,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 
 	//fatality-- Combo 10
 	if (unaToma->getNombre() == NOMBRE_COMBO_10){
+		ultimaToma = unaToma;
 		// perdon jose..
 		//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
 			nuevoEstado.accion = FATALITY_EST;

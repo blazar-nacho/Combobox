@@ -37,6 +37,7 @@ public:
 	~Vista();
 
 private:
+	unsigned int mantenerElColor;
 	int vibraciones;
 	int retraso;
 	bool vibracion;

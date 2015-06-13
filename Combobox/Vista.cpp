@@ -1849,15 +1849,30 @@ void Vista::alfa(Uint8 alfa){
 void Vista::DibujarInput(Controlador* unControlador){
 	ConversorAString* unConversor = new ConversorAString();
 
-	SDL_Color colorBlancoTexto = { 255, 255, 255, 255 };
+	SDL_Color colorBlancoTexto;
 	unConversor->mantenerStringSegunSeparador(textoCombos, " - ");
-	cargarTexto(textoCombos, colorBlancoTexto);
 
 	MOV_TIPO unMovimiento = unControlador->getUltimoMovTipo();
 
 	if (unMovimiento != QUIETO){
 		textoCombos += unConversor->getTeclaComoStringDelMovimientoParaElConversorDeEventos(unMovimiento, unControlador->getConversorDeEventos()) + " - ";
 	}
+
+	if (mantenerElColor != 0){
+		colorBlancoTexto = { 255, 0, 0, 0 };
+		mantenerElColor--;
+	}
+	else {
+		colorBlancoTexto = { 255, 255, 255, 255 };
+		mantenerElColor = 0;
+	}
+
+	if (refMundo->huboToma()){
+		textoCombos += refMundo->getToma()->getNombre() + " - ";
+		mantenerElColor = 100;
+	}
+
+	cargarTexto(textoCombos, colorBlancoTexto);
 
 	//Dibujar texturas del texto
 	cuadradoRedimension.w = anchoTexto;
