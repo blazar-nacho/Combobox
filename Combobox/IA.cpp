@@ -7,6 +7,8 @@ IA::IA()
 	personajeRival = nullptr;
 	personajeControlado = nullptr;
 	umbralDeProbabilidad = 5;
+	cantidadDeMovimientosAdelante = 0;
+	cantidadDeMovimientosAtras = 0;
 }
 
 
@@ -60,7 +62,22 @@ MOV_TIPO IA::getMovimiento(){
 		saltoAdelante = SALTODER;
 		saltoAtras = SALTOIZQ;
 	}
-	
+
+	//MOVIMIENTOS ADELANTE
+	if (cantidadDeMovimientosAdelante != 0){
+		cantidadDeMovimientosAdelante--;
+		return adelante;
+	}
+
+	//MOVIMIENTOS ADELANTE
+	if (cantidadDeMovimientosAtras != 0){
+		cantidadDeMovimientosAtras--;
+		return atras;
+	}
+
+	cantidadDeMovimientosAdelante = 0;
+	cantidadDeMovimientosAtras = 0;
+
 	if (probabilidadDeHacerLoCorrecto < umbralDeProbabilidad){
 		//BASICOS
 		if (personajeControlado->getEstado().golpeado == GOLPEADO){
@@ -75,8 +92,14 @@ MOV_TIPO IA::getMovimiento(){
 			probabilidadDeMovimiento = (rand() % 50);
 			if (probabilidadDeMovimiento == 0) return saltoAdelante;
 			if (probabilidadDeMovimiento == 1) return saltoAtras;
-			if (probabilidadDeMovimiento > 1 && probabilidadDeMovimiento < 40) return adelante;
-			if (probabilidadDeMovimiento >= 40) return atras;
+			if (probabilidadDeMovimiento > 1 && probabilidadDeMovimiento < 40){
+				cantidadDeMovimientosAdelante = 10;
+				return adelante;
+			}
+			if (probabilidadDeMovimiento >= 40){
+				cantidadDeMovimientosAtras = 10;
+				return atras;
+			}
 		}
 		if (unEstado.movimiento == ARMA_ARROJABLE || unEstado.movimiento == BICICLETA){
 			probabilidadDeMovimiento = (rand() % 50);
@@ -91,7 +114,10 @@ MOV_TIPO IA::getMovimiento(){
 		//SI ESTAN LEJOS
 		if (!posicionDeGolpeo){
 			probabilidadDeMovimiento = (rand() % 46);
-			if (probabilidadDeMovimiento <= 40) return adelante;
+			if (probabilidadDeMovimiento <= 40){
+				cantidadDeMovimientosAdelante = 10;
+				return adelante;
+			}
 			if (probabilidadDeMovimiento == 41) return saltoAdelante;
 			if (probabilidadDeMovimiento > 41) return ARMA;
 		}
@@ -119,8 +145,14 @@ MOV_TIPO IA::getMovimiento(){
 		}
 	}
 	probabilidadDeMovimiento = (rand() % 10);
-	if (probabilidadDeMovimiento == 1) return adelante;
-	if (probabilidadDeMovimiento == 2) return atras;
+	if (probabilidadDeMovimiento == 1){
+		cantidadDeMovimientosAdelante = 10;
+		return adelante;
+	}
+	if (probabilidadDeMovimiento == 2){
+		cantidadDeMovimientosAtras = 10;
+		return atras;
+	}
 	if (probabilidadDeMovimiento > 2) return QUIETO;
 	return (MOV_TIPO)(rand() % 22);
 }

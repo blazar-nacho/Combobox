@@ -18,5 +18,7 @@ private:
 	Personaje* personajeControlado;
 	std::vector<std::vector<MOV_TIPO>> movimientosIdeales;
 	int umbralDeProbabilidad;
+	unsigned int cantidadDeMovimientosAdelante;
+	unsigned int cantidadDeMovimientosAtras;
 };
 
