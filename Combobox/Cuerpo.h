@@ -356,6 +356,8 @@ public:
 	void setposProyectilAnterior(float posAnteriorProyectil);
 	float getXProyectilAnterior();
 	void limitarAEscenario();
+	// devuelve el mayor ancho de sensor y su posicion en x
+	int getSensorLargo(float *posX);
 
 private:
 	std::vector<Sensor*>* getSensoresActivos() const;
@@ -376,6 +378,7 @@ private:
 	std::vector<std::vector<Sensor*>*> sensores;
 	std::vector<Sensor*> sensoresDisparo;
 	std::string sensorActivoStr;
-	// nacho: devuelve el max x del sensor
-	int getSensorLargo();	
+	// devuelve el max x del sensor
+	float getSensorXMax();
+	
 };

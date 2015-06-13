@@ -155,12 +155,12 @@ bool Cuerpo::estaEnBorde2()
 	return true;
 }*/
 
-// nacho: devuelve el max x del sensor
-int Cuerpo::getSensorLargo()
+// devuelve el max x del sensor
+float Cuerpo::getSensorXMax()
 {
 	// valor default
-	int xSensor = 0;
-	int maximo = 0;
+	float xSensor = 0;
+	float maximo = 0;
 	std::vector<Sensor*>* sensoresAct = getSensores();
 	for (size_t i = 0; i < sensoresAct->size(); i++)
 	{
@@ -172,10 +172,30 @@ int Cuerpo::getSensorLargo()
 	return maximo;
 }
 
+int Cuerpo::getSensorLargo(float *posX)
+{
+	// valor default
+	int anchoSensor = 0;	
+	int maximo = 0;
+	std::vector<Sensor*>* sensoresAct = getSensores();
+	*posX = sensoresAct->at(0)->getPosicion().first;
+
+	for (size_t i = 0; i < sensoresAct->size(); i++)
+	{
+		int anchoSensor = sensoresAct->at(i)->getAncho();
+		if (anchoSensor > maximo) {
+			maximo = anchoSensor;
+			*posX = sensoresAct->at(i)->getPosicion().first;
+		}
+	}
+
+	return maximo;
+}
+
 bool Cuerpo::estaEnBorde()
 {
 	ManejadorULogicas manejadorUnidades;
-	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorLargo());
+	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorXMax());
 	bool esBorde = false;
 	float largoPersonaje = getRefPersonaje()->getAncho() - xSensorLog;
 
@@ -189,7 +209,7 @@ bool Cuerpo::estaEnBorde()
 void Cuerpo::limitarAEscenario()
 {
 	ManejadorULogicas manejadorUnidades;
-	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorLargo());
+	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorXMax());
 
 	// limita inicio del escenario
 	if (posicion.x + xSensorLog < 0)

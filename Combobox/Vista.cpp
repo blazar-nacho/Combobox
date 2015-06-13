@@ -335,24 +335,27 @@ void Vista::actualizar(){
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderClear(renderer);
 
-	Sensor* sensorPj1 = refMundo->getCuerpo(0)->getSensores()->at(0);
-	Sensor* sensorPj2 = refMundo->getCuerpo(1)->getSensores()->at(0);
+	float xSensPos1, xSensPos2;
+	xSensPos1 = 0;
+	xSensPos2 = 0;
+	int anchoSens1 = refMundo->getCuerpo(0)->getSensorLargo(&xSensPos1);
+	int anchoSens2 = refMundo->getCuerpo(1)->getSensorLargo(&xSensPos2);	
 
 	// condicion de borde Personaje Uno
 	bool PjUnoEstaEnBordeIzq = false;
 	bool PjUnoEstaEnBordeDer = false;
-	if (xPjUno + manejadorULog.darLongUnidades(sensorPj1->getPosicion().first + (sensorPj1->getAncho())) >= anchoVentana - camaraXLog)
+	if (xPjUno + manejadorULog.darLongUnidades(xSensPos1 + (anchoSens1)) >= anchoVentana - camaraXLog)
 		PjUnoEstaEnBordeDer = true;
-	if (xPjUno + manejadorULog.darLongUnidades(sensorPj1->getPosicion().first) < -camaraXLog)
+	if (xPjUno + manejadorULog.darLongUnidades(xSensPos1) < -camaraXLog)
 		PjUnoEstaEnBordeIzq = true;
 	bool PjUnoEstaEnBorde = PjUnoEstaEnBordeIzq || PjUnoEstaEnBordeDer;
 
 	// condicion de borde Personaje Dos
 	bool PjDosEstaEnBordeIzq = false;
 	bool PjDosEstaEnBordeDer = false;
-	if (xPjDos + manejadorULog.darLongUnidades(sensorPj2->getPosicion().first + (sensorPj2->getAncho())) >= anchoVentana - camaraXLog)
+	if (xPjDos + manejadorULog.darLongUnidades(xSensPos2 + (anchoSens2)) >= anchoVentana - camaraXLog)
 		PjDosEstaEnBordeDer = true;
-	if (xPjDos+ manejadorULog.darLongUnidades(sensorPj2->getPosicion().first)< -camaraXLog)
+	if (xPjDos+ manejadorULog.darLongUnidades(xSensPos2)< -camaraXLog)
 		PjDosEstaEnBordeIzq = true;
 	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
 
