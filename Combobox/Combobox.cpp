@@ -25,8 +25,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	bool error;
 
 	int accion = REINICIAR;
-	while (accion == REINICIAR){
 
+	while (accion == REINICIAR){
+		Controlador* controladorUno;
+		Controlador* controladorDos;
 		if (SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_EVENTS | SDL_INIT_AUDIO) != 0){
 			const char* msg = ((std::string)"Error iniciando SDL: ").append(SDL_GetError()).c_str();
 			Log::getInstancia().logearMensajeEnModo("No se puede inicializar SDL, se cierra el programa", Log::MODO_ERROR);
@@ -45,11 +47,11 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		if (!ParseoExitoso) return EXIT_FAILURE; //si el json por defecto fallo, el programa termina
 
-		vector2D vecGravedad(0.0f, GRAVEDAD_Y);	
+		vector2D vecGravedad(0.0f, GRAVEDAD_Y);
 
 		/*********************************************************************/
 		/*      Inicialización de vista y variables del juego               */
-		/*********************************************************************/	
+		/*********************************************************************/
 		//Parte de creación inicial.		
 		Mundo* unMundo = new Mundo(vecGravedad);
 		Vista* unaVista = new Vista(unMundo, &error, true);
@@ -67,17 +69,23 @@ int _tmain(int argc, _TCHAR* argv[])
 			return  EXIT_FAILURE;
 		}
 
-		//Instanciación de modos de juego
+		defCuerpo personaje1 = defCuerpo();
+		personaje1.posicion = vector2D((P1_POS_INI + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso()));
+		defCuerpo personaje2 = defCuerpo();
+		personaje2.posicion = vector2D((float)(P2_POS_INI + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso()));
+
+		accion = INICIAR;
+		while (accion == INICIAR){
+
+			//Instanciación de modos de juego
 
 			Menu* menu = new Menu(new Modo(unaVista));
 			int resultadoModo = menu->seleccionarModo(Parser::getInstancia().getControlador1(), Parser::getInstancia().getControlador2());
 
-			Controlador* controladorUno = menu->getModo()->getControlador1();
-			Controlador* controladorDos = menu->getModo()->getControlador2();
+			controladorUno = menu->getModo()->getControlador1();
+			controladorDos = menu->getModo()->getControlador2();
 
-			defCuerpo personaje1 = defCuerpo();
-			personaje1.posicion = vector2D((P1_POS_INI + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso()));
-			Personaje* perso1 = Parser::getInstancia().getPelea()->getPersonaje1();
+			//Personaje* perso1 = Parser::getInstancia().getPelea()->getPersonaje1();
 			personaje1.nombre = Parser::getInstancia().getPelea()->getPersonaje1()->getNombre();
 
 			Cuerpo *unCuerpo = new Cuerpo(personaje1, controladorUno);
@@ -87,8 +95,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 			unMundo->agregarCuerpo(unCuerpo);
 
-			defCuerpo personaje2 = defCuerpo();
-			personaje2.posicion = vector2D((float)(P2_POS_INI + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso()));
 			personaje2.nombre = Parser::getInstancia().getPelea()->getPersonaje2()->getNombre();
 
 			Cuerpo *otroCuerpo = new Cuerpo(personaje2, controladorDos);
@@ -123,7 +129,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				int estadoDos = controladorDos->cambiar();
 
 				if (estadoUno == REINICIAR || estadoDos == REINICIAR){
-
+					accion = REINICIAR;
 					break;
 				}
 
@@ -157,6 +163,11 @@ int _tmain(int argc, _TCHAR* argv[])
 						Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
 					}
 					else Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
+					unaVista->resetContadorLogoPelea();
+					unMundo->reiniciar();
+					unaVista->reiniciarCamara();
+					unaVista->reiniciarMenu();
+					accion = INICIAR;
 					break;
 				}
 				if (estadoVida == CAMBIAR_ROUND){
@@ -185,27 +196,29 @@ int _tmain(int argc, _TCHAR* argv[])
 					//Se espera el tiempo que queda
 					SDL_Delay((Uint32)round(MSxCUADRO - frameTicks));
 				}
-			
+
 
 
 			}
-		// Se eliminan variables del juego y se libera la memoria
-		delete unaVista;
-		delete unMundo;
-		delete unCuerpo;
+			// Se eliminan variables del juego y se libera la memoria
+			capTimer.stop();
+			fpsTimer.stop();
+			Parser::getInstancia().getPelea()->terminarPelea();
+			delete unCuerpo;
+			delete otroCuerpo;
+			delete menu;
+		}
 		delete controladorUno;
 		delete controladorDos;
-		delete menu;
+		delete unaVista;
+		delete unMundo;
 		Parser::FreeInstancia();
-		
 		//Cierro el sonido
 		Sonido::Cerrar();
 		TTF_Quit();
 		IMG_Quit();
 		SDL_Quit();
-		
 	}
-	
 	return EXIT_SUCCESS;
 }
 

@@ -16,8 +16,8 @@ public:
 	void actualizar();
 	MODOS_DE_JUEGO actualizarMenu(Controlador* unControlador, EventoDeMouse* unEventoDeMouse);
 	int Vista::elegirDificultad(Controlador* unControlador, EventoDeMouse *unEventoDeMouse);
-	PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, EventoDeMouse *unEventoDeMouse);
-	PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, Controlador* otroControlador, EventoDeMouse *unEventoDeMouse);
+	PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, EventoDeMouse *unEventoDeMouse, std::string &nombreDelP1, std::string &nombreDelP2);
+	PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, Controlador* otroControlador, EventoDeMouse *unEventoDeMouse, std::string &nombreDelP1, std::string &nombreDelP2);
 	PJSELECCION Vista::traducirSeleccion(int opcion1, int opcion2, PJSELECCION personajes);
 	void Vista::setColorPj1(std::vector<double> unColor);
 	void Vista::setColorPj2(std::vector<double> unColor);
@@ -34,6 +34,7 @@ public:
 	void Vista::cargarTexto(std::string textureText, SDL_Color textColor);
 	void dibujarTexto(SDL_Rect cuadradoDestino, Uint8 Alfa);
 	void reiniciarCamara();
+	void reiniciarMenu();
 	~Vista();
 
 private:

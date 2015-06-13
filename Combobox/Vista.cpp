@@ -302,6 +302,88 @@ void Vista::reiniciarCamara(){
 		+ Parser::getInstancia().getVentana().getAncho() / 2;
 }
 
+void Vista::reiniciarMenu(){
+	int anchoVentanaPx = Parser::getInstancia().getVentana().getAnchoPx();
+	int altoVentanaPx = Parser::getInstancia().getVentana().getAltoPx();
+	rectanguloVentana = { 0, 0, anchoVentanaPx, altoVentanaPx };
+	//Opciones modo de juego
+	opcion = 0;
+	opcionTorre = 0;
+	opcionPersonaje = 11;
+	opcionPj1 = 11;
+	opcionPj2 = 22;
+	opcion1Seleccionada = false;
+	opcion2Seleccionada = false;
+
+	// Textura Seleccion Personajes
+	SDL_DestroyTexture(texturaSeleccionPersonajes);
+	SDL_Surface* supPjs = IMG_Load("ima/bkg/seleccionPersonaje.png");
+	texturaSeleccionPersonajes = SDL_CreateTextureFromSurface(renderer, supPjs);
+	SDL_FreeSurface(supPjs);
+
+	// Textura Seleccion Pj1
+	SDL_DestroyTexture(texturaSeleccionPj1);
+	SDL_Surface* supPj1 = IMG_Load("ima/bkg/cuadPj1.png");
+	texturaSeleccionPj1 = SDL_CreateTextureFromSurface(renderer, supPj1);
+	SDL_FreeSurface(supPj1);
+
+	// Textura Seleccion Pj2
+	SDL_DestroyTexture(texturaSeleccionPj2);
+	SDL_Surface* supPj2 = IMG_Load("ima/bkg/cuadPj2.png");
+	texturaSeleccionPj2 = SDL_CreateTextureFromSurface(renderer, supPj2);
+	SDL_FreeSurface(supPj2);
+	cambiarColor = false;
+
+	// Textura fondo torres
+	SDL_DestroyTexture(texturaFondoTorres);
+	SDL_Surface* supfondoTorre = IMG_Load("ima/bkg/nocheOscura.png");
+	texturaFondoTorres = SDL_CreateTextureFromSurface(renderer, supfondoTorre);
+	SDL_FreeSurface(supfondoTorre);
+
+	// Textura Novato
+	SDL_DestroyTexture(texturabebebubu);
+	SDL_Surface* supbebe = IMG_Load("ima/bkg/d_bebebubu.png");
+	texturabebebubu = SDL_CreateTextureFromSurface(renderer, supbebe);
+	SDL_FreeSurface(supbebe);
+
+	// Textura Medio
+	SDL_DestroyTexture(texturaMedio);
+	SDL_Surface* supMedio = IMG_Load("ima/bkg/d_medio.png");
+	texturaMedio = SDL_CreateTextureFromSurface(renderer, supMedio);
+	SDL_FreeSurface(supMedio);
+
+	// Textura Experimentado
+	SDL_DestroyTexture(texturaExperimentado);
+	SDL_Surface* supExperimentado = IMG_Load("ima/bkg/d_Experimentado.png");
+	texturaExperimentado = SDL_CreateTextureFromSurface(renderer, supExperimentado);
+	SDL_FreeSurface(supExperimentado);
+
+	// Textura Experto
+	SDL_DestroyTexture(texturaExperto);
+	SDL_Surface* supExperto = IMG_Load("ima/bkg/d_Experto.png");
+	texturaExperto = SDL_CreateTextureFromSurface(renderer, supExperto);
+	SDL_FreeSurface(supExperto);
+
+	// Textura muestras
+	SDL_DestroyTexture(personajesMuestra);
+	SDL_Surface* supMuestras = IMG_Load("ima/bkg/muestras.png");
+	personajesMuestra = SDL_CreateTextureFromSurface(renderer, supMuestras);
+	SDL_FreeSurface(supMuestras);
+
+	muestra1 = { 212, 195, 63, 129 };
+	muestra2 = { 528, 195, 63, 129 };
+
+	rectDificultad = ajusteResolucionBase800x600(278, 15, 200, 200);
+
+	//textura 
+	texto = "Ingrese Nombre: ";
+	nombreTextoPj1 = " ";
+	nombreTextoPj2 = " ";
+
+	textoIngresado = " ";
+	textoIngresado2 = " ";
+
+}
 
 void Vista::actualizar(){
 
@@ -678,7 +760,7 @@ void Vista::setModoActual(MODOS_DE_JUEGO unModoActual){
 	modoActual = unModoActual;
 }
 
-PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, EventoDeMouse *unEventoDeMouse){
+PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, EventoDeMouse *unEventoDeMouse, std::string &nombreDelP1, std::string &nombreDelP2){
 
 	MOV_TIPO mov1 = unControlador->getMovimientos().back()->getMovimiento();
 
@@ -1018,8 +1100,8 @@ PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, EventoDeMouse *u
 
 	if ((opcion1Seleccionada) && (opcion2Seleccionada)){
 		personajes.seleccionados = SI;
-		Parser::getInstancia().getPersonajes().at(0)->setNombreActual(textoIngresado);
-		Parser::getInstancia().getPersonajes().at(1)->setNombreActual(textoIngresado2);
+		nombreDelP1 =  textoIngresado;
+		nombreDelP2 = textoIngresado2;
 	}
 	if (opcionPj1 == opcionPj2)
 		cambiarColor = true;
@@ -1155,7 +1237,7 @@ SDL_Rect Vista::ajusteResolucionBase800x600(int x, int y, int anchoPx, int altoP
 	return rectanguloResultado;
 }
 
-PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, Controlador* otroControlador, EventoDeMouse *unEventoDeMouse){
+PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, Controlador* otroControlador, EventoDeMouse *unEventoDeMouse, std::string &nombreDelP1, std::string &nombreDelP2){
 	MOV_TIPO mov1 = unControlador->getMovimientos().back()->getMovimiento();
 	MOV_TIPO mov2 = otroControlador->getMovimientos().back()->getMovimiento();
 
@@ -1535,8 +1617,8 @@ PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, Controlador* otr
 
 	if ((opcion1Seleccionada) && (opcion2Seleccionada)){
 		personajes.seleccionados = SI;
-		Parser::getInstancia().getPersonajes().at(0)->setNombreActual(textoIngresado);
-		Parser::getInstancia().getPersonajes().at(1)->setNombreActual(textoIngresado2);
+		nombreDelP1 = textoIngresado;
+		nombreDelP2 = textoIngresado2;
 	}
 	personajes = traducirSeleccion(opcionPj1, opcionPj2, personajes);
 

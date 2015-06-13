@@ -130,6 +130,8 @@ void Pelea::terminarPelea(){
 	peleaTerminada = true;
 	rounds.clear();
 	reloj->stop();
+	delete personaje1;
+	delete personaje2;
 }
 
 

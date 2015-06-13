@@ -6,6 +6,7 @@
 #define FIN   		2
 #define CAMBIAR_ROUND 3
 #define REINICIAR_PELEA 4
+#define INICIAR 5
 
 //Salida del gameloop de menu
 #define MODOVS 1
@@ -16,7 +17,7 @@
 #define MODO_COLOR false
 #define MODO_SONIDO true
 #define MODO_INMORTAL false //xjose lo uso para que nadie muera y poder testear tranquilo
-#define MODO_RAPIDO true
+#define MODO_RAPIDO false
 
 //JSON
 #define PRUEBA_JSON "prueba.json"
