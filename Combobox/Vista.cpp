@@ -2052,7 +2052,7 @@ void Vista::DibujarNombres(){
 	SDL_Color colorNombres = { 255, 255, 255 };
 	SDL_Rect rectanguloNombre1 = ajusteResolucionBase800x600(70, 20, 100, 20);
 	SDL_Rect rectanguloNombre2 = ajusteResolucionBase800x600(425, 20, 100, 20);
-	cargarTexto(Parser::getInstancia().getPersonajes().at(0)->getNombreActual(), colorNombres);
+	cargarTexto(Parser::getInstancia().getPelea()->getPersonaje1()->getNombreActual(), colorNombres);
 
 	
 	//Dibujar textura del texto
@@ -2064,7 +2064,7 @@ void Vista::DibujarNombres(){
 	rectanguloNombre1.x = 368 - rectanguloNombre1.w;
 	dibujarTexto(rectanguloNombre1, 255);
 
-	cargarTexto(Parser::getInstancia().getPersonajes().at(1)->getNombreActual(), colorNombres);
+	cargarTexto(Parser::getInstancia().getPelea()->getPersonaje2()->getNombreActual(), colorNombres);
 	if (anchoTexto<298)
 		rectanguloNombre2.w = anchoTexto;
 	else

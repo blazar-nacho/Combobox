@@ -30,8 +30,8 @@ int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlad
 					torre = vista->elegirDificultad(unControlador, controladorDeMouse->getEventoDeMouse());
 				else{
 				modo->setPersonajes(personajes);
-				Parser::getInstancia().getPersonajes().at(0)->setNombreActual(nombreP1);
-				Parser::getInstancia().getPersonajes().at(1)->setNombreActual(nombreP2);
+				Parser::getInstancia().getPelea()->getPersonaje1()->setNombreActual(nombreP1);
+				Parser::getInstancia().getPelea()->getPersonaje2()->setNombreActual(nombreP2);
 				break;
 				}
 			}
@@ -41,8 +41,8 @@ int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlad
 				personajes = personajes = vista->elegirPersonajes(unControlador, otroControlador, personajes, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);
 			else{
 				modo->setPersonajes(personajes);
-				Parser::getInstancia().getPersonajes().at(0)->setNombreActual(nombreP1);
-				Parser::getInstancia().getPersonajes().at(1)->setNombreActual(nombreP2);
+				Parser::getInstancia().getPelea()->getPersonaje1()->setNombreActual(nombreP1);
+				Parser::getInstancia().getPelea()->getPersonaje2()->setNombreActual(nombreP2);
 				break;
 			}
 			
@@ -52,8 +52,8 @@ int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlad
 				personajes = vista->elegirPersonajes(unControlador, personajes, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);
 			else{
 			modo->setPersonajes(personajes);
-			Parser::getInstancia().getPersonajes().at(0)->setNombreActual(nombreP1);
-			Parser::getInstancia().getPersonajes().at(1)->setNombreActual(nombreP2);
+			Parser::getInstancia().getPelea()->getPersonaje1()->setNombreActual(nombreP1);
+			Parser::getInstancia().getPelea()->getPersonaje2()->setNombreActual(nombreP2);
 			break;
 			}
 		}
