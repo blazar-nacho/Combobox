@@ -578,6 +578,7 @@ void Vista::actualizar(){
 
 void Vista::cargarTexto(std::string texto, SDL_Color colorDelTexto)
 {
+	SDL_DestroyTexture(texturaTexto);
 	supTexto = TTF_RenderText_Blended(fuente, texto.c_str(), colorDelTexto);
 	anchoTexto = supTexto->w;
 	altoTexto = supTexto->h;
@@ -2049,12 +2050,25 @@ void Vista::DibujarCapasAnteriores(std::vector<Personaje*> personajesVista, floa
 
 void Vista::DibujarNombres(){
 	SDL_Color colorNombres = { 255, 255, 255 };
-	SDL_Rect rectanguloNombre1 = ajusteResolucionBase800x600(100, 20, 100, 20);
-	SDL_Rect rectanguloNombre2 = ajusteResolucionBase800x600(550, 20, 100, 20);
+	SDL_Rect rectanguloNombre1 = ajusteResolucionBase800x600(70, 20, 100, 20);
+	SDL_Rect rectanguloNombre2 = ajusteResolucionBase800x600(425, 20, 100, 20);
 	cargarTexto(Parser::getInstancia().getPersonajes().at(0)->getNombreActual(), colorNombres);
+
+	
+	//Dibujar textura del texto
+	if (anchoTexto<298)
+		rectanguloNombre1.w = anchoTexto;
+	else
+		rectanguloNombre1.w = 298;
+
+	rectanguloNombre1.x = 368 - rectanguloNombre1.w;
 	dibujarTexto(rectanguloNombre1, 255);
 
 	cargarTexto(Parser::getInstancia().getPersonajes().at(1)->getNombreActual(), colorNombres);
+	if (anchoTexto<298)
+		rectanguloNombre2.w = anchoTexto;
+	else
+		rectanguloNombre2.w = 298;
 	dibujarTexto(rectanguloNombre2, 255);
 }
 
@@ -2062,12 +2076,13 @@ void Vista::DibujarReloj(){
 	//Parte de dibujado del reloj
 	Uint32 segundosTranscurridos = Parser::getInstancia().getPelea()->getTiempoDelRound()-Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRound();
 
-	SDL_Color colorReloj = { 255, 0, 0 };
+	SDL_Color colorReloj = { 220, 158, 40 };
 	SDL_Rect rectanguloReloj = ajusteResolucionBase800x600(386, 0, 25, 50);
 	std::stringstream flujoRonda;
 	flujoRonda << segundosTranscurridos;
 
 	std::string tiempoRonda = flujoRonda.str();
+
 	cargarTexto(tiempoRonda, colorReloj);
 	dibujarTexto(rectanguloReloj, 255);
 
