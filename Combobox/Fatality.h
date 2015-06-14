@@ -1,23 +1,28 @@
 #pragma once
+#include "Cuerpo.h"
 
-#define DIST 4.0f
 #define RANGO_DIST 5.0f
 #define RETRASO_SPRT 6
 
 class Fatality {
 public:	
-	Fatality(Personaje* jugadorGanador, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedor, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo);
+	Fatality(Personaje* jugadorGanador, Cuerpo* cuerpoGanadorNuevo, Personaje* jugadorPerdedor, Cuerpo* cuerpoPerdedorNuevo, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, std::vector<double> colorGanador);
 
 	// Básicamente reproduce secuencias de sprites específicos de fatality
 	void realizar();
 
 	std::string getImagenDir() const;
 
+	bool distanciaEstaCorrecta();
+
 	~Fatality();
 
 private:
 	Personaje* jugadorGanador;
+	Cuerpo* cuerpoGanador;
 	Personaje* jugadorPerdedor;
+	Cuerpo* cuerpoPerdedor;
+
 	std::string imagenDir;
 	float distancia;
 
@@ -28,16 +33,12 @@ private:
 	int cuadroActualPerdedor;
 	SDL_Rect cuadroPerdedor;
 	int retraso;
-
-	std::vector<SDL_Rect*> *Caminar;
-	int cuadroActualCaminar;
+		
 	bool distanciaCorrecta;
 
+	// textura del spritesheet con las fatalities
 	SDL_Texture* texturaSDL;
 	SDL_Renderer* renderer;
-
-	SDL_Texture* texturaGanador;
-	SDL_Texture* texturaPerdedor;
 
 	float distanciaMin;
 	float distanciaMax;
@@ -50,7 +51,7 @@ private:
 
 	Json::Value	ParsearRaizJson(std::string fatalityJsonDir);
 	SDL_Rect* crearCuadro(Json::Value cuadro);
-	void cargarTextura();
+	void cargarTextura(std::vector<double> colorGanador);
 
 	// mueve de a un paso al jugador ganador hasta la posicion de fatality	
 	void ubicarGanador();

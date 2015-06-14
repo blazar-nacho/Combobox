@@ -47,6 +47,9 @@ private:
 	std::vector<SDL_Rect*>* Bicicleta;
 	std::vector<SDL_Rect*>* Flykick;
 
+	// sin sprite
+	std::vector<SDL_Rect*>* Invisible;
+
 	// a asignar por la fatality
 	std::vector<SDL_Rect*>* Fatality;
 

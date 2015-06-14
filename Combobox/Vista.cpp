@@ -2284,20 +2284,20 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	// FATALITY
 	//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
-		//Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
-		if ((personajesVista[0]->getEstado().accion == FATALITY_EST) || (personajesVista[1]->getEstado().accion == FATALITY_EST)){
-			if (!fatalityCreada){
+	//Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
+	if ((personajesVista[0]->getEstado().accion == FATALITY_EST) || (personajesVista[1]->getEstado().accion == FATALITY_EST)){
+		if (!fatalityCreada){
 
-				//if (ganador == personajesVista[0])
-					fatality = new Fatality(personajesVista[0], texturaSpriteUno, personajesVista[1], texturaSpriteDos, renderer, personajeUno, personajeDos);
-				//else
-				//	fatality = new Fatality(personajesVista[1], texturaSpriteDos, personajesVista[0], texturaSpriteUno, renderer, personajeDos, personajeUno);
-				fatalityCreada = true;
-				// le paso el control de la textura uno a la fatility
-				texturaSpriteUno = nullptr;
-			}
-			// ejecuta un paso de la fatality
-			fatality->realizar();
+			//if (ganador == personajesVista[0])
+			fatality = new Fatality(personajesVista[0], refMundo->getCuerpo(0), personajesVista[1], refMundo->getCuerpo(1), renderer, personajeUno, personajeDos, colorPj1);
+			//else
+			//	fatality = new Fatality(personajesVista[1], refMundo->getCuerpo(1), personajesVista[0], refMundo->getCuerpo(0), renderer, personajeDos, personajeUno, colorPj2);
+			fatalityCreada = true;
+			// le paso el control de la textura uno a la fatility
+			texturaSpriteUno = nullptr;
+		}
+		// ejecuta un paso de la fatality
+		fatality->realizar();
 		//}
 	}
 

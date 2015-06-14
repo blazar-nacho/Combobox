@@ -2,6 +2,22 @@
 #include "Personaje.h"
 #include "Mundo.h"
 
+struct defFatality 
+{
+	defFatality()
+	{
+		esFatality = false;
+		distanciaCorrecta = false;
+		esInvisible = false;
+	}
+	// true si está realizando fatality
+	bool esFatality;
+	// true si la distancia es la correcta
+	bool distanciaCorrecta;
+	// true si el personaje no tiene visibilidad
+	bool esInvisible;
+};
+
 struct defCuerpo
 {
 	// constructor con valores por defecto
@@ -28,6 +44,7 @@ struct defCuerpo
 	int demora;
 	int demoraGolpe;
 	int demoraAire;
+	defFatality fatalityEst;
 };
 
 class Cuerpo
@@ -55,6 +72,17 @@ public:
 	std::vector<Sensor*>* getSensores() const
 	{
 		return getSensoresActivos();
+	}
+
+	// Obtiene el estado de Fatality
+	defFatality getFatalityEst() const
+	{
+		return fatalityEst;
+	}
+	// Setea el estado de Fatality
+	void setFatalityEst(defFatality fatalityEstNuevo)
+	{
+		fatalityEst = fatalityEstNuevo;
 	}
 
 	// Inicializa el conjunto de todos los sensores asociados al cuerpo
@@ -270,8 +298,8 @@ public:
 	bool estaEnBorde();
 		
 
-	// Aplica un impulso lineal al cuerpo. Modifica inmediatamente la velocidad
-	// El impulso sería en unidades de N.s o Kg.m/s
+	// Aplica un impulso lineal al cuerpo. Variación de la cantidad de movimiento.
+	// Modifica la velocidad. El impulso sería en unidades de N.s o Kg.m/s
 	inline void aplicarImpulso(vector2D& impulso)
 	{
 		impulso /= masa;
@@ -378,6 +406,7 @@ private:
 	std::vector<std::vector<Sensor*>*> sensores;
 	std::vector<Sensor*> sensoresDisparo;
 	std::string sensorActivoStr;
+	defFatality fatalityEst;
 	// devuelve el max x del sensor
 	float getSensorXMax();
 	

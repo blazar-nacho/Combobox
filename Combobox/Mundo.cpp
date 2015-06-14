@@ -817,11 +817,14 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	}
 
 
-	//fatality-- Combo 10
+	//FATALITY-- Combo 10
 	if (unaToma->getNombre() == NOMBRE_COMBO_10){
 		ultimaToma = unaToma;
-		// perdon jose..
+
 		//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
+		if (unCuerpo->getFatalityEst().esInvisible)
+			nuevoEstado.movimiento = INVISIBLE;
+
 			nuevoEstado.accion = FATALITY_EST;
 			unCuerpo->setDemora(INT_MAX);
 		//}
