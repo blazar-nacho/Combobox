@@ -600,6 +600,8 @@ bool estaEnRectangulo(SDL_Rect rectangulo, EventoDeMouse *unEventoDeMouse){
 
 std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPersonaje){
 
+	std::string textoADibujar;
+	
 	//Color del Texto
 	SDL_Color colorDelTexto = { 255, 255, 255 };
 
@@ -676,7 +678,6 @@ std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPer
 
 		dibujarTexto(rectTexto, 240);
 
-		cargarTexto(textoPersonaje, colorTexto);
 		
 
 	//El flag de dibujado
@@ -724,6 +725,15 @@ std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPer
 		}
 	}
 
+	textoADibujar = textoPersonaje;
+	if (textoPersonaje.size() > 10){
+		textoADibujar.erase(0, 1);
+		if (textoADibujar.size() > 10)
+			textoADibujar.erase(0, textoADibujar.size()-10);
+	}
+	
+	cargarTexto(textoADibujar, colorTexto);
+
 	//Dibuja el texto en caso de ser necesario
 	if (flagDibujado)
 	{
@@ -731,7 +741,7 @@ std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPer
 		if (textoPersonaje != "")
 		{
 			//Dibujar nuevo texto
-			cargarTexto(textoPersonaje, colorTexto);
+			cargarTexto(textoADibujar, colorTexto);
 		}
 		//Texto esta vacio
 		else
@@ -741,7 +751,8 @@ std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPer
 		}
 	}
 
-	//Dibujar texturas del texto
+
+	//Dibujar textura del texto
 	rectanguloDestino.w = anchoTexto;
 	rectanguloDestino.h = altoTexto;
 	dibujarTexto(rectanguloDestino, 255);
