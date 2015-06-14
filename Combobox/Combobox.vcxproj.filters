@@ -111,9 +111,6 @@
     <ClInclude Include="ModoPractica.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MortalFigther.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Movimiento.h">
       <Filter>Header Files</Filter>
     </ClInclude>

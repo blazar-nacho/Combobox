@@ -197,7 +197,6 @@
     <ClInclude Include="Modo1vsCom.h" />
     <ClInclude Include="ModoDeJuego.h" />
     <ClInclude Include="ModoPractica.h" />
-    <ClInclude Include="MortalFigther.h" />
     <ClInclude Include="Movimiento.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Parser.h" />

@@ -31,12 +31,12 @@ void Mundo::reiniciar(){
 	parado.movimiento = PARADO;
 	//Cuerpo 1
 	Cuerpos.at(0)->reiniciarAtributos();
-	Cuerpos.at(0)->SetPosicion(vector2D((-90 + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso())));
+	Cuerpos.at(0)->SetPosicion(vector2D((P1_POS_INI + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso())));
 	Cuerpos.at(0)->SetSensorActivoStr(parado);
 
 	//Cuerpo2
 	Cuerpos.at(1)->reiniciarAtributos();
-	Cuerpos.at(1)->SetPosicion(vector2D((float)(10 + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso())));
+	Cuerpos.at(1)->SetPosicion(vector2D((float)(P2_POS_INI + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso())));
 	Cuerpos.at(1)->SetSensorActivoStr(parado);
 	
 	cambioGolpeAlto = false;
@@ -822,8 +822,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 		ultimaToma = unaToma;
 
 		//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
-		if (unCuerpo->getFatalityEst().esInvisible)
-			nuevoEstado.movimiento = INVISIBLE;
+		
 
 			nuevoEstado.accion = FATALITY_EST;
 			unCuerpo->setDemora(INT_MAX);
@@ -1040,6 +1039,12 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	std::vector<Movimiento*> movimientos = unCuerpo->getControlador()->getMovimientos();
 	std::vector<Movimiento*> movimientosOtro = elOtroCuerpo->getControlador()->getMovimientos();
+
+	// SI el estado esta seteado invisible que saltee todo
+	if (unCuerpo->getFatalityEst().esInvisible) {
+		nuevoEstado.movimiento = INVISIBLE;
+		return nuevoEstado;
+	}
 
 	//
 	if (unCuerpo->EstaSuperpuesto() && ((!(unCuerpo->estaEnPiso() && elOtroCuerpo->estaEnPiso())) || (estadoanterior.golpeado == GOLPEADO) || estadoanterior.accion==ARMA )){

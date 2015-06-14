@@ -2309,7 +2309,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 			//	fatality = new Fatality(personajesVista[1], refMundo->getCuerpo(1), personajesVista[0], refMundo->getCuerpo(0), renderer, personajeDos, personajeUno, colorPj2);
 			fatalityCreada = true;
 			// le paso el control de la textura uno a la fatility
-			texturaSpriteUno = nullptr;
+			//texturaSpriteUno = nullptr;
 		}
 		// ejecuta un paso de la fatality
 		fatality->realizar();

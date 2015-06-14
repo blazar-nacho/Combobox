@@ -9,7 +9,8 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, P
 	cuerpoPerdedor = cuerpoPerdedorNuevo;
 	renderer = rendererSDL;
 	retraso = RETRASO_SPRT;
-
+	
+	
 	parsearFatality();
 	distanciaCorrecta = false;
 
@@ -82,14 +83,14 @@ void Fatality::ubicarGanador()
 	// acomodar jugador ganador a la distancia correcta
 	if (distanciaJugadores > distanciaMax) {
 		if (xJugGanador < xJugPerdedor) {
-			xJugGanador += DISTANCIA;
-			cuerpoGanador->mover(DISTANCIA);
+			xJugGanador += DISTANCIA;			
+			//cuerpoGanador->mover(DISTANCIA);
 			//cuadroGanador.x += DISTANCIA;
 			//SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
 		}
 		else {
 			xJugGanador -= DISTANCIA;
-			cuerpoGanador->mover(-DISTANCIA);
+			//cuerpoGanador->mover(-DISTANCIA);
 			//cuadroGanador.x -= DISTANCIA;
 			//SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 		}
@@ -97,14 +98,14 @@ void Fatality::ubicarGanador()
 	}
 	else if (distanciaJugadores < distanciaMin) {
 		if (xJugGanador > xJugPerdedor) {
-			xJugGanador += DISTANCIA;
-			cuerpoGanador->mover(DISTANCIA);
+			xJugGanador += DISTANCIA;			
+			//cuerpoGanador->mover(DISTANCIA);
 			//cuadroGanador.x += DISTANCIA;
 			//SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 		}
 		else {
 			xJugGanador -= DISTANCIA;
-			cuerpoGanador->mover(-DISTANCIA);
+			//cuerpoGanador->mover(-DISTANCIA);
 			//cuadroGanador.x -= DISTANCIA;
 			//SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
 		}		
