@@ -19,10 +19,10 @@ SDL_Surface* MatizColor::desplazarMatiz(double hInicial, double hFinal, double d
 
 SDL_Surface* MatizColor::desplazarMatiz(double hInicial, double hFinal, double desplazamiento, SDL_Rect* unCuadro)
 {	
-	int ancho = unCuadro->w;
-	int alto = unCuadro->h;
 	int xIni = unCuadro->x;
 	int yIni = unCuadro->y;
+	int ancho = xIni + unCuadro->w;
+	int alto = yIni + unCuadro->h;	
 	Uint8 rojo, verde, azul, alfa;
 	double croma = 0;
 	int minRGBRef;
