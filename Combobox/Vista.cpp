@@ -19,7 +19,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 	vibracion = false;
 	estaVibrando = false;
 
-	fuente = TTF_OpenFont("ima/ttf/mkx.ttf",22);
+	fuente = TTF_OpenFont("ima/ttf/mkx.ttf",30);
 	// Usa filtro anisotropico
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 	// Se inicia SDL_image
