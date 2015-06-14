@@ -221,7 +221,7 @@
             },
             {
                 "distancia": 20,
-                "delayPerdedor": 70,
+                "delayPerdedor": 230,
                 "secuenciaSpritesGanador": [
                     {
                         "x": 720,

@@ -21,7 +21,7 @@ private:
 	Personaje* jugadorGanador;
 	Cuerpo* cuerpoGanador;
 	Personaje* jugadorPerdedor;
-	Cuerpo* cuerpoPerdedor;
+	Cuerpo* cuerpoPerdedor;	
 
 	std::string imagenDir;
 	float distancia;

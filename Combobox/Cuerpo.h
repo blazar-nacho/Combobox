@@ -266,6 +266,12 @@ public:
 		return controlador;
 	}
 
+	// precaucion: setear el controlador asociado
+	inline void setControlador(Controlador* controladorNuevo)
+	{
+		controlador = controladorNuevo;
+	}
+
 	// Devuelve true si está en contacto con el piso o false en caso contrario
 	bool estaEnPiso();
 

@@ -316,6 +316,9 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string otrosSprites)
 }
 
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
+	if (unEstado.movimiento == INVISIBLE)
+		return Invisible;
+
 	if (unEstado.golpeado == GOLPEADO){
 		if (unEstado.accion == GUARDIA)
 			if (unEstado.movimiento == AGACHADO)
@@ -409,8 +412,7 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	}
 
 	if (unEstado.accion == FATALITY_EST){
-		if (unEstado.movimiento == INVISIBLE)
-			return Invisible;
+
 		return Fatality;
 	}
 
