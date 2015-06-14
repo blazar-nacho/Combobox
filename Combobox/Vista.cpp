@@ -2065,14 +2065,14 @@ void Vista::DibujarNombres(){
 		rectanguloNombre1.w = 298;
 
 	rectanguloNombre1.x = 368 - rectanguloNombre1.w;
-	dibujarTexto(rectanguloNombre1, 255);
+	dibujarTexto(rectanguloNombre1, AlfaVida);
 
 	cargarTexto(Parser::getInstancia().getPelea()->getPersonaje2()->getNombreActual(), colorNombres);
 	if (anchoTexto<298)
 		rectanguloNombre2.w = anchoTexto;
 	else
 		rectanguloNombre2.w = 298;
-	dibujarTexto(rectanguloNombre2, 255);
+	dibujarTexto(rectanguloNombre2, AlfaVida);
 }
 
 void Vista::DibujarReloj(){
@@ -2087,7 +2087,7 @@ void Vista::DibujarReloj(){
 	std::string tiempoRonda = flujoRonda.str();
 
 	cargarTexto(tiempoRonda, colorReloj);
-	dibujarTexto(rectanguloReloj, 255);
+	dibujarTexto(rectanguloReloj, AlfaVida);
 
 	//se limpia el flujo
 	flujoRonda.str("");
