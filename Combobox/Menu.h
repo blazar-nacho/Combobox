@@ -18,6 +18,8 @@ private:
 	MODOS_DE_JUEGO modoSeleccionado;
 	int torre;
 	int personaje1,personaje2;
+	std::string nombreP1;
+	std::string nombreP2;
 	PJSELECCION personajes;
 	ControladorDeMouse* controladorDeMouse;
 };

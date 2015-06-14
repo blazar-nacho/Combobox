@@ -16,8 +16,6 @@ Menu::Menu(Modo* unModo)
 
 int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlador){
 	int estado = 0;	
-	std::string nombreP1;
-	std::string nombreP2;
 
 	while (true){
 		int estado = unControlador->cambiar();
@@ -26,20 +24,18 @@ int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlad
 
 		if (modoSeleccionado == COM){
 			if (personajes.seleccionados == NO)
-				personajes = vista->elegirPersonajes(unControlador, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);
+				personajes = personajes = vista->elegirPersonajes(unControlador, personajes, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);
 			else
 				torre = vista->elegirDificultad(unControlador, controladorDeMouse->getEventoDeMouse());
 		}
 		if (modoSeleccionado == VS){
-			//Habilitar entrada de texto
-			SDL_StartTextInput();
 			if (personajes.seleccionados == NO){
-				personajes = vista->elegirPersonajes(unControlador, otroControlador, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);
+				personajes = personajes = vista->elegirPersonajes(unControlador, otroControlador, personajes, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);
 			}
 		}
 		if (modoSeleccionado == PRACTICA){
 			if (personajes.seleccionados == NO)
-				personajes = vista->elegirPersonajes(unControlador, otroControlador, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);
+				personajes = vista->elegirPersonajes(unControlador, personajes, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);
 		}
 
 		if ((modoSeleccionado == NINGUNO)){
@@ -52,8 +48,8 @@ int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlad
 		}
 		else if ((personajes.seleccionados == SI)){
 			modo->setPersonajes(personajes);
-			Parser::getInstancia().getPelea()->getPersonaje1()->setNombreActual(nombreP1);
-			Parser::getInstancia().getPelea()->getPersonaje2()->setNombreActual(nombreP2);
+			Parser::getInstancia().getPersonajes().at(0)->setNombreActual(nombreP1);
+			Parser::getInstancia().getPersonajes().at(1)->setNombreActual(nombreP2);
 			if ((modoSeleccionado == VS) || (modoSeleccionado == PRACTICA))
 				break;
 			else if (torre!=NINGUNA)

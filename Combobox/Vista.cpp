@@ -760,11 +760,10 @@ void Vista::setModoActual(MODOS_DE_JUEGO unModoActual){
 	modoActual = unModoActual;
 }
 
-PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, EventoDeMouse *unEventoDeMouse, std::string &nombreDelP1, std::string &nombreDelP2){
+PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, PJSELECCION personajes, EventoDeMouse *unEventoDeMouse, std::string &nombreDelP1, std::string &nombreDelP2){
 
 	MOV_TIPO mov1 = unControlador->getMovimientos().back()->getMovimiento();
 
-	PJSELECCION personajes;
 	personajes.seleccionados = NO;
 	bool cliequeoEnCuadrado = false;
 
@@ -1237,11 +1236,10 @@ SDL_Rect Vista::ajusteResolucionBase800x600(int x, int y, int anchoPx, int altoP
 	return rectanguloResultado;
 }
 
-PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, Controlador* otroControlador, EventoDeMouse *unEventoDeMouse, std::string &nombreDelP1, std::string &nombreDelP2){
+PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, Controlador* otroControlador, PJSELECCION personajes, EventoDeMouse *unEventoDeMouse, std::string &nombreDelP1, std::string &nombreDelP2){
 	MOV_TIPO mov1 = unControlador->getMovimientos().back()->getMovimiento();
 	MOV_TIPO mov2 = otroControlador->getMovimientos().back()->getMovimiento();
 
-	PJSELECCION personajes;
 	personajes.seleccionados = NO;
 	bool cliequeoEnCuadrado = false;
 	//Se limpia la pantalla
