@@ -14,6 +14,10 @@ public:
 	MatizColor(SDL_Surface* superficieNueva);
 
 	// devuelve la superficie con los colores entre matiz hInicial y hFinal desplazados segun
+	// la cantidad desplazamiento para un cuadro especifico de la superficie
+	SDL_Surface* desplazarMatiz(double hInicial, double hFinal, double desplazamiento, SDL_Rect* cuadro);
+
+	// devuelve la superficie con los colores entre matiz hInicial y hFinal desplazados segun
 	// la cantidad desplazamiento
 	SDL_Surface* desplazarMatiz(double hInicial, double hFinal, double desplazamiento);
 

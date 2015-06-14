@@ -50,6 +50,7 @@ private:
 	int opcionPersonaje;
 	bool opcion1Seleccionada;
 	bool opcion2Seleccionada;
+	// hInicial, hFinal, desplazamiento
 	std::vector<double> colorPj1;
 	std::vector<double> colorPj2;
 	bool cambiarColor;

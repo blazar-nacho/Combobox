@@ -59,6 +59,9 @@ Sprite::Sprite(std::string jsonSprites){
 
 	this->Bicicleta = new std::vector<SDL_Rect*>();
 	this->Flykick = new std::vector<SDL_Rect*>();
+	this->Invisible = new std::vector<SDL_Rect*>();
+
+	Invisible->push_back(crearCuadro(0, 0, 0, 0));
 
 	// si recibe una direccion de imagen busca el json asociado
 	std::size_t found = jsonSprites.find(".png");
@@ -405,12 +408,12 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 		return Agacharse;
 	}
 
-	
-
-
-	if (unEstado.movimiento == FATALITY){
+	if (unEstado.accion == FATALITY_EST){
+		if (unEstado.movimiento == INVISIBLE)
+			return Invisible;
 		return Fatality;
 	}
+
 	return Quieto;
 }
 
@@ -653,6 +656,20 @@ Sprite::~Sprite()
 		Fatality->clear();
 		delete Fatality;
 	}
+
+	for (size_t i = 0; i < Flykick->size(); i++)
+		delete Flykick->at(i);
+	Flykick->clear();
+	delete Flykick;
+
+	for (size_t i = 0; i < Bicicleta->size(); i++)
+		delete Bicicleta->at(i);
+	Bicicleta->clear();
+	delete Bicicleta;
+
+	delete Invisible->at(0);
+	Invisible->clear();
+	delete Invisible;
 
 	for (size_t i = 0; i < Sensores.size(); i++) {
 		for (size_t j = 0; j < Sensores[i]->size(); j++) 

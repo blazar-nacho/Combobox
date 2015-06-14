@@ -6,11 +6,23 @@ MatizColor::MatizColor(SDL_Surface* superficieNueva)
 }
 
 
-
 SDL_Surface* MatizColor::desplazarMatiz(double hInicial, double hFinal, double desplazamiento)
+{
+	// cuadro de toda la superficie
+	SDL_Rect* unCuadro = new SDL_Rect;
+	unCuadro->x = 0;
+	unCuadro->y = 0;
+	unCuadro->w = superficie->w;
+	unCuadro->h = superficie->h;
+	return desplazarMatiz(hInicial, hFinal, desplazamiento, unCuadro);
+}
+
+SDL_Surface* MatizColor::desplazarMatiz(double hInicial, double hFinal, double desplazamiento, SDL_Rect* unCuadro)
 {	
-	int ancho = superficie->w;
-	int alto = superficie->h;
+	int ancho = unCuadro->w;
+	int alto = unCuadro->h;
+	int xIni = unCuadro->x;
+	int yIni = unCuadro->y;
 	Uint8 rojo, verde, azul, alfa;
 	double croma = 0;
 	int minRGBRef;
@@ -20,8 +32,8 @@ SDL_Surface* MatizColor::desplazarMatiz(double hInicial, double hFinal, double d
 	if (SDL_MUSTLOCK(superficie))
 		SDL_LockSurface(superficie);
 
-	for (int x = 0; x < ancho; x++)
-		for (int y = 0; y < alto; y++)
+	for (int x = xIni; x < ancho; x++)
+		for (int y = yIni; y < alto; y++)
 		{
 
 			Uint32 pixelXY = obtenerPixel(x, y, &punteroPixel);

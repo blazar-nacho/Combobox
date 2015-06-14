@@ -18,7 +18,7 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo)
 	estadoAnterior.accion = SIN_ACCION;
 	estadoAnterior.golpeado = NOGOLPEADO;
 	estadoAnterior.movimiento = PARADO;
-	
+	fatalityEst = defFatality();
 }
 
 std::vector<Sensor*>* Cuerpo::getSensoresActivos() const
@@ -144,11 +144,9 @@ bool Cuerpo::HayDemoraAire()
 }
 
 
-/*// XERROR Nacho: invento esta funcion por que la modificacion que le agrego posicion.x>0 hace que pinche el programa
+/*// XERROR invento esta funcion por que la modificacion que le agrego posicion.x>0 hace que pinche el programa
 bool Cuerpo::estaEnBorde2()
 {
-	// nacho: chequea el borde considerando ancho del personaje
-	// el +2 es para que no se vea una linea en el limite
 	if (posicion.x + getRefPersonaje()->getAncho() + 2 < Parser::getInstancia().getEscenario().getAncho()&& (posicion.x>0))
 		return false;
 
