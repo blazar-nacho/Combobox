@@ -4,7 +4,7 @@
 
 Toma::Toma()
 {
-	movimientos = std::vector<MOV_TIPO>();
+	movimientos = new std::vector<MOV_TIPO>();
 	error = 0;
 	tiempo = 2000;
 	nombre = "";
@@ -27,7 +27,7 @@ void Toma::setNombre(std::string unNombre){
 
 
 void Toma::setMovimiento(MOV_TIPO unMovimiento){
-	movimientos.push_back(unMovimiento);
+	movimientos->push_back(unMovimiento);
 }
 
 
@@ -47,13 +47,14 @@ int Toma::getError(){
 
 
 std::vector<MOV_TIPO>* Toma::getMovimientos(){
-	return &movimientos;
+	return movimientos;
 }
 
 
 Toma::~Toma()
 {
-	movimientos.clear();
+	movimientos->clear();
+	delete movimientos;	
 	nombre.clear();
 	error = 0;
 	tiempo = 0;

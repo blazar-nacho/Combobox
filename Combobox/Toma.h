@@ -15,7 +15,7 @@ public:
 	
 private:
 	std::string nombre;
-	std::vector<MOV_TIPO> movimientos;
+	std::vector<MOV_TIPO>* movimientos;
 	int error;
 	int tiempo;
 };
