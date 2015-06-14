@@ -2,6 +2,8 @@
 //
 
 #include "stdafx.h"
+// al incluir vld.h se hace la deteccion de perdidas de memoria
+#include <vld.h>
 #include "Parser.h"
 #include "Vista.h"
 #include "Mundo.h"
