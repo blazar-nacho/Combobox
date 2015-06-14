@@ -658,7 +658,9 @@ std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPer
 		}
 		else{
 			cargarTexto(textoIngresado, colorDelTexto);
-			texto1elegido.x = ima1elegida.x;
+			if (ima1elegida.w / 2<35)
+			texto1elegido.x = ima1elegida.x + ima1elegida.w / 2 - ima1elegida.w / 8;
+			if (ima1elegida.w>72)
 			texto1elegido.w = ima1elegida.w;
 			dibujarTexto(texto1elegido, 240);
 		}
@@ -670,7 +672,9 @@ std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPer
 		}
 		else{
 			cargarTexto(textoIngresado2, colorDelTexto);
-			texto2elegido.x = ima2elegida.x;
+			if (ima2elegida.w / 2<35)
+				texto2elegido.x = ima2elegida.x + ima2elegida.w / 2 - ima1elegida.w / 8;
+			if (ima2elegida.w>72)
 			texto2elegido.w = ima2elegida.w;
 			dibujarTexto(texto2elegido, 240);
 		}
@@ -794,7 +798,7 @@ PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, PJSELECCION pers
 	SDL_RenderCopy(renderer, texturaSeleccionPersonajes, NULL, NULL);
 
 	//alfa transparente
-	Uint8 alfaSeleccion = 230;
+	Uint8 alfaSeleccion = 255;
 	Uint8 pColor = alfaSeleccion;
 
 	//Cuadrados de los personajes
@@ -845,7 +849,7 @@ PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, PJSELECCION pers
 	if (!opcion2Seleccionada){
 		opcionPj2 = rand() % 11 + 11;
 		opcion2Seleccionada = true;
-		textoIngresado2 = "       P2       ";
+		textoIngresado2 = "P2";
 	}
 
 	//MOUSE
@@ -2050,11 +2054,10 @@ void Vista::DibujarCapasAnteriores(std::vector<Personaje*> personajesVista, floa
 
 void Vista::DibujarNombres(){
 	SDL_Color colorNombres = { 255, 255, 255 };
-	SDL_Rect rectanguloNombre1 = ajusteResolucionBase800x600(70, 20, 100, 20);
-	SDL_Rect rectanguloNombre2 = ajusteResolucionBase800x600(425, 20, 100, 20);
+	SDL_Rect rectanguloNombre1 = ajusteResolucionBase800x600(70, 20, 100, 30);
+	SDL_Rect rectanguloNombre2 = ajusteResolucionBase800x600(425, 20, 100, 30);
 	cargarTexto(Parser::getInstancia().getPelea()->getPersonaje1()->getNombreActual(), colorNombres);
-
-	
+		
 	//Dibujar textura del texto
 	if (anchoTexto<298)
 		rectanguloNombre1.w = anchoTexto;
