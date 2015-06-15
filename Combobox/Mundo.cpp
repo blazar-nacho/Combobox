@@ -13,6 +13,7 @@ Mundo::Mundo(const vector2D& valorGravedad)
 	gravedad = valorGravedad;
 	Cuerpos = std::vector<Cuerpo*>();
 	cambioGolpeAlto = false;
+	unReloj = new Timer();
 }
 
 void Mundo::agregarCuerpo(Cuerpo *unCuerpo)
@@ -40,6 +41,8 @@ void Mundo::reiniciar(){
 	Cuerpos.at(1)->SetSensorActivoStr(parado);
 	
 	cambioGolpeAlto = false;
+
+	unReloj->stop();
 }
 
 bool Mundo::huboToma(){
@@ -765,7 +768,6 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 	}
 
-
 	return nuevoEstado;
 }
 
@@ -818,7 +820,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 
 
 	//FATALITY-- Combo 10
-	if (unaToma->getNombre() == NOMBRE_COMBO_10){
+	if (unaToma->getNombre() == NOMBRE_COMBO_10 && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
 		ultimaToma = unaToma;
 
 		//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
@@ -1272,8 +1274,11 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			stream << numeroDeRound;
 			Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " para " + elOtroCuerpo->getRefPersonaje()->getNombreActual(), Log::MODO_DEBUG);
 			Parser::getInstancia().getPelea()->personajeGanoElRound(elOtroCuerpo->getRefPersonaje());
-			if (Parser::getInstancia().getPelea()->terminoLaPelea()){
-				nuevoEstado.golpeado = FALLECIDO;
+			if (Parser::getInstancia().getPelea()->terminoLaPelea() ){
+				if (estadoanterior.golpeado != DIZZY){
+					nuevoEstado.golpeado = DIZZY;
+					unReloj->start();
+				}
 			}
 			else {
 				nuevoEstado.golpeado = FALLECIDO_ROUND;
@@ -1306,7 +1311,32 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		
 	}
 	
+	if (Parser::getInstancia().getPelea()->terminoLaPelea()){
+		if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
+			if (estadoanterior.golpeado != DIZZY){
+				nuevoEstado.golpeado = DIZZY;
+				unReloj->start();
+			}
+		}
+		else{
+			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
+			nuevoEstado.golpeado = FALLECIDO;
+		}
 
+	}
+	
+	if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
+		if (unReloj->getTicks() < 10000){
+			nuevoEstado.movimiento = PARADO;
+			nuevoEstado.accion = SIN_ACCION;
+			nuevoEstado.golpeado = DIZZY;
+		}
+		else{
+			unReloj->stop();
+			Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
+			nuevoEstado.golpeado = FALLECIDO;
+		}
+	}
 	
 
 	unCuerpo->SetSensorActivoStr(nuevoEstado);
@@ -1319,7 +1349,6 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	
 		unCuerpo->sumarVelocidad(gravedad * difTiempo); // aplico gravedad
 	
-
 	return nuevoEstado;
 }
 

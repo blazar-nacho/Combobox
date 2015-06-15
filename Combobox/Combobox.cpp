@@ -160,12 +160,7 @@ int _tmain(int argc, _TCHAR* argv[])
 				int estadoVida = unMundo->Paso(0.13f);
 				unaVista->actualizar();
 
-				if (estadoVida == REINICIAR || Parser::getInstancia().getPelea()->terminoLaPelea()){
-					if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
-						Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
-					}
-					else Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
-
+				if (estadoVida == REINICIAR){
 					//esto ya es aparte del else
 					unaVista->resetContadorLogoPelea();
 					unMundo->reiniciar();

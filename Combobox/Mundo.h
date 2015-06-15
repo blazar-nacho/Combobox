@@ -32,6 +32,7 @@ public:
 	void reiniciar();
 
 private:
+	Timer* unReloj;
 	Toma* ultimaToma;
 	vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
