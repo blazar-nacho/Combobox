@@ -72,6 +72,10 @@ private:
 	SDL_Texture *texturaBarraDeVidaRoja;
 	SDL_Texture *texturaLogoPelea;
 	SDL_Texture *texturaRonda;
+	SDL_Texture *texturaFatality;
+	SDL_Texture *texturaGanador;
+	SDL_Texture *texturaFinishHim;
+
 	SDL_Texture *texturaTexto;
 	SDL_Texture* texturaFondoTorres;
 	SDL_Texture *texturabebebubu;
@@ -173,7 +177,10 @@ private:
 	void DibujarPersonajes(std::vector<Personaje*> personajes);
 	void DibujarInput(Controlador* unControlador);
 	void DibujarReloj();
-	void DibujarEfectos();
-	void Vista::DibujarNombres();
+	void DibujarRondaPelea();
+	void DibujarFinishHim();
+	void DibujarFatality();
+	void DibujarGanador();
+	void DibujarNombres();
 };
 

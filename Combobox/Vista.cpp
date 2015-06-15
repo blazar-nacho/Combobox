@@ -245,6 +245,16 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		texturaRonda = SDL_CreateTextureFromSurface(renderer, ronda);
 		SDL_FreeSurface(ronda);
 
+		//Carga  textura Fatality
+		SDL_Surface* fatality = IMG_Load("ima/bkg/Fatality.png");
+		texturaFatality = SDL_CreateTextureFromSurface(renderer, fatality);
+		SDL_FreeSurface(fatality);
+
+		//Carga  textura FinishHim
+		SDL_Surface* FinishHim = IMG_Load("ima/bkg/finishhim.png");
+		texturaFinishHim = SDL_CreateTextureFromSurface(renderer, FinishHim);
+		SDL_FreeSurface(FinishHim);
+		
 		//Carga de cuadrado redimension para texto de combos
 		cuadradoRedimension = ajusteResolucionBase800x600(0, 550, 100, 50);
 		textoCombos = "-";
@@ -1860,7 +1870,7 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 
 	DibujarCapasPosteriores(personajesVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
    
-	DibujarEfectos();
+	DibujarRondaPelea();
 	DibujarNombres();
 }
 
@@ -2019,8 +2029,18 @@ void Vista::DibujarReloj(){
 	flujoRonda.str("");
 }
 
+void Vista::DibujarFinishHim(){
+	SDL_Rect rFinishHim = ajusteResolucionBase800x600(235, 172, 300, 150);
+}
+void Vista::DibujarFatality(){
+	SDL_Rect rFatality = ajusteResolucionBase800x600(225, 165, 360, 164);
+}
+void Vista::DibujarGanador(){
+	SDL_Rect rGanador = ajusteResolucionBase800x600(225, 165, 360, 164); 
 
-void Vista::DibujarEfectos()
+}
+
+void Vista::DibujarRondaPelea()
 {
 	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 	SDL_Rect cuadLogoPelea = ajusteResolucionBase800x600(225, 165,360,164);
@@ -2311,10 +2331,33 @@ Vista::~Vista()
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_DestroyTexture(texturaVerde);
 	SDL_DestroyTexture(texturaBarraDeVida);
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(ventana);	
+	SDL_DestroyTexture(texturaBarraDeVidaRoja);
+	SDL_DestroyTexture(texturaLogoPelea);
+	SDL_DestroyTexture(texturaRonda);
+	SDL_DestroyTexture(texturaFatality);
+	SDL_DestroyTexture(texturaGanador);
+	SDL_DestroyTexture(texturaFinishHim);
+	SDL_DestroyTexture(texturaTexto);
+	SDL_DestroyTexture(texturaFondoTorres);
+	SDL_DestroyTexture(texturabebebubu);
+	SDL_DestroyTexture(texturaMedio);
+	SDL_DestroyTexture(texturaExperimentado);
+	SDL_DestroyTexture(texturaExperto);
+	SDL_DestroyTexture(texturaSeleccionPersonajes);
+	SDL_DestroyTexture(texturaSeleccionPj1);
+	SDL_DestroyTexture(texturaSeleccionPj2);
+	SDL_DestroyTexture(personajesMuestra);
+	SDL_DestroyTexture(juegoModo);
 	SDL_FreeSurface(SuperficieUno);
 	SDL_FreeSurface(SuperficieDos);
+	SDL_FreeSurface(superficieBarraDeVida);
+	SDL_FreeSurface(superficieBarraDeVidaRoja);
+	SDL_FreeSurface(supTexto);
+	SDL_FreeSurface(modoJuego);
+
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(ventana);	
+	
 	//TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
