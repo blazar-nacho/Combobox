@@ -752,7 +752,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			////////////////////////////////////////////////////////////////////////////////////////////
 			//TOMAS
 
-			Toma* unaToma = new Toma();
+			Toma* unaToma;
 			unaToma = unCuerpo->getControlador()->getControladorDeTomas()->getTomaSegunOrientacion(invertido);
 			
 			if (unaToma != nullptr){
