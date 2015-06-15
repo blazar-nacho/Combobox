@@ -202,8 +202,6 @@ void Modo::setPersonajes(PJSELECCION personajes){
 			Parser::getInstancia().getPelea()->setPersonaje2(personaje2Seleccionado);
 		}
 	}
-
-	
 }
 
 void Modo::iniciarModo(){

@@ -155,11 +155,11 @@ int _tmain(int argc, _TCHAR* argv[])
 				{
 					avgFPS = 0;
 				}
-				float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
+				//float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 
 				//Se actualiza la pantalla
 				int estadoVida = CONTINUAR;
-				if ((segundosTranscurridos>FINDELFIGHT) || (segundosTranscurridos<0.1))
+				//if ((segundosTranscurridos>FINDELFIGHT) || (segundosTranscurridos<0.1))
 				estadoVida = unMundo->Paso(0.13f);
 				unaVista->actualizar();
 
