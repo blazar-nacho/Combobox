@@ -309,61 +309,8 @@ void Vista::reiniciarMenu(){
 	opcionPj2 = 22;
 	opcion1Seleccionada = false;
 	opcion2Seleccionada = false;
-
-	// Textura Seleccion Personajes
-	SDL_DestroyTexture(texturaSeleccionPersonajes);
-	SDL_Surface* supPjs = IMG_Load("ima/bkg/seleccionPersonaje.png");
-	texturaSeleccionPersonajes = SDL_CreateTextureFromSurface(renderer, supPjs);
-	SDL_FreeSurface(supPjs);
-
-	// Textura Seleccion Pj1
-	SDL_DestroyTexture(texturaSeleccionPj1);
-	SDL_Surface* supPj1 = IMG_Load("ima/bkg/cuadPj1.png");
-	texturaSeleccionPj1 = SDL_CreateTextureFromSurface(renderer, supPj1);
-	SDL_FreeSurface(supPj1);
-
-	// Textura Seleccion Pj2
-	SDL_DestroyTexture(texturaSeleccionPj2);
-	SDL_Surface* supPj2 = IMG_Load("ima/bkg/cuadPj2.png");
-	texturaSeleccionPj2 = SDL_CreateTextureFromSurface(renderer, supPj2);
-	SDL_FreeSurface(supPj2);
 	cambiarColor = false;
 
-	// Textura fondo torres
-	SDL_DestroyTexture(texturaFondoTorres);
-	SDL_Surface* supfondoTorre = IMG_Load("ima/bkg/nocheOscura.png");
-	texturaFondoTorres = SDL_CreateTextureFromSurface(renderer, supfondoTorre);
-	SDL_FreeSurface(supfondoTorre);
-
-	// Textura Novato
-	SDL_DestroyTexture(texturabebebubu);
-	SDL_Surface* supbebe = IMG_Load("ima/bkg/d_bebebubu.png");
-	texturabebebubu = SDL_CreateTextureFromSurface(renderer, supbebe);
-	SDL_FreeSurface(supbebe);
-
-	// Textura Medio
-	SDL_DestroyTexture(texturaMedio);
-	SDL_Surface* supMedio = IMG_Load("ima/bkg/d_medio.png");
-	texturaMedio = SDL_CreateTextureFromSurface(renderer, supMedio);
-	SDL_FreeSurface(supMedio);
-
-	// Textura Experimentado
-	SDL_DestroyTexture(texturaExperimentado);
-	SDL_Surface* supExperimentado = IMG_Load("ima/bkg/d_Experimentado.png");
-	texturaExperimentado = SDL_CreateTextureFromSurface(renderer, supExperimentado);
-	SDL_FreeSurface(supExperimentado);
-
-	// Textura Experto
-	SDL_DestroyTexture(texturaExperto);
-	SDL_Surface* supExperto = IMG_Load("ima/bkg/d_Experto.png");
-	texturaExperto = SDL_CreateTextureFromSurface(renderer, supExperto);
-	SDL_FreeSurface(supExperto);
-
-	// Textura muestras
-	SDL_DestroyTexture(personajesMuestra);
-	SDL_Surface* supMuestras = IMG_Load("ima/bkg/muestras.png");
-	personajesMuestra = SDL_CreateTextureFromSurface(renderer, supMuestras);
-	SDL_FreeSurface(supMuestras);
 
 	muestra1 = { 212, 195, 63, 129 };
 	muestra2 = { 528, 195, 63, 129 };
