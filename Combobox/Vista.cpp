@@ -501,7 +501,7 @@ void Vista::actualizar(){
 			//Dibuja las barras de vida
 			DibujarBarrasDeVida(personajesVista);
 
-			//Dibujar input del controlador si es modo 
+			//Dibujar input del controlador si es modo Practica
 			if (modoActual==PRACTICA)
 			DibujarInput(refMundo->getCuerpo(0)->getControlador());
 
@@ -1885,7 +1885,7 @@ void Vista::alfa(Uint8 alfa){
 void Vista::DibujarInput(Controlador* unControlador){
 	ConversorAString* unConversor = new ConversorAString();
 
-	SDL_Color colorBlancoTexto;
+	SDL_Color colorTexto;
 	unConversor->mantenerStringSegunSeparador(textoCombos, " - ");
 
 	MOV_TIPO unMovimiento = unControlador->getUltimoMovTipo();
@@ -1895,11 +1895,11 @@ void Vista::DibujarInput(Controlador* unControlador){
 	}
 
 	if (mantenerElColor != 0){
-		colorBlancoTexto = { 255, 0, 0, 0 };
+		colorTexto = { 255, 0, 0, 0 };
 		mantenerElColor--;
 	}
 	else {
-		colorBlancoTexto = { 255, 255, 255, 255 };
+		colorTexto = { 255, 255, 255, 255 };
 		mantenerElColor = 0;
 	}
 
@@ -1908,7 +1908,7 @@ void Vista::DibujarInput(Controlador* unControlador){
 		mantenerElColor = 100;
 	}
 
-	cargarTexto(textoCombos, colorBlancoTexto);
+	cargarTexto(textoCombos, colorTexto);
 
 	//Dibujar texturas del texto
 	cuadradoRedimension.w = anchoTexto;
