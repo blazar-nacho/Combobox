@@ -1,14 +1,17 @@
 #include "stdafx.h"
 #include "Fatality.h"
 
-Fatality::Fatality(Personaje* jugadorGanadorNuevo, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedorNuevo, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, std::vector<double> colorGanador)
+Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedorNuevo, Cuerpo* cuerpoPerdedorNuevo, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, Mundo* refMundoNueva, std::vector<double> colorGanador)
 {
 	jugadorGanador = jugadorGanadorNuevo;
+	cuerpoGanador = cuerpoGanadorNuevo;
 	jugadorPerdedor = jugadorPerdedorNuevo;
+	cuerpoPerdedor = cuerpoPerdedorNuevo;
 	renderer = rendererSDL;
 	retraso = RETRASO_SPRT;
 	parsearFatality();
 	distanciaCorrecta = false;
+	refMundo = refMundoNueva;
 
 	texturaGanador = texturaGanadorNueva;
 	texturaPerdedor = texturaPerdedorNueva;
@@ -52,11 +55,20 @@ void Fatality::realizar()
 		return;
 	}
 
+	// creo estado invisible
+	ESTADO InvisibleEst;
+	InvisibleEst.accion = FATALITY_EST;
+	InvisibleEst.movimiento = INVISIBLE;
+	InvisibleEst.golpeado = NOGOLPEADO;
 
+	// seteo invisible al ganador
+	refMundo->setResolver(InvisibleEst, cuerpoGanador);
 
 	SDL_RenderCopy(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), &cuadroGanador);
+
 	if (delayPerdedor == 0) {
-		SDL_DestroyTexture(texturaPerdedor);
+		// seteo invisible al perdedor
+		refMundo->setResolver(InvisibleEst, cuerpoPerdedor);
 		SDL_RenderCopy(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), &cuadroPerdedor);
 
 		if ((cuadroActualPerdedor < fatalityPerdedor->size() - 1) && (retraso == 0))

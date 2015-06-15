@@ -255,17 +255,11 @@
         "tiempo": 2000,
         "movimientos": [
             {
-                "movimiento": "arriba"
-            },
-            {
-                "movimiento": "abajo"
-            },
+                "movimiento": "adelante"
+            },           
             {
                 "movimiento": "GA"
-            },
-            {
-                "movimiento": "arriba"
-            }
+            }           
         ]
     },
 	"combo_11": {

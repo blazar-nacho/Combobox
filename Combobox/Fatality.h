@@ -1,12 +1,16 @@
 #pragma once
+#include "Mundo.h"
 
 #define DIST 4.0f
 #define RANGO_DIST 5.0f
 #define RETRASO_SPRT 6
 
+// declaro para poder usar 
+class Cuerpo;
+
 class Fatality {
 public:
-	Fatality(Personaje* jugadorGanador, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedor, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, std::vector<double> colorGanador);
+	Fatality(Personaje* jugadorGanador, Cuerpo* cuerpoGanador, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedor, Cuerpo* cuerpoPerdedor, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, Mundo* refMundoNueva, std::vector<double> colorGanador);
 
 	// Básicamente reproduce secuencias de sprites específicos de fatality
 	void realizar();
@@ -17,9 +21,12 @@ public:
 
 private:
 	Personaje* jugadorGanador;
+	Cuerpo* cuerpoGanador;
 	Personaje* jugadorPerdedor;
+	Cuerpo* cuerpoPerdedor;
 	std::string imagenDir;
 	float distancia;
+	Mundo* refMundo;
 
 	std::vector<SDL_Rect*> *fatalityGanador;
 	int cuadroActualGanador;

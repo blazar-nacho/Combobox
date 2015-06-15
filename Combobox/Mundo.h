@@ -29,6 +29,7 @@ public:
 	Sensor* getProyectil(size_t pos);
 	Sensor* sensorEngloba(Sensor* sensorUno, Sensor* sensorDos);
 	bool huboToma();
+	void setResolver(ESTADO, Cuerpo*);
 	Toma* getToma();
 	void reiniciar();
 
@@ -38,6 +39,9 @@ private:
 	vector2D gravedad;	
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
+	ESTADO estadoResolver;
+	Cuerpo* resolverRefCuerpo;
+	bool resolverSeteado;
 	float yPiso;
 	bool cambioGolpeAlto;
 	std::vector<Cuerpo*> Cuerpos;

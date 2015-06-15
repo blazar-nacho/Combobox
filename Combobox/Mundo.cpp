@@ -973,7 +973,12 @@ ESTADO Mundo::ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 	return nuevoEstado;
 	}
 
-
+void Mundo::setResolver(ESTADO resolverNuevo, Cuerpo* refCuerpo)
+{
+	estadoResolver = resolverNuevo;
+	resolverSeteado = true;
+	resolverRefCuerpo = refCuerpo;
+}
 
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
@@ -994,7 +999,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			}
 	}
 	/////////////////////////////////////////////
-
+	if (resolverRefCuerpo == unCuerpo)
+	if (resolverSeteado) { resolverSeteado = false; return estadoResolver; }
 	/////////////////////////////////////////////////////////////////
 	//esto lo usamos si necesitamos inmovilizarlo en y un tiempo determinado
 	if (unCuerpo->HayDemoraAire())
@@ -1041,14 +1047,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	std::vector<Movimiento*> movimientos = unCuerpo->getControlador()->getMovimientos();
 	std::vector<Movimiento*> movimientosOtro = elOtroCuerpo->getControlador()->getMovimientos();
-
-	// SI el estado esta seteado invisible que saltee todo
-	if (unCuerpo->getFatalityEst().esInvisible) {
-		nuevoEstado.movimiento = INVISIBLE;
-		return nuevoEstado;
-	}
-
-	//
+		
+	
 	if (unCuerpo->EstaSuperpuesto() && ((!(unCuerpo->estaEnPiso() && elOtroCuerpo->estaEnPiso())) || (estadoanterior.golpeado == GOLPEADO) || estadoanterior.accion==ARMA )){
 
 		nuevoEstado = Mundo::moverCuerpos(unCuerpo, elOtroCuerpo, invertido, &movimientosOtro, nuevoEstado);
