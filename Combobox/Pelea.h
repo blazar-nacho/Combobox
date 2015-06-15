@@ -11,6 +11,7 @@ public:
 	void setTiempoDelRound(Uint32 unTiempo);
 	Uint32 getTiempoDelRound();
 	void personajeGanoElRound(Personaje* unPersonaje);
+	float getSegundosTranscurridosDelRoundFloat();
 	void iniciarPelea();
 	void terminarPelea();
 	void terminarRound();

@@ -140,6 +140,11 @@ Uint32 Pelea::getSegundosTranscurridosDelRound(){
 	return (reloj->getTicks() / 1000);
 }
 
+float Pelea::getSegundosTranscurridosDelRoundFloat(){
+	if (tiempoDelRound == TIEMPO_INFINITO || reloj->isPaused()) return 0;
+	return ((float)reloj->getTicks() / (float)1000);
+}
+
 
 Round* Pelea::getRoundActual(){
 	return rounds.back();

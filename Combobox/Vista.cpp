@@ -248,12 +248,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		//Carga de cuadrado redimension para texto de combos
 		cuadradoRedimension = ajusteResolucionBase800x600(0, 550, 100, 50);
 		textoCombos = "-";
-
-		//Tiempo de permanecia en pantalla de efectos
-		this->efectosTimer.start();
-		//Menu timer
-		this->menuTimer.start();
-
+		
 }
 
 bool Vista::cambiaColorPersonaje(){
@@ -542,23 +537,7 @@ void Vista::actualizar(){
 	//Dibujar menu 
 
 	int anchoVentanaPx = ventanaVista.getAnchoPx();
-	/*
-	if ((this->menuTimer.getTicks() >= 50) && (this->menuTimer.getTicks() <= 1000))
-	{
-		this->dibujarMenu(anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
-		SDL_RenderPresent(renderer);
-	}
-	else
-	{
-		if (this->menuTimer.getTicks() > 1000)
-		{
 
-			SDL_DestroyTexture(this->texturaMenu);
-			this->menuTimer.stop();
-		}
-		else
-		{
-			*/
 			// Dibuja las capas y el personaje
 			Dibujar(personajesVista);
 
@@ -2096,19 +2075,17 @@ void Vista::DibujarReloj(){
 
 void Vista::DibujarEfectos()
 {
+	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 	SDL_Rect cuadLogoPelea = ajusteResolucionBase800x600(225, 165,360,164);
 	SDL_Rect cuadLogoRonda = ajusteResolucionBase800x600(235, 172, 300, 150);
-
-	if (contadorLogoPelea > 0){
-		contadorLogoPelea--;
-	}
-	if ((contadorLogoPelea > 0) && (contadorLogoPelea < 55)){
-		SDL_SetRenderTarget(renderer, texturaLogoPelea);
-		SDL_RenderCopy(renderer, texturaLogoPelea, NULL, &cuadLogoPelea);
-	}
-	if ((contadorLogoPelea > 60) && (contadorLogoPelea < CONTADORLOGOPELEA-20)){
+		
+	if ((segundosTranscurridos >= 0.5) && (segundosTranscurridos < 1.7)){
 		SDL_SetRenderTarget(renderer, texturaRonda);
 		SDL_RenderCopy(renderer, texturaRonda, NULL, &cuadLogoRonda);
+	}
+	if ((segundosTranscurridos > 2) && (segundosTranscurridos < 2.7)){
+		SDL_SetRenderTarget(renderer, texturaLogoPelea);
+		SDL_RenderCopy(renderer, texturaLogoPelea, NULL, &cuadLogoPelea);
 	}
 }
 
