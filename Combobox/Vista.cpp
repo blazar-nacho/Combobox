@@ -1872,6 +1872,10 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
    
 	DibujarRondaPelea();
 	DibujarNombres();
+	//TODO Para pruebas
+	DibujarFinishHim();
+	DibujarFatality();
+	DibujarGanador();
 }
 
 void Vista::alfa(Uint8 alfa){
@@ -2030,14 +2034,35 @@ void Vista::DibujarReloj(){
 }
 
 void Vista::DibujarFinishHim(){
+	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 	SDL_Rect rFinishHim = ajusteResolucionBase800x600(235, 172, 300, 150);
+
+	if ((segundosTranscurridos >= 2.7) && (segundosTranscurridos < 3)){
+		SDL_SetRenderTarget(renderer, texturaFinishHim);
+		SDL_RenderCopy(renderer, texturaFinishHim, NULL, &rFinishHim);
+	}
+
 }
 void Vista::DibujarFatality(){
+	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
+
 	SDL_Rect rFatality = ajusteResolucionBase800x600(225, 165, 360, 164);
+	if ((segundosTranscurridos >= 3) && (segundosTranscurridos < 3.5)){
+		SDL_SetRenderTarget(renderer, texturaFatality);
+		SDL_RenderCopy(renderer, texturaFatality, NULL, &rFatality);
+	}
 }
 void Vista::DibujarGanador(){
+	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
+	
 	SDL_Rect rGanador = ajusteResolucionBase800x600(225, 165, 360, 164); 
-
+	SDL_Color color = { 255, 255, 255 };
+	std::string nombre = "Ganó Seba";
+	cargarTexto(nombre, color);
+	if ((segundosTranscurridos >= 3.5) && (segundosTranscurridos < 4)){
+		dibujarTexto(rGanador, 255);
+	}
+	
 }
 
 void Vista::DibujarRondaPelea()
