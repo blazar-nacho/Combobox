@@ -180,7 +180,7 @@ private:
 	void DibujarRondaPelea();
 	void DibujarFinishHim();
 	void DibujarFatality();
-	void DibujarGanador();
+	void DibujarGanador(int resultado);
 	void DibujarNombres();
 };
 

@@ -1875,7 +1875,7 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 	//TODO Para pruebas
 	DibujarFinishHim();
 	DibujarFatality();
-	DibujarGanador();
+	DibujarGanador(GANOJUGADOR2);
 }
 
 void Vista::alfa(Uint8 alfa){
@@ -2037,7 +2037,7 @@ void Vista::DibujarFinishHim(){
 	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 	SDL_Rect rFinishHim = ajusteResolucionBase800x600(235, 172, 300, 150);
 
-	if ((segundosTranscurridos >= 2.7) && (segundosTranscurridos < 3)){
+	if ((segundosTranscurridos >= 2.7) && (segundosTranscurridos < 4)){
 		SDL_SetRenderTarget(renderer, texturaFinishHim);
 		SDL_RenderCopy(renderer, texturaFinishHim, NULL, &rFinishHim);
 	}
@@ -2047,22 +2047,42 @@ void Vista::DibujarFatality(){
 	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 
 	SDL_Rect rFatality = ajusteResolucionBase800x600(225, 165, 360, 164);
-	if ((segundosTranscurridos >= 3) && (segundosTranscurridos < 3.5)){
+	if ((segundosTranscurridos >= 4) && (segundosTranscurridos < 5.5)){
 		SDL_SetRenderTarget(renderer, texturaFatality);
 		SDL_RenderCopy(renderer, texturaFatality, NULL, &rFatality);
 	}
 }
-void Vista::DibujarGanador(){
+void Vista::DibujarGanador(int resultado){
 	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 	
-	SDL_Rect rGanador = ajusteResolucionBase800x600(225, 165, 360, 164); 
+	SDL_Rect rGanador = ajusteResolucionBase800x600(50, 500, 200, 50);
+	SDL_Rect rGanador2 = ajusteResolucionBase800x600(550, 500, 200, 50);
+	SDL_Rect rEmpate = ajusteResolucionBase800x600(300, 500, 200, 50);
+
 	SDL_Color color = { 255, 255, 255 };
-	std::string nombre = "Ganó Seba";
-	cargarTexto(nombre, color);
-	if ((segundosTranscurridos >= 3.5) && (segundosTranscurridos < 4)){
+	std::string nombre = Parser::getInstancia().getPelea()->getPersonaje1()->getNombreActual()+" Wins";
+	std::string nombre2 = Parser::getInstancia().getPelea()->getPersonaje2()->getNombreActual()+" Wins";
+	std::string empate = "Empate";
+
+	
+	if (resultado == GANOJUGADOR1){
+		cargarTexto(nombre, color);
+	if ((segundosTranscurridos >= 5.5) && (segundosTranscurridos < 7)){
 		dibujarTexto(rGanador, 255);
 	}
-	
+	}
+	if (resultado == GANOJUGADOR2){
+		cargarTexto(nombre2, color);
+		if ((segundosTranscurridos >= 5.5) && (segundosTranscurridos < 7)){
+			dibujarTexto(rGanador2, 255);
+		}
+	}
+	if (resultado == EMPATE){
+		cargarTexto(empate, color);
+		if ((segundosTranscurridos >= 5.5) && (segundosTranscurridos < 7)){
+			dibujarTexto(rEmpate, 255);
+		}
+	}
 }
 
 void Vista::DibujarRondaPelea()
