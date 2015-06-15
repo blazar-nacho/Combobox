@@ -46,15 +46,16 @@ void Modo::cambiarColorPersonajes(){
 
 void Modo::setPersonajes(PJSELECCION personajes){
 
+	delete personaje1Seleccionado;
+	delete personaje2Seleccionado;
+	personaje1Seleccionado = new Personaje();
+	personaje2Seleccionado = new Personaje();
+
 	std::vector<Personaje*> personajesParser = Parser::getInstancia().getPersonajes();
 
 	std::string personajeUnoABuscar;
 	std::string personajeDosABuscar;
-
-	Personaje* personaje1Seleccionado = new Personaje();
-	Personaje* personaje2Seleccionado = new Personaje();
-
-	
+		
 	std::vector<double> colorPj1;
 	std::vector<double> colorPj2;
 

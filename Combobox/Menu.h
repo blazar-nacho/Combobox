@@ -11,6 +11,7 @@ public:
 	int seleccionarModo(Controlador* unControlador, Controlador* otroControlador);
 	Modo* getModo();
 	MODOS_DE_JUEGO getModoSeleccionado();
+	void reiniciarMenu();
 	~Menu();
 private:
 	Modo* modo;

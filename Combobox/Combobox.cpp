@@ -165,8 +165,11 @@ int _tmain(int argc, _TCHAR* argv[])
 						Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
 					}
 					else Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
+
+					//esto ya es aparte del else
 					unaVista->resetContadorLogoPelea();
 					unMundo->reiniciar();
+					menu->reiniciarMenu();
 					unaVista->reiniciarCamara();
 					unaVista->reiniciarMenu();
 					accion = INICIAR;

@@ -14,6 +14,15 @@ Menu::Menu(Modo* unModo)
 	personajes.seleccionados = NO;
 }
 
+void Menu::reiniciarMenu(){
+	modoSeleccionado = NINGUNO;
+	torre = NINGUNA;
+	personaje1 = NINGUNPJ;
+	personaje2 = NINGUNPJ;
+	personajes.seleccionados = NO;
+}
+
+
 int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlador){
 	int estado = 0;	
 
@@ -87,9 +96,4 @@ Menu::~Menu()
 {
 	if (modo != nullptr) delete modo;
 	delete controladorDeMouse;
-	modoSeleccionado = NINGUNO;
-	torre = NINGUNA;
-	personaje1 = NINGUNPJ;
-	personaje2 = NINGUNPJ;
-	personajes.seleccionados = NO;
 }
