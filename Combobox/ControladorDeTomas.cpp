@@ -113,4 +113,5 @@ ControladorDeTomas::~ControladorDeTomas()
 		delete tomas.at(i);
 	}
 	tomas.clear();
+	delete timer;
 }

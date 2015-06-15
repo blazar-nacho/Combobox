@@ -2370,7 +2370,10 @@ void Vista::deshabilitarVibracion(){
 
 Vista::~Vista()
 {
-	//TTF_CloseFont(this->fuente);
+	if (fuente != NULL) {
+		TTF_CloseFont(fuente);
+		TTF_Quit();
+	}
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_DestroyTexture(texturaVerde);
@@ -2402,7 +2405,6 @@ Vista::~Vista()
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(ventana);	
 	
-	//TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }

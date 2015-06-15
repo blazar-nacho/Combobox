@@ -23,5 +23,5 @@ void ModoPractica::iniciar(){
 ModoPractica::~ModoPractica()
 {
 	controlador1 = nullptr;
-	controlador2 = nullptr;
+	delete controlador2;
 }
