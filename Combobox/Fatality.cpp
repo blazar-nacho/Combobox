@@ -12,6 +12,7 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 	parsearFatality();
 	distanciaCorrecta = false;
 	refMundo = refMundoNueva;
+	fatalityFinalizada = false;
 
 	texturaGanador = texturaGanadorNueva;
 	texturaPerdedor = texturaPerdedorNueva;
@@ -81,12 +82,24 @@ void Fatality::realizar()
 	if ((cuadroActualGanador < fatalityGanador->size() - 1) && (retraso == 0))
 		cuadroActualGanador++;
 
+	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1))
+		fatalityFinalizada = true;
 
 	if (retraso == 0)
 		retraso = RETRASO_SPRT;
 	else
 		retraso--;
 
+}
+
+bool Fatality::finalizo()
+{
+	return fatalityFinalizada;
+}
+
+SDL_Texture* Fatality::getTexturaGanador()
+{
+	return texturaGanador;
 }
 
 void Fatality::ubicarGanador()

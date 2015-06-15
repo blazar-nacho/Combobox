@@ -15,6 +15,12 @@ public:
 	// Básicamente reproduce secuencias de sprites específicos de fatality
 	void realizar();
 
+	// devuelve true si termino de hacer la fatality
+	bool finalizo();
+
+	// devuelve la textura del ganador para reestablecer la vista
+	SDL_Texture* getTexturaGanador();
+
 	std::string getImagenDir() const;
 
 	~Fatality();
@@ -27,6 +33,7 @@ private:
 	std::string imagenDir;
 	float distancia;
 	Mundo* refMundo;
+	bool fatalityFinalizada;
 
 	std::vector<SDL_Rect*> *fatalityGanador;
 	int cuadroActualGanador;

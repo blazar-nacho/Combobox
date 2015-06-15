@@ -2301,10 +2301,29 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 			//	fatality = new Fatality(personajesVista[1], refMundo->getCuerpo(0), texturaSpriteDos, personajesVista[0], refMundo->getCuerpo(0), texturaSpriteUno, renderer, personajeDos, personajeUno, refMundo, colorPj2);
 			fatalityCreada = true;
 			// le paso el control de la textura uno a la fatility
-			//texturaSpriteUno = nullptr;
+			texturaSpriteUno = nullptr;
 		}
-		// ejecuta un paso de la fatality
-		fatality->realizar();
+		else {
+			// ejecuta un paso de la fatality
+			fatality->realizar();
+
+			if (fatality->finalizo()){
+				texturaSpriteUno = fatality->getTexturaGanador();
+
+				delete fatality;
+				fatalityCreada = false;				
+
+				ESTADO estadoUno = personajesVista[0]->getEstado();
+				estadoUno.accion = SIN_ACCION;
+				ESTADO estadoDos = personajesVista[1]->getEstado();
+				estadoDos.accion = SIN_ACCION;
+				refMundo->getCuerpo(0)->setDemora(0);
+				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
+				refMundo->getCuerpo(1)->setDemora(0);
+				refMundo->setResolver(estadoDos, refMundo->getCuerpo(1));
+			}
+		}
+		
 		//}
 	}
 
