@@ -1357,3 +1357,9 @@ float Mundo::getYPiso() const
 {
 	return yPiso;
 }
+
+Mundo:: ~Mundo(){
+	delete unReloj;
+	ultimaToma = nullptr;
+	Cuerpos.clear();
+}

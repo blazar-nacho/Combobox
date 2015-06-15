@@ -221,7 +221,5 @@ Modo::~Modo()
 	for (size_t i = 0; i < modosDeJuego.size(); i++){
 		delete modosDeJuego.at(i);
 	}
-	delete personaje1Seleccionado;
-	delete personaje2Seleccionado;
 	modosDeJuego.clear();
 }

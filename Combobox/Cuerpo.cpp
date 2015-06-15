@@ -271,3 +271,25 @@ Sprite* Cuerpo::getSprite() const
 {
 	return observador->getSprite();
 }
+
+Cuerpo:: ~Cuerpo(){
+	size_t i;
+	std::vector<Sensor*>* sensoresAux;
+
+	for (i = 0; i < sensores.size(); i++){
+		sensoresAux = sensores.at(i);
+		if (sensoresAux != nullptr){
+			for (size_t j = 0; j < sensoresAux->size(); j++){
+				if (sensoresAux->at(j) != nullptr) delete sensoresAux->at(j);
+			}
+			sensoresAux->clear();
+			delete sensoresAux;
+		}
+	}
+	sensores.clear();
+	
+	for (i = 0; i < sensoresDisparo.size(); i++){
+		if (sensoresDisparo.at(i) != nullptr) delete sensoresDisparo.at(i);
+	}
+	sensoresDisparo.clear();
+}

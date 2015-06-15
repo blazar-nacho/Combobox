@@ -51,6 +51,7 @@ class Cuerpo
 {
 public:
 	Cuerpo(const  defCuerpo unaDefCuerpo, Controlador* controladorNuevo);
+	~Cuerpo();
 
 	inline const vector2D& getPosicion() const
 	{

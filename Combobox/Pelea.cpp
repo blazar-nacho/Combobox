@@ -127,6 +127,8 @@ void Pelea::terminarPelea(){
 	for (size_t i = 0; i < rounds.size(); i++){
 		delete rounds.at(i);
 	}
+	personaje1 = nullptr;
+	personaje2 = nullptr;
 	peleaTerminada = true;
 	rounds.clear();
 	reloj->stop();

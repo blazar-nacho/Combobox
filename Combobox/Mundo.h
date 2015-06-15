@@ -17,6 +17,7 @@ class Mundo
 {
 public:
 	Mundo();
+	~Mundo();
 	Mundo(const vector2D& valorGravedad);
 	void agregarCuerpo(Cuerpo *unCuerpo);
 	int Paso(float difTiempo);
