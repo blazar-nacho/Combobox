@@ -34,6 +34,7 @@ public:
 
 private:
 	SDL_Surface* superficie;
+	SDL_Rect* unCuadro;
 	SDL_Rect* cuadroModificado;
 	std::queue<Uint32> pixelsOrig;
 	bool modificado = false;

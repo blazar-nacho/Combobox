@@ -324,7 +324,6 @@ void Vista::reiniciarMenu(){
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_FreeSurface(SuperficieUno);
 	SDL_FreeSurface(SuperficieDos);
-
 	muestra1 = { 212, 195, 63, 129 };
 	muestra2 = { 528, 195, 63, 129 };
 
@@ -1459,9 +1458,7 @@ PJSELECCION Vista::elegirPersonajes(Controlador* unControlador, Controlador* otr
 
 	SDL_SetRenderTarget(renderer, personajesMuestra);
 	SDL_RenderCopy(renderer, personajesMuestra, &imaColor1elegida, &muestra1);
-
 	
-
 	//Opciones de selección
 	cargarTexto("P2", colorDelTexto);
 	switch (opcionPj2){

@@ -9,7 +9,7 @@ MatizColor::MatizColor(SDL_Surface* superficieNueva)
 SDL_Surface* MatizColor::desplazarMatiz(double hInicial, double hFinal, double desplazamiento)
 {
 	// cuadro de toda la superficie
-	SDL_Rect* unCuadro = new SDL_Rect;
+	unCuadro = new SDL_Rect;
 	unCuadro->x = 0;
 	unCuadro->y = 0;
 	unCuadro->w = superficie->w;
@@ -315,5 +315,5 @@ SDL_Surface* MatizColor::mostrarOriginal()
 
 MatizColor::~MatizColor()
 {
-
+	delete unCuadro;
 }

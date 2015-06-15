@@ -18,7 +18,7 @@ public:
 	//Chequea el status del Timer
 	bool isStarted();
 	bool isPaused();
-
+	~Timer();
 private:
 	//El tiempo del reloj cuando comenzó el Timer
 	Uint32 mStartTicks;

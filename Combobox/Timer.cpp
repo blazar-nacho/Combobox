@@ -104,3 +104,12 @@ bool Timer::isPaused()
 	//Timer esta corriendo y fue pausado
 	return mPaused && mStarted;
 }
+
+Timer::~Timer()
+{	
+	mStartTicks = 0;
+	mPausedTicks = 0;
+
+	mPaused = false;
+	mStarted = false;
+}
