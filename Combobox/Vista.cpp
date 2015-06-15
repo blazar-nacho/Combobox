@@ -246,9 +246,9 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		SDL_FreeSurface(ronda);
 
 		//Carga  textura Fatality
-		SDL_Surface* fatality = IMG_Load("ima/bkg/Fatality.png");
-		texturaFatality = SDL_CreateTextureFromSurface(renderer, fatality);
-		SDL_FreeSurface(fatality);
+		SDL_Surface* fatalityIMG = IMG_Load("ima/bkg/Fatality.png");
+		texturaFatality = SDL_CreateTextureFromSurface(renderer, fatalityIMG);
+		SDL_FreeSurface(fatalityIMG);
 
 		//Carga  textura FinishHim
 		SDL_Surface* FinishHim = IMG_Load("ima/bkg/finishhim.png");
@@ -2289,18 +2289,19 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	}
 
 	// FATALITY
+	// La fatality va a dibujar los sprites que hagan falta y setear estado invisible al personaje cuando haga falta
 	//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
 	//Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
 	if ((personajesVista[0]->getEstado().accion == FATALITY_EST) || (personajesVista[1]->getEstado().accion == FATALITY_EST)){
 		if (!fatalityCreada){
 
-			//if (ganador == personajesVista[0])
-			fatality = new Fatality(personajesVista[0], refMundo->getCuerpo(0), personajesVista[1], refMundo->getCuerpo(1), renderer, personajeUno, personajeDos, colorPj1);
-			//else
-			//	fatality = new Fatality(personajesVista[1], refMundo->getCuerpo(1), personajesVista[0], refMundo->getCuerpo(0), renderer, personajeDos, personajeUno, colorPj2);
+			//if (ganador == personajesVista[0]) // CAMBIO
+			fatality = new Fatality(personajesVista[0], texturaSpriteUno, personajesVista[1], texturaSpriteDos, renderer, personajeUno, personajeDos, colorPj1);
+			//else // CAMBIO
+			//	fatality = new Fatality(personajesVista[1], texturaSpriteDos, personajesVista[0], texturaSpriteUno, renderer, personajeDos, personajeUno, colorPj2);
 			fatalityCreada = true;
 			// le paso el control de la textura uno a la fatility
-			//texturaSpriteUno = nullptr;
+			texturaSpriteUno = nullptr;
 		}
 		// ejecuta un paso de la fatality
 		fatality->realizar();

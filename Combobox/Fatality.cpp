@@ -1,21 +1,27 @@
 #include "stdafx.h"
 #include "Fatality.h"
 
-Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, Personaje* jugadorPerdedorNuevo, Cuerpo* cuerpoPerdedorNuevo, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, std::vector<double> colorGanador)
+Fatality::Fatality(Personaje* jugadorGanadorNuevo, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedorNuevo, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, std::vector<double> colorGanador)
 {
 	jugadorGanador = jugadorGanadorNuevo;
-	cuerpoGanador = cuerpoGanadorNuevo;
 	jugadorPerdedor = jugadorPerdedorNuevo;
-	cuerpoPerdedor = cuerpoPerdedorNuevo;
 	renderer = rendererSDL;
 	retraso = RETRASO_SPRT;
-	
-	
 	parsearFatality();
 	distanciaCorrecta = false;
 
+	texturaGanador = texturaGanadorNueva;
+	texturaPerdedor = texturaPerdedorNueva;
+
 	xJugGanador = jugadorGanador->getPosicionUn().first;
-	xJugPerdedor = jugadorPerdedor->getPosicionUn().first;		
+	xJugPerdedor = jugadorPerdedor->getPosicionUn().first;
+
+	ESTADO caminarEst;
+	caminarEst.accion = SIN_ACCION;
+	caminarEst.movimiento = CAMINARDER;
+	caminarEst.golpeado = NOGOLPEADO;
+
+	Caminar = jugadorGanador->getSprite()->listaDeCuadros(caminarEst);
 
 	distanciaMax = distancia + RANGO_DIST;
 	distanciaMin = distancia - RANGO_DIST;
@@ -26,7 +32,7 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, P
 	cuadroGanador = cuadroGanadorNuevo;
 	cuadroPerdedor = cuadroPerdedorNuevo;
 	cuadroActualPerdedor = 0;
-	
+
 }
 
 void Fatality::realizar()
@@ -38,23 +44,19 @@ void Fatality::realizar()
 	// reproducir secuenciaSpritesGanador en posicion del jugador ganador
 	// reproducir secuenciaSpritesPerdedor en posicion del jugador perdedor
 
-	
+
 	// si movio al jugador retorna para volver y hacer otro paso
 	// sino se avanza a la fatality
 	if (!distanciaCorrecta){
 		ubicarGanador();
 		return;
 	}
-	
 
-	//
-	SDL_RenderCopy(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador ), &cuadroGanador);
 
+
+	SDL_RenderCopy(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), &cuadroGanador);
 	if (delayPerdedor == 0) {
-		defFatality fatalityEstNuevo = cuerpoPerdedor->getFatalityEst();
-		fatalityEstNuevo.esInvisible = true;
-		cuerpoPerdedor->setFatalityEst(fatalityEstNuevo);
-		
+		SDL_DestroyTexture(texturaPerdedor);
 		SDL_RenderCopy(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), &cuadroPerdedor);
 
 		if ((cuadroActualPerdedor < fatalityPerdedor->size() - 1) && (retraso == 0))
@@ -63,11 +65,11 @@ void Fatality::realizar()
 	else
 		delayPerdedor--;
 
-	
+
 	if ((cuadroActualGanador < fatalityGanador->size() - 1) && (retraso == 0))
 		cuadroActualGanador++;
-	
-	
+
+
 	if (retraso == 0)
 		retraso = RETRASO_SPRT;
 	else
@@ -78,41 +80,46 @@ void Fatality::realizar()
 void Fatality::ubicarGanador()
 {
 	// chuequear distancia
-	float distanciaJugadores = abs(xJugGanador - xJugPerdedor);	
+	float distanciaJugadores = abs(xJugGanador - xJugPerdedor);
 
 	// acomodar jugador ganador a la distancia correcta
 	if (distanciaJugadores > distanciaMax) {
 		if (xJugGanador < xJugPerdedor) {
-			xJugGanador += DISTANCIA;			
-			//cuerpoGanador->mover(DISTANCIA);
-			//cuadroGanador.x += DISTANCIA;
-			//SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
+			xJugGanador += DIST;
+			cuadroGanador.x += DIST;
+			SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
 		}
 		else {
-			xJugGanador -= DISTANCIA;
-			//cuerpoGanador->mover(-DISTANCIA);
-			//cuadroGanador.x -= DISTANCIA;
-			//SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
+			xJugGanador -= DIST;
+			cuadroGanador.x -= DIST;
+			SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 		}
-				
+
 	}
 	else if (distanciaJugadores < distanciaMin) {
 		if (xJugGanador > xJugPerdedor) {
-			xJugGanador += DISTANCIA;			
-			//cuerpoGanador->mover(DISTANCIA);
-			//cuadroGanador.x += DISTANCIA;
-			//SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
+			xJugGanador += DIST;
+			cuadroGanador.x += DIST;
+			SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 		}
 		else {
-			xJugGanador -= DISTANCIA;
-			//cuerpoGanador->mover(-DISTANCIA);
-			//cuadroGanador.x -= DISTANCIA;
-			//SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
-		}		
+			xJugGanador -= DIST;
+			cuadroGanador.x -= DIST;
+			SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
+		}
 	}
 	else {
-		distanciaCorrecta = true;		
+		distanciaCorrecta = true;
+		retraso = RETRASO_SPRT;
 	}
+
+	if ((cuadroActualCaminar < Caminar->size() - 1) && (retraso == 0))
+		cuadroActualCaminar++;
+
+	if (retraso == 0)
+		retraso = RETRASO_SPRT;
+	else
+		retraso--;
 
 }
 
@@ -125,6 +132,7 @@ void Fatality::cargarTextura(std::vector<double> colorGanador)
 	MatizColor matiz(superficieFatality);
 	for (int i = 0; i < fatalityGanador->size(); i++)
 		matiz.desplazarMatiz(colorGanador.at(0), colorGanador.at(1), colorGanador.at(2), fatalityGanador->at(i));
+
 
 	texturaSDL = SDL_CreateTextureFromSurface(renderer, superficieFatality);
 	// se queda con la textura libero la superficie
@@ -143,7 +151,7 @@ void Fatality::parsearFatality()
 	Json::Value raiz = ParsearRaizJson(jugadorGanador->getFatalityDir());
 
 	// Fatality aleatoria
-	size_t posAleatoria =  rand() % (raiz["fatality"]["coordenadas"].size());
+	size_t posAleatoria = rand() % (raiz["fatality"]["coordenadas"].size());
 
 	imagenDir = raiz["fatality"].get("imagen", FATALITY_IMG_DEFAULT).asString();
 	distancia = raiz["fatality"]["coordenadas"][posAleatoria].get("distancia", FATALITY_DIST_DEFAULT).asFloat();
@@ -182,11 +190,6 @@ Json::Value	Fatality::ParsearRaizJson(std::string fatalityJsonDir)
 	archivo.close();
 
 	return raiz;
-}
-
-bool Fatality::distanciaEstaCorrecta()
-{
-	return distanciaCorrecta;
 }
 
 // levanta sus propios sprites

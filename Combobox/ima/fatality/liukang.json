@@ -1,6 +1,13 @@
 {
     "fatality": {
         "imagen": "ima/fatality/scorpion.png",
+		"salto": 
+					{
+                        "x": 1260,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
         "coordenadas": [
             {
                 "distancia": 20,

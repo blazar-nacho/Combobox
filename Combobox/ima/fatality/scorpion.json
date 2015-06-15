@@ -1,6 +1,13 @@
 {
     "fatality": {
         "imagen": "ima/fatality/scorpion.png",
+		"salto": 
+					{
+                        "x": 1260,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
         "coordenadas": [
             {
                 "distancia": 20,
@@ -221,7 +228,7 @@
             },
             {
                 "distancia": 20,
-                "delayPerdedor": 230,
+                "delayPerdedor": 70,
                 "secuenciaSpritesGanador": [
                     {
                         "x": 720,
