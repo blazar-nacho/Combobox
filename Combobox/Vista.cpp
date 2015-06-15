@@ -2063,8 +2063,7 @@ void Vista::DibujarGanador(int resultado){
 	std::string nombre = Parser::getInstancia().getPelea()->getPersonaje1()->getNombreActual()+" Wins";
 	std::string nombre2 = Parser::getInstancia().getPelea()->getPersonaje2()->getNombreActual()+" Wins";
 	std::string empate = "Empate";
-
-	
+		
 	if (resultado == GANOJUGADOR1){
 		cargarTexto(nombre, color);
 	if ((segundosTranscurridos >= 5.5) && (segundosTranscurridos < 7)){
@@ -2095,7 +2094,7 @@ void Vista::DibujarRondaPelea()
 		SDL_SetRenderTarget(renderer, texturaRonda);
 		SDL_RenderCopy(renderer, texturaRonda, NULL, &cuadLogoRonda);
 	}
-	if ((segundosTranscurridos > 2) && (segundosTranscurridos < 2.7)){
+	if ((segundosTranscurridos > 2) && (segundosTranscurridos < FINDELFIGHT)){
 		SDL_SetRenderTarget(renderer, texturaLogoPelea);
 		SDL_RenderCopy(renderer, texturaLogoPelea, NULL, &cuadLogoPelea);
 	}

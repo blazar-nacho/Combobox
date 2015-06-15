@@ -47,6 +47,9 @@ enum MODOS_DE_JUEGO { VS, COM, PRACTICA, NINGUNO };
 #define GANOJUGADOR2 1
 #define EMPATE 2
 
+//Tiempos entre cada cartel fijos
+#define FINDELFIGHT 2.7f
+
 //PERSONAJES
 #define NINGUNPJ 999
 #define SCORPIONROJO 11
