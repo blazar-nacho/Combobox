@@ -21,5 +21,5 @@ void Modo1vsCom::setNivelDeDificultad(int unNivel){
 Modo1vsCom::~Modo1vsCom()
 {
 	controlador1 = nullptr;
-	controlador2 = nullptr;
+	delete controlador2;
 }
