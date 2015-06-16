@@ -712,6 +712,12 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 			}
 			if (movimientos->back()->getMovimiento() == G_ALTO) {
 
+				nuevoEstado.accion = GOLPE_ALTO1;
+				
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
+				
+
+				/*
 				if (cambioGolpeAlto){
 
 					nuevoEstado.accion = GOLPE_ALTO1;
@@ -721,13 +727,14 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 					
 					
 				}
+				
 				else{
 					nuevoEstado.accion = GOLPE_ALTO2;
-					//cambioGolpeAlto = true;
+					cambioGolpeAlto = true;
 					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-					//unCuerpo->setDemoraGolpe((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())+20);
+					unCuerpo->setDemoraGolpe((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())+20);
 				}
-				
+				*/
 
 
 			}
@@ -992,6 +999,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	nuevoEstado.golpeado = NOGOLPEADO;
 
 	////////////////////////////////////////////
+	/*
 	cambioGolpeAlto = false;
 	if (unCuerpo->HayDemoraGolpe())
 	{
@@ -1001,6 +1009,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			cambioGolpeAlto = true;
 			}
 	}
+	*/
 	/////////////////////////////////////////////
 	if (resolverRefCuerpo == unCuerpo)
 	if (resolverSeteado) { resolverSeteado = false; return estadoResolver; }
