@@ -92,9 +92,12 @@ void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorA
 	if ((cuadroActualGanador < fatalityGanador->size() - 1) && (retraso == 0))
 		cuadroActualGanador++;
 
-	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1) && (contador < 1)){
-		fatalityFinalizada = true;
-		texturaPerdedorBloqueada = false;
+	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1)) {
+		fatalityEfectuada = true;
+		if (contador < 1) {
+			fatalityFinalizada = true;
+			texturaPerdedorBloqueada = false;
+		}
 	}
 
 	if (retraso == 0)
@@ -107,6 +110,11 @@ void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorA
 bool Fatality::finalizo()
 {
 	return fatalityFinalizada;
+}
+
+bool Fatality::efectuada()
+{
+	return fatalityEfectuada;
 }
 
 SDL_Texture* Fatality::getTexturaGanador()
@@ -200,6 +208,7 @@ void Fatality::parsearFatality()
 {
 	fatalityGanador = new std::vector<SDL_Rect*>();
 	fatalityPerdedor = new std::vector<SDL_Rect*>();
+	extraFX = new std::vector<SDL_Rect*>();
 
 	Json::Value raiz = ParsearRaizJson(jugadorGanador->getFatalityDir());
 
@@ -225,6 +234,11 @@ void Fatality::parsearFatality()
 	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["secuenciaSpritesPerdedor"];
 	for (size_t i = 0; i < estadoSprites.size(); i++)
 		fatalityPerdedor->push_back(crearCuadro(estadoSprites[i]));
+
+	// carga los cuadros de los sprites del vencido
+	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["extraFX"];
+	for (size_t i = 0; i < estadoSprites.size(); i++)
+		extraFX->push_back(crearCuadro(estadoSprites[i]));
 
 	jugadorPerdedor->getSprite()->setFatality(fatalityPerdedor);
 
@@ -256,5 +270,18 @@ SDL_Rect* Fatality::crearCuadro(Json::Value cuadro){
 }
 
 Fatality::~Fatality(){
+	for (size_t i = 0; i < fatalityGanador->size(); i++)
+		delete fatalityGanador->at(i);
+	fatalityGanador->clear();
+	delete fatalityGanador;
 
+	for (size_t i = 0; i < fatalityPerdedor->size(); i++)
+		delete fatalityPerdedor->at(i);
+	fatalityPerdedor->clear();
+	delete fatalityPerdedor;
+
+	for (size_t i = 0; i < extraFX->size(); i++)
+		delete extraFX->at(i);
+	extraFX->clear();
+	delete extraFX;
 }

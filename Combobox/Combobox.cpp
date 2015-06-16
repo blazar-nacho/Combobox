@@ -210,6 +210,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			delete unCuerpo;
 			delete otroCuerpo;
 			delete menu;
+			unMundo->limpiarCuerpos();
 		}
 		delete unaVista;
 		delete unMundo;
