@@ -92,9 +92,12 @@ void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorA
 	if ((cuadroActualGanador < fatalityGanador->size() - 1) && (retraso == 0))
 		cuadroActualGanador++;
 
-	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1) && (contador < 1)){
-		fatalityFinalizada = true;
-		texturaPerdedorBloqueada = false;
+	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1)) {
+		fatalityEfectuada = true;
+		if (contador < 1) {
+			fatalityFinalizada = true;
+			texturaPerdedorBloqueada = false;
+		}
 	}
 
 	if (retraso == 0)
@@ -107,6 +110,11 @@ void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorA
 bool Fatality::finalizo()
 {
 	return fatalityFinalizada;
+}
+
+bool Fatality::efectuada()
+{
+	return fatalityEfectuada;
 }
 
 SDL_Texture* Fatality::getTexturaGanador()
@@ -223,6 +231,11 @@ void Fatality::parsearFatality()
 
 	// carga los cuadros de los sprites del vencido
 	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["secuenciaSpritesPerdedor"];
+	for (size_t i = 0; i < estadoSprites.size(); i++)
+		fatalityPerdedor->push_back(crearCuadro(estadoSprites[i]));
+
+	// carga los cuadros de los sprites del vencido
+	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["extraFX"];
 	for (size_t i = 0; i < estadoSprites.size(); i++)
 		fatalityPerdedor->push_back(crearCuadro(estadoSprites[i]));
 
