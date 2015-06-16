@@ -238,8 +238,7 @@ void Cuerpo::limitarACamara()
 		// la posicion tiene que ser negativa por el espacio 
 		// transparente del sprite, se toma el x sensor, como inicio
 		posicion.x = borde1 - xSensorLog;
-
-
+	
 	float largoPersonaje = getRefPersonaje()->getAncho() - xSensorLog;
 
 	// limita fin de escenario

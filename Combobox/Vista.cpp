@@ -414,16 +414,32 @@ void Vista::actualizar(){
 	refMundo->getCuerpo(0)->setBorde(bordeizq, bordeder);
 	refMundo->getCuerpo(1)->setBorde(bordeizq, bordeder);
 
-	if (PjUnoEstaEnBordeIzq)
+	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {
+		refMundo->FrenarCuerpos();
+	}
+
+	if (PjUnoEstaEnBordeIzq && (mov1 == DER))
+		refMundo->LiberarCuerpos();
+
+	if (PjUnoEstaEnBordeDer && (mov1 == IZQ))
+		refMundo->LiberarCuerpos();
+
+	if (PjDosEstaEnBordeIzq && (mov2 == DER))
+		refMundo->LiberarCuerpos();
+
+	if (PjDosEstaEnBordeDer && (mov2 == IZQ))
+		refMundo->LiberarCuerpos();
+
+	if (PjUnoEstaEnBordeIzq && !(refMundo->getCuerpo(0)->EstaFrenado()))
 		if (personajesVista[0]->getDeltaX() > 0)
 			camaraXLog += personajesVista[0]->getDeltaX();
-	if (PjDosEstaEnBordeIzq)
+	if (PjDosEstaEnBordeIzq && !(refMundo->getCuerpo(1)->EstaFrenado()))
 		if (personajesVista[1]->getDeltaX() > 0)
 			camaraXLog += personajesVista[1]->getDeltaX();
-	if (PjUnoEstaEnBordeDer)
+	if (PjUnoEstaEnBordeDer && !(refMundo->getCuerpo(0)->EstaFrenado()))
 		if (personajesVista[0]->getDeltaX() < 0)
 			camaraXLog += personajesVista[0]->getDeltaX();
-	if (PjDosEstaEnBordeDer)
+	if (PjDosEstaEnBordeDer && !(refMundo->getCuerpo(1)->EstaFrenado()))
 		if (personajesVista[1]->getDeltaX() < 0)
 			camaraXLog += personajesVista[1]->getDeltaX();
 
