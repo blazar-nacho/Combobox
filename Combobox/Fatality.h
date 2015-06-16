@@ -54,6 +54,9 @@ private:
 
 	std::vector<SDL_Rect*> *extraFX;
 	int cuadroActualExtraFX;
+	float yInicialExtra;
+	std::string xInicialExtra;
+	int retrasoExtra;
 
 	std::vector<SDL_Rect*> *Caminar;
 	std::vector<SDL_Rect*> *CaminarAtras;
