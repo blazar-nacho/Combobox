@@ -9,7 +9,7 @@ public:
 	virtual Personaje* getPersonaje2();
 	virtual bool esModoPractica();
 	virtual void iniciar();
-	~ModoDeJuego();
+	virtual ~ModoDeJuego();
 
 protected:
 	Controlador* controlador1;
