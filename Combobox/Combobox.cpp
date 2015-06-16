@@ -171,8 +171,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 				//Se actualiza la pantalla
 				int estadoVida = CONTINUAR;
-				if ((segundosTranscurridos>FINDELFIGHT) || (segundosTranscurridos<0.01))
-				estadoVida = unMundo->Paso(0.13f);
+				if ((segundosTranscurridos > FINDELFIGHT) || (segundosTranscurridos < 0.01)){
+					estadoVida = unMundo->Paso(0.13f);
+				}
+
 				unaVista->actualizar();
 
 				if (estadoVida == REINICIAR){

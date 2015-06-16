@@ -1324,6 +1324,14 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 	
 	if (Parser::getInstancia().getPelea()->terminoLaPelea()){
+
+
+		if (Parser::getInstancia().getPelea()->getPersonajeGanador() == nullptr){
+		
+			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
+			nuevoEstado.golpeado = FALLECIDO;
+		}
+		/*
 		if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
 			if (estadoanterior.golpeado != DIZZY){
 				nuevoEstado.golpeado = DIZZY;
@@ -1334,7 +1342,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
 			nuevoEstado.golpeado = FALLECIDO;
 		}
-
+		*/
 	}
 	
 	if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
