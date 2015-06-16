@@ -29,6 +29,11 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 
 	Caminar = jugadorGanador->getSprite()->listaDeCuadros(caminarEst);
 
+	caminarEst.movimiento = CAMINARIZQ;
+	CaminarAtras = jugadorGanador->getSprite()->listaDeCuadros(caminarEst);
+	
+		
+
 	distanciaMax = distancia + RANGO_DIST;
 	distanciaMin = distancia - RANGO_DIST;
 
@@ -123,12 +128,14 @@ void Fatality::ubicarGanador()
 	if (distanciaJugadores > distanciaMax) {
 		if (xJugGanador < xJugPerdedor) {
 			xJugGanador += DIST/4;
-			cuadroGanador.x += DIST;
+			cuerpoGanador->mover(DIST / 4);
+			//cuadroGanador.x += DIST;
 			SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
 		}
 		else {
 			xJugGanador -= DIST/4;
-			cuadroGanador.x -= DIST;
+			cuerpoGanador->mover(-DIST / 4);
+			//cuadroGanador.x -= DIST;
 			SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 		}
 
@@ -136,13 +143,15 @@ void Fatality::ubicarGanador()
 	else if (distanciaJugadores < distanciaMin) {
 		if (xJugGanador > xJugPerdedor) {
 			xJugGanador += DIST/4;
-			cuadroGanador.x += DIST;
-			SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
+			cuerpoGanador->mover(DIST / 4);
+			//cuadroGanador.x += DIST;
+			SDL_RenderCopyEx(renderer, texturaGanador, CaminarAtras->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 		}
 		else {
 			xJugGanador -= DIST/4;
-			cuadroGanador.x -= DIST;
-			SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
+			cuerpoGanador->mover(-DIST / 4);
+			//cuadroGanador.x -= DIST;
+			SDL_RenderCopy(renderer, texturaGanador, CaminarAtras->at(cuadroActualCaminar), &cuadroGanador);
 		}
 	}
 	else {

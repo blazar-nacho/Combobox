@@ -1,13 +1,12 @@
 #pragma once
 #include "Mundo.h"
+#include "Cuerpo.h"
 
 #define DIST 4.0f
 #define RANGO_DIST 2.5f
 #define RETRASO_SPRT 6
 #define CONTADOR_INI 200
 
-// declaro para poder usar 
-class Cuerpo;
 
 class Fatality {
 public:
@@ -47,6 +46,7 @@ private:
 	int retraso;
 
 	std::vector<SDL_Rect*> *Caminar;
+	std::vector<SDL_Rect*> *CaminarAtras;
 	int cuadroActualCaminar;
 	bool distanciaCorrecta;
 
