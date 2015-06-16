@@ -203,6 +203,31 @@ bool Cuerpo::estaEnBorde()
 	
 }
 
+bool Cuerpo::estaEnBordeCamaraIzq()
+{
+	ManejadorULogicas manejadorUnidades;
+	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorXMax());
+	bool esBorde = false;
+	float largoPersonaje = getRefPersonaje()->getAncho() - xSensorLog;
+
+	esBorde = (posicion.x + xSensorLog <= borde1 + 10);
+
+	return esBorde;
+}
+
+bool Cuerpo::estaEnBordeCamaraDer()
+{
+	ManejadorULogicas manejadorUnidades;
+	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorXMax());
+	bool esBorde = false;
+	float largoPersonaje = getRefPersonaje()->getAncho() - xSensorLog;
+
+	esBorde = (posicion.x + largoPersonaje + 10 >= borde2);
+
+	return esBorde;
+}
+
+
 void Cuerpo::setBorde(float unborde1, float unborde2){
 	borde1 = unborde1;
 	borde2 = unborde2;

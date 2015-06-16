@@ -304,7 +304,8 @@ public:
 	// borde izquierdo se toma cero siempre
 	bool estaEnBorde();
 		
-
+	bool estaEnBordeCamaraIzq();
+	bool estaEnBordeCamaraDer();
 	// Aplica un impulso lineal al cuerpo. Variación de la cantidad de movimiento.
 	// Modifica la velocidad. El impulso sería en unidades de N.s o Kg.m/s
 	inline void aplicarImpulso(vector2D& impulso)

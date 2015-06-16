@@ -388,20 +388,21 @@ void Vista::actualizar(){
 	// condicion de borde Personaje Uno
 	bool PjUnoEstaEnBordeIzq = false;
 	bool PjUnoEstaEnBordeDer = false;
-	if (xPjUno + manejadorULog.darLongUnidades(xSensPos1 + (anchoSens1)) >= anchoVentana - camaraXLog)
+	if (refMundo->getCuerpo(0)->estaEnBordeCamaraDer())
 		PjUnoEstaEnBordeDer = true;
-	if (xPjUno + manejadorULog.darLongUnidades(xSensPos1) < -camaraXLog)
+	if (refMundo->getCuerpo(0)->estaEnBordeCamaraIzq())
 		PjUnoEstaEnBordeIzq = true;
 	bool PjUnoEstaEnBorde = PjUnoEstaEnBordeIzq || PjUnoEstaEnBordeDer;
 
 	// condicion de borde Personaje Dos
 	bool PjDosEstaEnBordeIzq = false;
 	bool PjDosEstaEnBordeDer = false;
-	if (xPjDos + manejadorULog.darLongUnidades(xSensPos2 + (anchoSens2)) >= anchoVentana - camaraXLog)
+	if (refMundo->getCuerpo(1)->estaEnBordeCamaraDer())
 		PjDosEstaEnBordeDer = true;
-	if (xPjDos+ manejadorULog.darLongUnidades(xSensPos2)< -camaraXLog)
+	if (refMundo->getCuerpo(1)->estaEnBordeCamaraIzq())
 		PjDosEstaEnBordeIzq = true;
 	bool PjDosEstaEnBorde = PjDosEstaEnBordeIzq || PjDosEstaEnBordeDer;
+
 
 	MOV_TIPO mov1 = refMundo->getCuerpo(0)->getControlador()->getMovimientos().back()->getMovimiento();
 	MOV_TIPO mov2 = refMundo->getCuerpo(1)->getControlador()->getMovimientos().back()->getMovimiento();
