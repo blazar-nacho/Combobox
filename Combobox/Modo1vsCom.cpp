@@ -20,6 +20,7 @@ void Modo1vsCom::setNivelDeDificultad(int unNivel){
 
 Modo1vsCom::~Modo1vsCom()
 {
-	controlador1 = nullptr;
-	delete controlador2;
+	ControladorAutomatico* controladorAutomatico;
+	controladorAutomatico = (ControladorAutomatico*)controlador2;
+	delete controladorAutomatico;
 }
