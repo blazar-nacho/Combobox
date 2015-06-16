@@ -9,6 +9,7 @@ IA::IA()
 	umbralDeProbabilidad = 5;
 	cantidadDeMovimientosAdelante = 0;
 	cantidadDeMovimientosAtras = 0;
+	cantidadDeMovimientosAgachado = 0;
 }
 
 
@@ -76,8 +77,15 @@ MOV_TIPO IA::getMovimiento(){
 		return atras;
 	}
 
+	//MOVIMIENTOS AGACHADO
+	if (cantidadDeMovimientosAgachado != 0){
+		cantidadDeMovimientosAgachado--;
+		return ABAJO;
+	}
+
 	cantidadDeMovimientosAdelante = 0;
 	cantidadDeMovimientosAtras = 0;
+	cantidadDeMovimientosAgachado = 0;
 
 	if (probabilidadDeHacerLoCorrecto < umbralDeProbabilidad){
 		//BASICOS
@@ -86,7 +94,10 @@ MOV_TIPO IA::getMovimiento(){
 			if (probabilidadDeMovimiento <= 2) return saltoAdelante;
 			if (probabilidadDeMovimiento > 2 && probabilidadDeMovimiento <= 4) return saltoAtras;
 			if (probabilidadDeMovimiento > 4 && probabilidadDeMovimiento <= 6) return ARRIBA;
-			if (probabilidadDeMovimiento > 6 && probabilidadDeMovimiento <= 8) return ABAJO;
+			if (probabilidadDeMovimiento > 6 && probabilidadDeMovimiento <= 8) {
+				cantidadDeMovimientosAgachado = 10;
+				return ABAJO;
+			}
 			if (probabilidadDeMovimiento > 8) return DEFENSA;
 		}
 		if (unEstado.movimiento == GUARDIA){
@@ -106,7 +117,10 @@ MOV_TIPO IA::getMovimiento(){
 			probabilidadDeMovimiento = (rand() % 50);
 			if (probabilidadDeMovimiento < 5) return DEFENSA;
 			if (probabilidadDeMovimiento >= 5 && probabilidadDeMovimiento < 10) return DEFENSA_AGACHADO;
-			if (probabilidadDeMovimiento >= 10 && probabilidadDeMovimiento < 47)  return ABAJO;
+			if (probabilidadDeMovimiento >= 10 && probabilidadDeMovimiento < 47) {
+				cantidadDeMovimientosAgachado = 10;
+				return ABAJO;
+			}
 			if (probabilidadDeMovimiento == 47) return ARRIBA;
 			if (probabilidadDeMovimiento == 48) return saltoAdelante;
 			if (probabilidadDeMovimiento == 49) return saltoAtras;
@@ -156,7 +170,7 @@ MOV_TIPO IA::getMovimiento(){
 	}
 	if (probabilidadDeMovimiento > 2) return QUIETO;
 	movimiento = (MOV_TIPO)(rand() % 22);
-	if (movimiento != CERRAR || movimiento != RECARGAR) return movimiento;
+	if (movimiento != CERRAR && movimiento != RECARGAR && movimiento != FATALITY) return movimiento;
 	return QUIETO;
 }
 

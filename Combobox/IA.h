@@ -19,5 +19,6 @@ private:
 	int umbralDeProbabilidad;
 	unsigned int cantidadDeMovimientosAdelante;
 	unsigned int cantidadDeMovimientosAtras;
+	unsigned int cantidadDeMovimientosAgachado;
 };
 
