@@ -2301,45 +2301,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	}
 
 	// FATALITY
-	// La fatality va a dibujar los sprites que hagan falta y setear estado invisible al personaje cuando haga falta
-	//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
-	//Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
-	if ((personajesVista[0]->getEstado().accion == FATALITY_EST) || (personajesVista[1]->getEstado().accion == FATALITY_EST)){
-		if (!fatalityCreada){
-
-			//if (ganador == personajesVista[0]) // CAMBIO
-			fatality = new Fatality(personajesVista[0], refMundo->getCuerpo(0), texturaSpriteUno, personajesVista[1], refMundo->getCuerpo(1), texturaSpriteDos, renderer, refMundo, colorPj1);
-			//else // CAMBIO
-			//	fatality = new Fatality(personajesVista[1], refMundo->getCuerpo(0), texturaSpriteDos, personajesVista[0], refMundo->getCuerpo(0), texturaSpriteUno, renderer, refMundo, colorPj2);
-			fatalityCreada = true;
-			// le paso el control de la textura uno a la fatility
-			texturaSpriteUno = nullptr;			
-		}
-		else {
-			// ejecuta un paso de la fatality
-			fatality->realizar(&personajeUno, &personajeDos);
-			texturaSpriteDos = fatality->getTexturaPerdedor();
-
-			if (fatality->finalizo()){
-				texturaSpriteUno = fatality->getTexturaGanador(); 
-				texturaSpriteDos = fatality->getTexturaPerdedor();
-
-				delete fatality;
-				fatalityCreada = false;				
-
-				ESTADO estadoUno = personajesVista[0]->getEstado();
-				estadoUno.accion = SIN_ACCION;
-				ESTADO estadoDos = personajesVista[1]->getEstado();
-				estadoDos.accion = SIN_ACCION;
-				refMundo->getCuerpo(0)->setDemora(0);
-				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
-				refMundo->getCuerpo(1)->setDemora(0);
-				refMundo->setResolver(estadoDos, refMundo->getCuerpo(1));
-			}
-		}
-		
-		//}
-	}
+	RealizarFatality(&personajesVista, &personajeUno, &personajeDos);
 
 	// tamaño sensores
 	proyectilUno.w = (int)refMundo->getProyectil(1)->getAncho();
@@ -2401,6 +2363,63 @@ void Vista::deshabilitarVibracion(){
 	vibracion = false;
 }
 
+void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect* personajeUno, SDL_Rect* personajeDos)
+{
+	//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
+	//Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
+	if ((personajesVista->at(0)->getEstado().accion == FATALITY_EST) || (personajesVista->at(1)->getEstado().accion == FATALITY_EST) ||
+		(personajesVista->at(0)->getEstado().accion == FIN_FATALITY) || (personajesVista->at(1)->getEstado().accion == FIN_FATALITY)){
+		if (!fatalityCreada){
+
+			//if (ganador == personajesVista[0]) // CAMBIO
+			fatality = new Fatality(personajesVista->at(0), refMundo->getCuerpo(0), texturaSpriteUno, personajesVista->at(1), refMundo->getCuerpo(1), texturaSpriteDos, renderer, refMundo, colorPj1);
+			//else // CAMBIO
+			//	fatality = new Fatality(personajesVista->at(1), refMundo->getCuerpo(0), texturaSpriteDos, personajesVista->at(0), refMundo->getCuerpo(0), texturaSpriteUno, renderer, refMundo, colorPj2);
+			fatalityCreada = true;
+			// le paso el control de la textura uno a la fatility
+			texturaSpriteUno = nullptr;
+		}
+		else {
+			refMundo->getCuerpo(0)->setDemora(INT_MAX);			
+			refMundo->getCuerpo(1)->setDemora(INT_MAX);
+
+			// ejecuta un paso de la fatality
+			fatality->realizar(personajeUno, personajeDos);
+			texturaSpriteDos = fatality->getTexturaPerdedor();
+
+			if (fatality->efectuada()){
+				ESTADO estadoUno = personajesVista->at(0)->getEstado();
+				estadoUno.accion = FIN_FATALITY;
+				ESTADO estadoDos = personajesVista->at(1)->getEstado();
+				estadoDos.accion = FIN_FATALITY;
+				refMundo->getCuerpo(0)->setDemora(INT_MAX);
+				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
+				refMundo->getCuerpo(1)->setDemora(INT_MAX);
+				refMundo->setResolver(estadoDos, refMundo->getCuerpo(1));
+			}
+
+			if (fatality->finalizo()){
+				texturaSpriteUno = fatality->getTexturaGanador();
+				texturaSpriteDos = fatality->getTexturaPerdedor();
+
+				delete fatality;
+				fatalityCreada = false;
+
+				ESTADO estadoUno = personajesVista->at(0)->getEstado();
+				estadoUno.accion = SIN_ACCION;
+				ESTADO estadoDos = personajesVista->at(1)->getEstado();
+				estadoDos.accion = SIN_ACCION;
+				refMundo->getCuerpo(0)->setDemora(0);
+				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
+				refMundo->getCuerpo(1)->setDemora(0);
+				refMundo->setResolver(estadoDos, refMundo->getCuerpo(1));
+
+			}
+		}
+
+		//}
+	}
+}
 
 Vista::~Vista()
 {

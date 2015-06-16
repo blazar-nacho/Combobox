@@ -15,8 +15,11 @@ public:
 	// Básicamente reproduce secuencias de sprites específicos de fatality
 	void realizar(SDL_Rect* cuadroGanador, SDL_Rect* cuadroPerdedor);
 
-	// devuelve true si termino de hacer la fatality
+	// devuelve true si ya termino de hacer la fatality del todo 
 	bool finalizo();
+
+	// devuelvetrue si ya la termino de hacer la fatality pero sigue mostrandose 
+	bool efectuada();
 
 	// devuelve la textura del ganador para reestablecer la vista
 	SDL_Texture* getTexturaGanador();
@@ -36,7 +39,10 @@ private:
 	Mundo* refMundo;
 	// contador de tiempo de fatality
 	int contador;
+	// true si ya termino del todo
 	bool fatalityFinalizada;
+	// true si ya la termino de realizar pero sigue mostrandose 
+	bool fatalityEfectuada;
 
 	std::vector<SDL_Rect*> *fatalityGanador;
 	int cuadroActualGanador;
@@ -45,6 +51,9 @@ private:
 	int cuadroActualPerdedor;
 	SDL_Rect* cuadroPerdedor;
 	int retraso;
+
+	std::vector<SDL_Rect*> *extraFX;
+	int cuadroActualExtraFX;
 
 	std::vector<SDL_Rect*> *Caminar;
 	std::vector<SDL_Rect*> *CaminarAtras;

@@ -164,6 +164,8 @@ private:
 	ManejadorULogicas manejadorULog;
 	bool fatalityCreada = false;
 	Fatality* fatality;
+	// La fatality va a dibujar los sprites que hagan falta y setear estado invisible al personaje cuando haga falta
+	void RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect* personajeUno, SDL_Rect* personajeDos);
 
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
