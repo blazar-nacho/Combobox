@@ -39,6 +39,7 @@ MOV_TIPO IA::getMovimiento(){
 	MOV_TIPO atras;
 	MOV_TIPO saltoAdelante;
 	MOV_TIPO saltoAtras;
+	MOV_TIPO movimiento;
 	ESTADO unEstado = personajeRival->getEstado();
 	bool posicionDeGolpeo = false;
 	float posicion1 = personajeRival->getPosicionUn().first + personajeRival->getAncho() / 2;
@@ -154,7 +155,9 @@ MOV_TIPO IA::getMovimiento(){
 		return atras;
 	}
 	if (probabilidadDeMovimiento > 2) return QUIETO;
-	return (MOV_TIPO)(rand() % 22);
+	movimiento = (MOV_TIPO)(rand() % 22);
+	if (movimiento != CERRAR || movimiento != RECARGAR) return movimiento;
+	return QUIETO;
 }
 
 
