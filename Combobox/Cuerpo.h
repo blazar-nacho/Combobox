@@ -391,6 +391,8 @@ public:
 	void setposProyectilAnterior(float posAnteriorProyectil);
 	float getXProyectilAnterior();
 	void limitarAEscenario();
+	void limitarACamara();
+	void setBorde(float unborde1, float unborde2);
 	// devuelve el mayor ancho de sensor y su posicion en x
 	int getSensorLargo(float *posX);
 
@@ -406,6 +408,7 @@ private:
 	bool estaSuperpuesto;
 	int demora;
 	int demoraGolpe;
+	float borde1, borde2;
 	bool invertidoaux;
 	int demoraAire;
 	ESTADO estadoAnterior;

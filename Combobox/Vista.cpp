@@ -266,7 +266,13 @@ bool Vista::cambiaColorPersonaje(){
 }
 
 void Vista::crearPersonajes(){
-	//Se cargan los sprites:		
+	// se limitan los personajes
+	float anchoVentana = Parser::getInstancia().getVentana().getAncho();
+	float bordeizq = -camaraXLog;
+	float bordeder = anchoVentana - camaraXLog;
+	//Se les pone el borde
+	refMundo->getCuerpo(0)->setBorde(bordeizq, bordeder);
+	refMundo->getCuerpo(1)->setBorde(bordeizq, bordeder);
 
 	//Dirección de la imagen de Sprites
 	std::string dirImgPersonajeUno = Parser::getInstancia().getPelea()->getPersonaje1()->getSpriteDir();
@@ -348,7 +354,7 @@ void Vista::actualizar(){
 	personajesVista.push_back(Parser::getInstancia().getPelea()->getPersonaje2());
 	Ventana ventanaVista = Parser::getInstancia().getVentana();
 	
-
+	
 
 	//Parametros de la ventana
 
@@ -400,6 +406,11 @@ void Vista::actualizar(){
 	ESTADO estadoPj1 = refMundo->getCuerpo(0)->getEstado();
 	ESTADO estadoPj2 = refMundo->getCuerpo(1)->getEstado();
 
+	float bordeizq = -camaraXLog;
+	float bordeder = anchoVentana - camaraXLog;
+	//Se les pone el borde
+	refMundo->getCuerpo(0)->setBorde(bordeizq, bordeder);
+	refMundo->getCuerpo(1)->setBorde(bordeizq, bordeder);
 
 
 	if ((PjUnoEstaEnBordeIzq && PjDosEstaEnBordeDer) || (PjDosEstaEnBordeIzq && PjUnoEstaEnBordeDer)) {

@@ -203,6 +203,10 @@ bool Cuerpo::estaEnBorde()
 	
 }
 
+void Cuerpo::setBorde(float unborde1, float unborde2){
+	borde1 = unborde1;
+	borde2 = unborde2;
+}
 
 void Cuerpo::limitarAEscenario()
 {
@@ -224,6 +228,27 @@ void Cuerpo::limitarAEscenario()
 		posicion.x = Parser::getInstancia().getEscenario().getAncho() - largoPersonaje;
 }
 
+void Cuerpo::limitarACamara()
+{
+	ManejadorULogicas manejadorUnidades;
+	float xSensorLog = manejadorUnidades.darLongUnidades(getSensorXMax());
+
+	// limita inicio del escenario
+	if (posicion.x + xSensorLog < borde1)
+		// la posicion tiene que ser negativa por el espacio 
+		// transparente del sprite, se toma el x sensor, como inicio
+		posicion.x = borde1 - xSensorLog;
+
+
+	float largoPersonaje = getRefPersonaje()->getAncho() - xSensorLog;
+
+	// limita fin de escenario
+	if (posicion.x + largoPersonaje > borde2)
+		// se toma el ancho del sensor, como parametro
+		posicion.x = borde2 - largoPersonaje;
+}
+
+
 
 Personaje* Cuerpo::getRefPersonaje(){
 	return observador;
@@ -242,6 +267,7 @@ void Cuerpo::sumarPosicion(const vector2D& unaPosicion)
 
 	// que no se mueva más allá de los límites del escenario
 	limitarAEscenario();
+	limitarACamara();
 
 }
 
