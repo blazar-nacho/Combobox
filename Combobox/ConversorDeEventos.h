@@ -3,7 +3,7 @@ class ConversorDeEventos
 {
 public:
 	#define NULO 9999999 
-	enum Acciones {UP, DOWN, RIGHT, LEFT, HOLD, LOW_PUNCH, HIGH_PUNCH, LOW_KICK, HIGH_KICK, WEAPON, QUIT, REBOOT, REBOOT_FIGHT};
+	enum Acciones {UP, DOWN, RIGHT, LEFT, HOLD, LOW_PUNCH, HIGH_PUNCH, LOW_KICK, HIGH_KICK, WEAPON, QUIT, REBOOT, REBOOT_FIGHT, BACK_MENU};
 
 	ConversorDeEventos();
 	bool setAccion(Acciones unaAccion, std::string keyName);
@@ -45,7 +45,7 @@ private:
 		Sint16 ejeHasta;
 	};
 
-	Accion acciones[13];
+	Accion acciones[14];
 
 	CodigosDeEvento getCodigosDeEventoDeTecla(std::string tecla);
 

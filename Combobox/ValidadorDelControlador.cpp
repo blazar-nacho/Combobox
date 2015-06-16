@@ -26,6 +26,7 @@ std::vector<std::string>* ValidadorDelControlador::cargarConstantesParaElControl
 		constantes->push_back(P_BAJA_DEFAULT_1);
 		constantes->push_back(P_ALTA_DEFAULT_1);
 		constantes->push_back(REINICIAR_PELEA_DEFAULT);
+		constantes->push_back(MENU_DEFAULT);
 		return constantes;
 	}
 	constantes->push_back(ARRIBA_DEFAULT_2);
@@ -41,6 +42,7 @@ std::vector<std::string>* ValidadorDelControlador::cargarConstantesParaElControl
 	constantes->push_back(P_BAJA_DEFAULT_2);
 	constantes->push_back(P_ALTA_DEFAULT_2);
 	constantes->push_back(REINICIAR_PELEA_DEFAULT);
+	constantes->push_back(MENU_DEFAULT);
 	return constantes;
 
 }
@@ -62,7 +64,7 @@ int ValidadorDelControlador::crearYobtenerNumeroDeControlador(){
 void ValidadorDelControlador::validarControladorDesde(Json::Value unControlador){
 	ConversorDeEventos* unConversorDeEventos = new ConversorDeEventos();
 
-	std::string arriba, abajo, izquierda, derecha, golpe_bajo, golpe_alto;
+	std::string arriba, abajo, izquierda, derecha, golpe_bajo, golpe_alto, menu;
 	std::string patada_baja, patada_alta, defensa, arma, reiniciar, reiniciarPelea, salir;
 	std::string mensaje, mensajeDelNumeroDeControlador;
 	int numeroDeControlador;
@@ -92,6 +94,7 @@ void ValidadorDelControlador::validarControladorDesde(Json::Value unControlador)
 		patada_baja = acciones->at(10);
 		patada_alta = acciones->at(11);
 		reiniciarPelea = acciones->at(12);
+		menu = acciones->at(13);
 
 		delete acciones;
 		
@@ -150,6 +153,13 @@ void ValidadorDelControlador::validarControladorDesde(Json::Value unControlador)
 		}
 		else{
 			Log::getInstancia().logearMensajeEnModo("Se carga boton reiniciar pelea por defecto", Log::MODO_WARNING);
+		}
+
+		if ((unControlador.isMember("menu_principal") && unControlador.get("menu_principal", MENU_DEFAULT).isString())){
+			menu = unControlador.get("menu_principal", MENU_DEFAULT).asString();
+		}
+		else{
+			Log::getInstancia().logearMensajeEnModo("Se carga boton menu principal por defecto", Log::MODO_WARNING);
 		}
 
 		if ((unControlador.isMember("salir") && unControlador.get("salir", SALIR_DEFAULT).isString())){
@@ -223,6 +233,11 @@ void ValidadorDelControlador::validarControladorDesde(Json::Value unControlador)
 
 	if (!unConversorDeEventos->setAccion(ConversorDeEventos::REBOOT_FIGHT, reiniciarPelea)){
 		mensaje = "Accion reiniciar pelea del control " + mensajeDelNumeroDeControlador;
+		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
+	}
+
+	if (!unConversorDeEventos->setAccion(ConversorDeEventos::BACK_MENU, menu)){
+		mensaje = "Accion menu principal del control " + mensajeDelNumeroDeControlador;
 		Log::getInstancia().logearMensajeEnModo(mensaje, Log::MODO_WARNING);
 	}
 
