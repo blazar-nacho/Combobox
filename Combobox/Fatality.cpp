@@ -208,6 +208,7 @@ void Fatality::parsearFatality()
 {
 	fatalityGanador = new std::vector<SDL_Rect*>();
 	fatalityPerdedor = new std::vector<SDL_Rect*>();
+	extraFX = new std::vector<SDL_Rect*>();
 
 	Json::Value raiz = ParsearRaizJson(jugadorGanador->getFatalityDir());
 
@@ -237,7 +238,7 @@ void Fatality::parsearFatality()
 	// carga los cuadros de los sprites del vencido
 	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["extraFX"];
 	for (size_t i = 0; i < estadoSprites.size(); i++)
-		fatalityPerdedor->push_back(crearCuadro(estadoSprites[i]));
+		extraFX->push_back(crearCuadro(estadoSprites[i]));
 
 	jugadorPerdedor->getSprite()->setFatality(fatalityPerdedor);
 
@@ -269,5 +270,18 @@ SDL_Rect* Fatality::crearCuadro(Json::Value cuadro){
 }
 
 Fatality::~Fatality(){
+	for (size_t i = 0; i < fatalityGanador->size(); i++)
+		delete fatalityGanador->at(i);
+	fatalityGanador->clear();
+	delete fatalityGanador;
 
+	for (size_t i = 0; i < fatalityPerdedor->size(); i++)
+		delete fatalityPerdedor->at(i);
+	fatalityPerdedor->clear();
+	delete fatalityPerdedor;
+
+	for (size_t i = 0; i < extraFX->size(); i++)
+		delete extraFX->at(i);
+	extraFX->clear();
+	delete extraFX;
 }
