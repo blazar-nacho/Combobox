@@ -92,7 +92,8 @@
         "arma": "n",
         "salir": "esc",
         "reiniciar": "r",
-        "reiniciar_pelea": "f1"
+        "reiniciar_pelea": "f1",
+        "menu_principal":  "f2"
     },
 
     "control_2": {
@@ -108,7 +109,8 @@
         "arma": "u",
         "salir": "esc",
         "reiniciar": "r",
-        "reiniciar_pelea": "f1"
+        "reiniciar_pelea": "f1",
+        "menu_principal":  "f2"
     },
 	
 	"combo_1": {

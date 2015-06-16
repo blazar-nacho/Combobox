@@ -165,6 +165,10 @@ int Controlador::cambiar(){
 		return REINICIAR_PELEA;
 	}
 
+	if (state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::BACK_MENU)]) {
+		return MENU_PRINCIPAL;
+	}
+
 	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_PUNCH)]) golpeBajoTecladoHabilitado = true;
 	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::HIGH_PUNCH)]) golpeAltoTecladoHabilitado = true;
 	if (!state[conversorDeEventos->getScanCodeDeLaAccion(ConversorDeEventos::LOW_KICK)]) patadaBajaTecladoHabilitada = true;
@@ -1221,6 +1225,37 @@ int Controlador::cambiar(){
 				valorDelEje = SDL_JoystickGetAxis(joystickAlternativo, conversorDeEventos->getJbotonDeLaAccion(ConversorDeEventos::REBOOT_FIGHT));
 				if ((valorDelEje >= conversorDeEventos->getValorDesdeDelEjeDeLaAccion(ConversorDeEventos::REBOOT_FIGHT)) && (valorDelEje <= conversorDeEventos->getValorHastaDelEjeDeLaAccion(ConversorDeEventos::REBOOT_FIGHT))){
 					return REINICIAR_PELEA;
+				}
+			}
+
+		}
+
+		//VOLVER AL MENU----------------------------------------------------------------------------
+		if (conversorDeEventos->geNnumeroDeJoystickDeLaAccion(ConversorDeEventos::BACK_MENU) == 0){
+			joystickAlternativo = unJoystick;
+		}
+		else{
+			if (conversorDeEventos->geNnumeroDeJoystickDeLaAccion(ConversorDeEventos::BACK_MENU) == 1) joystickAlternativo = otroJoystick;
+		}
+		if (joystickAlternativo != nullptr){
+
+			//BOTON
+			if (SDL_JoystickGetButton(joystickAlternativo, conversorDeEventos->getJbotonDeLaAccion(ConversorDeEventos::BACK_MENU)) == 1){
+				return MENU_PRINCIPAL;
+			}
+
+			//FLECHAS
+			if (conversorDeEventos->hayFlechasParaLaAccion(ConversorDeEventos::BACK_MENU)){
+				if (conversorDeEventos->getHatDeLaAccion(ConversorDeEventos::BACK_MENU) == SDL_JoystickGetHat(joystickAlternativo, 0)){
+					return MENU_PRINCIPAL;
+				}
+			}
+
+			//EJES
+			if (conversorDeEventos->hayEjeParaLaAccion(ConversorDeEventos::BACK_MENU)){
+				valorDelEje = SDL_JoystickGetAxis(joystickAlternativo, conversorDeEventos->getJbotonDeLaAccion(ConversorDeEventos::BACK_MENU));
+				if ((valorDelEje >= conversorDeEventos->getValorDesdeDelEjeDeLaAccion(ConversorDeEventos::BACK_MENU)) && (valorDelEje <= conversorDeEventos->getValorHastaDelEjeDeLaAccion(ConversorDeEventos::BACK_MENU))){
+					return MENU_PRINCIPAL;
 				}
 			}
 

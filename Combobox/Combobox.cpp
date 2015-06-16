@@ -135,13 +135,25 @@ int _tmain(int argc, _TCHAR* argv[])
 					break;
 				}
 
-				if ((estadoUno == REINICIAR_PELEA && menu->getModo()->esModoPractica()) || (estadoDos == REINICIAR_PELEA && menu->getModo()->esModoPractica())){
-					unaVista->resetContadorLogoPelea();
-					unMundo->reiniciar();
-					unaVista->reiniciarCamara();
+				if (menu->getModo()->esModoPractica()){
+					if ((estadoUno == MENU_PRINCIPAL) || estadoDos == MENU_PRINCIPAL){
+						unaVista->resetContadorLogoPelea();
+						unMundo->reiniciar();
+						menu->reiniciarMenu();
+						unaVista->reiniciarCamara();
+						unaVista->reiniciarMenu();
+						accion = INICIAR;
+						break;
+					}
+
+					if (estadoUno == REINICIAR_PELEA || estadoDos == REINICIAR_PELEA ){
+						unaVista->resetContadorLogoPelea();
+						unMundo->reiniciar();
+						unaVista->reiniciarCamara();
+					}
 				}
 
-				else if (estadoUno == FIN || estadoDos == FIN){
+				if (estadoUno == FIN || estadoDos == FIN){
 					accion = FIN;
 					break;
 				};
