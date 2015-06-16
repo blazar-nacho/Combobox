@@ -2,9 +2,9 @@
 #include "Mundo.h"
 
 #define DIST 4.0f
-#define RANGO_DIST 5.0f
+#define RANGO_DIST 2.5f
 #define RETRASO_SPRT 6
-#define CONTADOR_INI 500
+#define CONTADOR_INI 200
 
 // declaro para poder usar 
 class Cuerpo;

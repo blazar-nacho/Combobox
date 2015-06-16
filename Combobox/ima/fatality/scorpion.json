@@ -10,7 +10,7 @@
                     },
         "coordenadas": [
             {
-                "distancia": 20,
+                "distancia": 100,
                 "delayPerdedor": 70,
                 "secuenciaSpritesGanador": [
                     {
@@ -227,7 +227,7 @@
 
             },
             {
-                "distancia": 20,
+                "distancia": 100,
                 "delayPerdedor": 70,
                 "secuenciaSpritesGanador": [
                     {
