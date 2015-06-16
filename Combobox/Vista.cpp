@@ -2433,7 +2433,6 @@ Vista::~Vista()
 	SDL_FreeSurface(superficieBarraDeVida);
 	SDL_FreeSurface(superficieBarraDeVidaRoja);
 	SDL_FreeSurface(supTexto);
-	SDL_FreeSurface(modoJuego);
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(ventana);	
