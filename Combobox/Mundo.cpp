@@ -819,7 +819,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	}
 
 
-	//FATALITY-- Combo 10
+	//FARTALITY-- Combo 10
 	if ((unaToma->getNombre() == NOMBRE_COMBO_10) && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
 		ultimaToma = unaToma;
 

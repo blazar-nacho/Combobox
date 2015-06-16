@@ -4,6 +4,7 @@
 #define DIST 4.0f
 #define RANGO_DIST 5.0f
 #define RETRASO_SPRT 6
+#define CONTADOR_INI 500
 
 // declaro para poder usar 
 class Cuerpo;
@@ -33,6 +34,8 @@ private:
 	std::string imagenDir;
 	float distancia;
 	Mundo* refMundo;
+	// contador de tiempo de fatality
+	int contador;
 	bool fatalityFinalizada;
 
 	std::vector<SDL_Rect*> *fatalityGanador;

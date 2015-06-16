@@ -2240,9 +2240,9 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	else
 		proyectilUno.x = personajeUno.x + manejadorULog.darLongPixels(personajesVista.at(0)->getAncho()) - refMundo->getProyectil(1)->getPosicion().first - refMundo->getProyectil(1)->getAncho();
 	proyectilUno.y = personajeUno.y + refMundo->getProyectil(1)->getPosicion().second;	
-	// nacho: obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
+	// obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
 	SDL_Rect* cuadroProyectilUnoSprite = personajesVista.at(0)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
-	// nacho: ancho y alto del dibujo del sprite
+	// ancho y alto del dibujo del sprite
 	proyectilUno.w = (int)refMundo->getProyectil(1)->getAncho();
 	proyectilUno.h = (int)refMundo->getProyectil(1)->getAlto();
 
@@ -2251,7 +2251,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	else
 		proyectilDos.x = personajeDos.x + refMundo->getProyectil(2)->getPosicion().first;
 	proyectilDos.y = personajeDos.y + refMundo->getProyectil(2)->getPosicion().second;
-	// nacho: obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
+	// obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
 	SDL_Rect* cuadroProyectilDosSprite = personajesVista.at(1)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
 	proyectilDos.w = (int)refMundo->getProyectil(2)->getAncho(); 
 	proyectilDos.h = (int)refMundo->getProyectil(2)->getAlto(); 
@@ -2267,23 +2267,23 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	//Se cargan ambos acorde a su posición relativa
 	if (invertido){
 		SDL_RenderCopyEx(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno, 0, NULL, SDL_FLIP_HORIZONTAL);
-		// nacho: dibuja el proyectil si está activado
+		// dibuja el proyectil si está activado
 		if (refMundo->getProyectil(1)->estaActivo())
 			SDL_RenderCopyEx(renderer, texturaSpriteUno, cuadroProyectilUnoSprite, &proyectilUno, 0, NULL, SDL_FLIP_HORIZONTAL);
 		
 		SDL_RenderCopy(renderer, texturaSpriteDos, cuadroActualDos, &PersonajeDosMovimiento);
-		// nacho: dibuja el proyectil si está activado
+		// dibuja el proyectil si está activado
 		if (refMundo->getProyectil(2)->estaActivo())
 			SDL_RenderCopy(renderer, texturaSpriteDos, cuadroProyectilDosSprite, &proyectilDos);
 	}
 	else{
 		SDL_RenderCopy(renderer, texturaSpriteUno, cuadroActualUno, &PersonajeUnoMovimiento);
-		// nacho: dibuja el proyectil si está activado
+		// dibuja el proyectil si está activado
 		if (refMundo->getProyectil(1)->estaActivo())
 			SDL_RenderCopy(renderer, texturaSpriteUno, cuadroProyectilUnoSprite, &proyectilUno);
 
 		SDL_RenderCopyEx(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos, 0, NULL, SDL_FLIP_HORIZONTAL);
-		// nacho: dibuja el proyectil si está activado
+		// dibuja el proyectil si está activado
 		if (refMundo->getProyectil(2)->estaActivo())
 			SDL_RenderCopyEx(renderer, texturaSpriteDos, cuadroProyectilDosSprite, &proyectilDos, 0, NULL, SDL_FLIP_HORIZONTAL);
 	}

@@ -9,6 +9,7 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 	cuerpoPerdedor = cuerpoPerdedorNuevo;
 	renderer = rendererSDL;
 	retraso = RETRASO_SPRT;
+	contador = CONTADOR_INI;
 	parsearFatality();
 	distanciaCorrecta = false;
 	refMundo = refMundoNueva;
@@ -56,6 +57,9 @@ void Fatality::realizar()
 		return;
 	}
 
+	// tiempo de fatality
+	contador--;
+
 	// creo estado invisible
 	ESTADO InvisibleEst;
 	InvisibleEst.accion = FATALITY_EST;
@@ -82,7 +86,7 @@ void Fatality::realizar()
 	if ((cuadroActualGanador < fatalityGanador->size() - 1) && (retraso == 0))
 		cuadroActualGanador++;
 
-	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1))
+	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1) && (contador < 1))
 		fatalityFinalizada = true;
 
 	if (retraso == 0)
