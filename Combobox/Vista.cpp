@@ -2296,19 +2296,21 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		if (!fatalityCreada){
 
 			//if (ganador == personajesVista[0]) // CAMBIO
-			fatality = new Fatality(personajesVista[0], refMundo->getCuerpo(0), texturaSpriteUno, personajesVista[1], refMundo->getCuerpo(1), texturaSpriteDos, renderer, personajeUno, personajeDos, refMundo, colorPj1);
+			fatality = new Fatality(personajesVista[0], refMundo->getCuerpo(0), texturaSpriteUno, personajesVista[1], refMundo->getCuerpo(1), texturaSpriteDos, renderer, refMundo, colorPj1);
 			//else // CAMBIO
-			//	fatality = new Fatality(personajesVista[1], refMundo->getCuerpo(0), texturaSpriteDos, personajesVista[0], refMundo->getCuerpo(0), texturaSpriteUno, renderer, personajeDos, personajeUno, refMundo, colorPj2);
+			//	fatality = new Fatality(personajesVista[1], refMundo->getCuerpo(0), texturaSpriteDos, personajesVista[0], refMundo->getCuerpo(0), texturaSpriteUno, renderer, refMundo, colorPj2);
 			fatalityCreada = true;
 			// le paso el control de la textura uno a la fatility
-			texturaSpriteUno = nullptr;
+			texturaSpriteUno = nullptr;			
 		}
 		else {
 			// ejecuta un paso de la fatality
-			fatality->realizar();
+			fatality->realizar(&personajeUno, &personajeDos);
+			texturaSpriteDos = fatality->getTexturaPerdedor();
 
 			if (fatality->finalizo()){
-				texturaSpriteUno = fatality->getTexturaGanador();
+				texturaSpriteUno = fatality->getTexturaGanador(); 
+				texturaSpriteDos = fatality->getTexturaPerdedor();
 
 				delete fatality;
 				fatalityCreada = false;				

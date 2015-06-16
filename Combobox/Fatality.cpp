@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Fatality.h"
 
-Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedorNuevo, Cuerpo* cuerpoPerdedorNuevo, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, Mundo* refMundoNueva, std::vector<double> colorGanador)
+Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedorNuevo, Cuerpo* cuerpoPerdedorNuevo, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, Mundo* refMundoNueva, std::vector<double> colorGanador)
 {
 	jugadorGanador = jugadorGanadorNuevo;
 	cuerpoGanador = cuerpoGanadorNuevo;
@@ -18,6 +18,7 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 
 	texturaGanador = texturaGanadorNueva;
 	texturaPerdedor = texturaPerdedorNueva;
+	texturaPerdedorBloqueada = false;
 
 	xJugGanador = jugadorGanador->getPosicionUn().first;
 	xJugPerdedor = jugadorPerdedor->getPosicionUn().first;
@@ -39,14 +40,12 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 
 	cargarTextura(colorGanador);
 
-	cuadroActualGanador = 0;
-	cuadroGanador = cuadroGanadorNuevo;
-	cuadroPerdedor = cuadroPerdedorNuevo;
+	cuadroActualGanador = 0;	
 	cuadroActualPerdedor = 0;
 
 }
 
-void Fatality::realizar()
+void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorActual)
 {
 	// TODO:
 	// chequear distancia
@@ -55,6 +54,8 @@ void Fatality::realizar()
 	// reproducir secuenciaSpritesGanador en posicion del jugador ganador
 	// reproducir secuenciaSpritesPerdedor en posicion del jugador perdedor
 
+	cuadroGanador = cuadroGanadorActual;
+	cuadroPerdedor = cuadroPerdedorActual;
 
 	// si movio al jugador retorna para volver y hacer otro paso
 	// sino se avanza a la fatality
@@ -66,28 +67,20 @@ void Fatality::realizar()
 	// tiempo de fatality
 	contador--;
 
-	// creo estado invisible
-	ESTADO InvisibleEst;
-	InvisibleEst.accion = FATALITY_EST;
-	InvisibleEst.movimiento = INVISIBLE;
-	InvisibleEst.golpeado = NOGOLPEADO;
-
-	// seteo invisible al ganador
-	refMundo->setResolver(InvisibleEst, cuerpoGanador);
-
+	
 	if (xJugGanador < xJugPerdedor)
-		SDL_RenderCopy(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), &cuadroGanador);
+		SDL_RenderCopy(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), cuadroGanador);
 	else
-		SDL_RenderCopyEx(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
+		SDL_RenderCopyEx(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 
 	if (delayPerdedor == 0) {
 		// seteo invisible al perdedor
-		refMundo->setResolver(InvisibleEst, cuerpoPerdedor);
+		texturaPerdedorBloqueada = true;		
 
 	if (xJugGanador < xJugPerdedor)
-		SDL_RenderCopy(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), &cuadroPerdedor);
+		SDL_RenderCopy(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), cuadroPerdedor);
 	else
-		SDL_RenderCopyEx(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), &cuadroPerdedor, NULL, NULL, SDL_FLIP_HORIZONTAL);
+		SDL_RenderCopyEx(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), cuadroPerdedor, NULL, NULL, SDL_FLIP_HORIZONTAL);
 
 		if ((cuadroActualPerdedor < fatalityPerdedor->size() - 1) && (retraso == 0))
 			cuadroActualPerdedor++;
@@ -99,8 +92,10 @@ void Fatality::realizar()
 	if ((cuadroActualGanador < fatalityGanador->size() - 1) && (retraso == 0))
 		cuadroActualGanador++;
 
-	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1) && (contador < 1))
+	if ((cuadroActualGanador == fatalityGanador->size() - 1) && (cuadroActualPerdedor == fatalityPerdedor->size() - 1) && (contador < 1)){
 		fatalityFinalizada = true;
+		texturaPerdedorBloqueada = false;
+	}
 
 	if (retraso == 0)
 		retraso = RETRASO_SPRT;
@@ -119,6 +114,16 @@ SDL_Texture* Fatality::getTexturaGanador()
 	return texturaGanador;
 }
 
+SDL_Texture* Fatality::getTexturaPerdedor()
+{
+	if (!texturaPerdedorBloqueada)
+		return texturaPerdedor;
+
+	return nullptr;
+}
+
+
+
 void Fatality::ubicarGanador()
 {
 	// chuequear distancia
@@ -129,14 +134,14 @@ void Fatality::ubicarGanador()
 		if (xJugGanador < xJugPerdedor) {
 			xJugGanador += DIST/4;
 			cuerpoGanador->mover(DIST / 4);
-			//cuadroGanador.x += DIST;
-			SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador);
+			
+			SDL_RenderCopy(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), cuadroGanador);
 		}
 		else {
 			xJugGanador -= DIST/4;
 			cuerpoGanador->mover(-DIST / 4);
-			//cuadroGanador.x -= DIST;
-			SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
+			
+			SDL_RenderCopyEx(renderer, texturaGanador, Caminar->at(cuadroActualCaminar), cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 		}
 
 	}
@@ -144,14 +149,14 @@ void Fatality::ubicarGanador()
 		if (xJugGanador > xJugPerdedor) {
 			xJugGanador += DIST/4;
 			cuerpoGanador->mover(DIST / 4);
-			//cuadroGanador.x += DIST;
-			SDL_RenderCopyEx(renderer, texturaGanador, CaminarAtras->at(cuadroActualCaminar), &cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
+			
+			SDL_RenderCopyEx(renderer, texturaGanador, CaminarAtras->at(cuadroActualCaminar), cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
 		}
 		else {
 			xJugGanador -= DIST/4;
 			cuerpoGanador->mover(-DIST / 4);
-			//cuadroGanador.x -= DIST;
-			SDL_RenderCopy(renderer, texturaGanador, CaminarAtras->at(cuadroActualCaminar), &cuadroGanador);
+			
+			SDL_RenderCopy(renderer, texturaGanador, CaminarAtras->at(cuadroActualCaminar), cuadroGanador);
 		}
 	}
 	else {

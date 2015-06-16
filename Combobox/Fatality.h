@@ -10,10 +10,10 @@
 
 class Fatality {
 public:
-	Fatality(Personaje* jugadorGanador, Cuerpo* cuerpoGanador, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedor, Cuerpo* cuerpoPerdedor, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, SDL_Rect cuadroGanadorNuevo, SDL_Rect cuadroPerdedorNuevo, Mundo* refMundoNueva, std::vector<double> colorGanador);
+	Fatality(Personaje* jugadorGanador, Cuerpo* cuerpoGanador, SDL_Texture* texturaGanadorNueva, Personaje* jugadorPerdedor, Cuerpo* cuerpoPerdedor, SDL_Texture* texturaPerdedorNueva, SDL_Renderer* rendererSDL, Mundo* refMundoNueva, std::vector<double> colorGanador);
 
 	// Básicamente reproduce secuencias de sprites específicos de fatality
-	void realizar();
+	void realizar(SDL_Rect* cuadroGanador, SDL_Rect* cuadroPerdedor);
 
 	// devuelve true si termino de hacer la fatality
 	bool finalizo();
@@ -21,6 +21,7 @@ public:
 	// devuelve la textura del ganador para reestablecer la vista
 	SDL_Texture* getTexturaGanador();
 
+	SDL_Texture* getTexturaPerdedor();
 	std::string getImagenDir() const;
 
 	~Fatality();
@@ -39,10 +40,10 @@ private:
 
 	std::vector<SDL_Rect*> *fatalityGanador;
 	int cuadroActualGanador;
-	SDL_Rect cuadroGanador;
+	SDL_Rect* cuadroGanador;
 	std::vector<SDL_Rect*> *fatalityPerdedor;
 	int cuadroActualPerdedor;
-	SDL_Rect cuadroPerdedor;
+	SDL_Rect* cuadroPerdedor;
 	int retraso;
 
 	std::vector<SDL_Rect*> *Caminar;
@@ -55,6 +56,7 @@ private:
 
 	SDL_Texture* texturaGanador;
 	SDL_Texture* texturaPerdedor;
+	bool texturaPerdedorBloqueada;
 
 	float distanciaMin;
 	float distanciaMax;
