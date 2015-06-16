@@ -258,7 +258,8 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		//Carga de cuadrado redimension para texto de combos
 		cuadradoRedimension = ajusteResolucionBase800x600(0, 550, 100, 50);
 		textoCombos = "-";
-		
+
+
 }
 
 bool Vista::cambiaColorPersonaje(){
@@ -295,6 +296,9 @@ void Vista::crearPersonajes(){
 	//Creación de la textura sobre la superficie
 	texturaSpriteUno = SDL_CreateTextureFromSurface(renderer, SuperficieUno);
 	texturaSpriteDos = SDL_CreateTextureFromSurface(renderer, SuperficieDos);
+	SDL_FreeSurface(SuperficieUno);
+	SDL_FreeSurface(SuperficieDos);
+
 }
 
 void Vista::setColorPj1(std::vector<double> unColor)
@@ -2428,11 +2432,7 @@ Vista::~Vista()
 	SDL_DestroyTexture(texturaSeleccionPj2);
 	SDL_DestroyTexture(personajesMuestra);
 	SDL_DestroyTexture(juegoModo);
-	SDL_FreeSurface(SuperficieUno);
-	SDL_FreeSurface(SuperficieDos);
-	SDL_FreeSurface(superficieBarraDeVida);
-	SDL_FreeSurface(superficieBarraDeVidaRoja);
-	SDL_FreeSurface(supTexto);
+
 
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(ventana);	
