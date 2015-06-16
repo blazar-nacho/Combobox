@@ -262,7 +262,8 @@ void Parser::FreeInstancia()
 	delete getInstancia().validadorDeCapas;
 	delete getInstancia().validadorDelColor;
 	delete getInstancia().validadorDePelea;
-	//delete getInstancia().validadorDeTomas;
+	delete getInstancia().validadorDelControlador;
+	delete getInstancia().validadorDeTomas;
 }
 
 Parser::~Parser()

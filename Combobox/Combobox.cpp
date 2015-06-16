@@ -211,8 +211,6 @@ int _tmain(int argc, _TCHAR* argv[])
 			delete otroCuerpo;
 			delete menu;
 		}
-		delete controladorUno;
-		delete controladorDos;
 		delete unaVista;
 		delete unMundo;
 		Parser::FreeInstancia();
