@@ -316,4 +316,6 @@ SDL_Surface* MatizColor::mostrarOriginal()
 MatizColor::~MatizColor()
 {
 	delete unCuadro;
+	//if (superficie != nullptr) SDL_FreeSurface(superficie);
+	if (cuadroModificado != nullptr) delete cuadroModificado;
 }
