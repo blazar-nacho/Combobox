@@ -247,5 +247,7 @@ enum MOV_TIPO { ARRIBA, ABAJO, DER, IZQ, DEFENSA, G_BAJO, G_ALTO, P_BAJA, P_ALTA
 #define TIEMPO_INFINITO 999
 #define ROUNDS_MAXIMOS 3
 #define TIEMPO_DE_PELEA 99  //xjose pongo ***** para poder testear tranquilo
+#define TIEMPO_DIZZY 100000
+
 
 //FIN
