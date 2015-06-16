@@ -30,20 +30,10 @@ void Mundo::reiniciar(){
 	gravedad = vecGravedad;
 	ESTADO parado;
 	parado.movimiento = PARADO;
-	//Cuerpo 1
-	Cuerpos.at(0)->reiniciarAtributos();
-	Cuerpos.at(0)->SetPosicion(vector2D((P1_POS_INI + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso())));
-	Cuerpos.at(0)->SetSensorActivoStr(parado);
-
-	//Cuerpo2
-	Cuerpos.at(1)->reiniciarAtributos();
-	Cuerpos.at(1)->SetPosicion(vector2D((float)(P2_POS_INI + Parser::getInstancia().getEscenario().getAncho() / 2), (Parser::getInstancia().getEscenario().getYPiso())));
-	Cuerpos.at(1)->SetSensorActivoStr(parado);
-	
 	cambioGolpeAlto = false;
-
 	unReloj->stop();
 }
+
 
 bool Mundo::huboToma(){
 	if (ultimaToma != nullptr) return true;
@@ -91,6 +81,11 @@ void Mundo::FrenarCuerpos()
 		Cuerpos.at(i)->Frenar();
 	}
 }
+
+void Mundo::limpiarCuerpos(){
+	Cuerpos.clear();
+}
+
 
 void Mundo::LiberarCuerpos()
 {

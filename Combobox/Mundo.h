@@ -31,6 +31,7 @@ public:
 	bool huboToma();
 	void setResolver(ESTADO, Cuerpo*);
 	Toma* getToma();
+	void limpiarCuerpos();
 	void reiniciar();
 
 private:
