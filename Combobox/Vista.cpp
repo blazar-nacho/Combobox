@@ -332,8 +332,6 @@ void Vista::reiniciarMenu(){
 	cambiarColor = false;
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
-	SDL_FreeSurface(SuperficieUno);
-	SDL_FreeSurface(SuperficieDos);
 	muestra1 = { 212, 195, 63, 129 };
 	muestra2 = { 528, 195, 63, 129 };
 
