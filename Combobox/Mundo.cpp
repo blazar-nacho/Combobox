@@ -1286,7 +1286,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		}
 	}
 
-
+	
 
 	if (unCuerpo->EstaFrenado() ){
 		
@@ -1326,7 +1326,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 	
 	if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
-		if (unReloj->getTicks() < 10000){
+		if (unReloj->getTicks() < TIEMPO_DIZZY){
 			nuevoEstado.movimiento = PARADO;
 			nuevoEstado.accion = SIN_ACCION;
 			nuevoEstado.golpeado = DIZZY;
