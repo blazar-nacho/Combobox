@@ -723,9 +723,9 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 				}
 				else{
 					nuevoEstado.accion = GOLPE_ALTO2;
-					cambioGolpeAlto = true;
+					//cambioGolpeAlto = true;
 					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-					unCuerpo->setDemoraGolpe((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())+20);
+					//unCuerpo->setDemoraGolpe((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())+20);
 				}
 				
 
