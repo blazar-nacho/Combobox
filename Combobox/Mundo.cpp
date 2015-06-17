@@ -781,8 +781,8 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	if ((unaToma->getNombre() == NOMBRE_COMBO_4) ){
 		ultimaToma = unaToma;
 
-		nuevoEstado.golpeado = DIZZY;
-		unCuerpo->setDemora(5*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		nuevoEstado.golpeado = TUMBANDOSE;
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 		
 
 	}
@@ -1194,7 +1194,7 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 					if (estadoanterior.golpeado == TUMBANDOSE && nuevoEstado.golpeado == NOGOLPEADO){
 						
 						nuevoEstado.golpeado = TUMBADO;
-						unCuerpo->setDemora(10000);
+						unCuerpo->setDemora(1000);
 					}
 
 					if (estadoanterior.golpeado == TUMBADO && nuevoEstado.golpeado == NOGOLPEADO){
@@ -1205,7 +1205,14 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 					if (nuevoEstado.golpeado == GOLPEADO && estadoanterior.golpeado != TUMBADO && estadoanterior.golpeado != TUMBANDOSE){
 						
 						nuevoEstado.golpeado = TUMBANDOSE;
-						unCuerpo->setDemora(10000);
+						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+
+					}
+
+					if (estadoanterior.golpeado == DIZZY && nuevoEstado.golpeado == NOGOLPEADO ){
+
+						nuevoEstado.golpeado = TUMBANDOSE;
+						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 
 					}
 

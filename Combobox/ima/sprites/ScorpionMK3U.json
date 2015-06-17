@@ -1771,7 +1771,7 @@
                     }
                 ]
             },
-            "Disparo": {
+            "DisparoProyectil": {
                 "sensores": [
                     {
                         "x": 0,
@@ -1797,7 +1797,7 @@
                     }
                 ]
             },
-            "Disparo_alt1": {
+            "DisparoAcido": {
                 "sensores": [
                     {
                         "x": 0,
@@ -1853,7 +1853,7 @@
                     }
                 ]
             },
-            "Disparo_alt2": {
+            "DisparoHielo": {
                 "sensores": [
                     {
                         "x": 0,
