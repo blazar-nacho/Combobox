@@ -64,7 +64,7 @@ Sprite::Sprite(std::string jsonSprites){
 
 	//XjoseCargaSprite 1
 	this->Dizzy = new std::vector<SDL_Rect*>();
-	this->Subbarrida = new std::vector<SDL_Rect*>();
+	
 	this->Bicicleta = new std::vector<SDL_Rect*>();
 	this->Flykick = new std::vector<SDL_Rect*>();
 	this->Invisible = new std::vector<SDL_Rect*>();
@@ -249,11 +249,7 @@ Sprite::Sprite(std::string jsonSprites){
 	cargarSprites(Dizzy, "Dizzy", sprites);
 	// Sensores Dizzy
 	cargarSensores("Dizzy", sprites);
-
-	// Sprites subbarrida
-	cargarSprites(Subbarrida, "Subbarrida", sprites);
-	// Sensores subbarrida
-	cargarSensores("Subbarrida", sprites);
+		
 
 	//xjose cambiar estos nombres!
 	// Sprites BICICLETA 
@@ -754,12 +750,7 @@ Sprite::~Sprite()
 		delete Dizzy->at(i);
 	Dizzy->clear();
 	delete Dizzy;
-
-	//XjoseCargaSprite 3
-	for (size_t i = 0; i < Subbarrida->size(); i++)
-		delete Subbarrida->at(i);
-	Subbarrida->clear();
-	delete Subbarrida;
+		
 
 	if (Fatality != nullptr) {
 		for (size_t i = 0; i < Fatality->size(); i++)
