@@ -37,7 +37,7 @@ public:
 private:
 	Timer* unReloj;
 	Toma* ultimaToma;
-	vector2D gravedad;	
+	vector2D gravedad;
 	ESTADO estadoAnteriorPj1;
 	ESTADO estadoAnteriorPj2;
 	ESTADO estadoResolver;
@@ -54,10 +54,11 @@ private:
 
 	ESTADO moverCuerpos(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido, std::vector<Movimiento*>* movimientos, ESTADO nuevoEstado);
 
-	ESTADO ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo,ESTADO nuevoEstado, Sensor* proyectilUno, Sensor* proyectilDos, bool invertido);
+	ESTADO ResolverAtaques(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nuevoEstado, Sensor* proyectilUno, Sensor* proyectilDos, bool invertido);
 	ESTADO ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado);
 	ESTADO ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invertido, ESTADO nuevoEstado);
 	ESTADO ResolverSaltos(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<Movimiento*>* movimientos);
 	ESTADO ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo *otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<Movimiento*>* movimientos);
 	ESTADO ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<Movimiento*>* movimientos, Toma* unaToma);
+	ESTADO ResolverDemorasEspeciales(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido);
 };

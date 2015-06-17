@@ -861,6 +861,113 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 
 	return nuevoEstado;
 }
+             
+ESTADO Mundo::ResolverDemorasEspeciales(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido){
+	Sprite* elSprite = unCuerpo->getSprite();
+
+	if (nuevoEstado.accion == BICICLETA)
+	{
+		if (!unCuerpo->GetInvertidoAux()){
+			unCuerpo->SetVelocidad(vector2D(SALTO_X / 6, -gravedad.y * difTiempo));
+			if (elOtroCuerpo->getEstadoAnterior().golpeado != NOGOLPEADO){
+				unCuerpo->SetVelocidadX(2 * DISTANCIA);
+			}
+
+		}
+		else {
+			unCuerpo->SetVelocidad(vector2D(-SALTO_X / 6, -gravedad.y * difTiempo));
+			if (elOtroCuerpo->getEstadoAnterior().golpeado != NOGOLPEADO){
+				unCuerpo->SetVelocidadX(2 * -DISTANCIA);
+			}
+
+		}
+		//......
+		if (elOtroCuerpo->estaEnBorde() && (elOtroCuerpo->getEstado().golpeado == GOLPEADO))
+		{
+			unCuerpo->SetVelocidadX(0);
+		}
+
+		if (elOtroCuerpo->getEstado().golpeado == GOLPEADO && elOtroCuerpo->getEstado().accion == GUARDIA)
+		{
+			unCuerpo->SetVelocidadX(0);
+		}
+		//...
+		// si la demora esta por terminar
+		if (unCuerpo->GetDemora() < (0.3*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()))){
+
+			unCuerpo->SetVelocidadY(-20.f);
+		}
+
+	}
+
+	//tomas 6
+
+	if (nuevoEstado.accion == FLYKICK)
+	{
+		if (!unCuerpo->GetInvertidoAux()){  //caso invertido
+
+
+			if (elOtroCuerpo->getEstado().golpeado != NOGOLPEADO){ //si te pegue
+
+				unCuerpo->SetVelocidad(vector2D(0, 0));
+
+
+				unCuerpo->setDemora((0.3*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())));
+
+			}
+
+			else{  //si no te pegue
+
+				unCuerpo->SetVelocidad(vector2D(SALTO_X / 6, -gravedad.y * difTiempo));
+
+			}
+
+
+
+		}
+		else {
+
+			if (elOtroCuerpo->getEstado().golpeado != NOGOLPEADO){
+				unCuerpo->SetVelocidad(vector2D(0, 0));
+				unCuerpo->setDemora((0.3*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())));
+
+			}
+
+			else{
+
+				unCuerpo->SetVelocidad(vector2D(-SALTO_X / 6, -gravedad.y * difTiempo));
+
+			}
+
+		}
+
+		//......
+		//if (elOtroCuerpo->estaEnBorde() && (elOtroCuerpo->getEstado().golpeado == GOLPEADO))
+		//{
+		//	unCuerpo->SetVelocidad(vector2D(0, 0));
+		//}
+
+		//if (elOtroCuerpo->getEstado().golpeado == GOLPEADO && elOtroCuerpo->getEstado().accion == GUARDIA)
+		//{
+		//		unCuerpo->SetVelocidad(vector2D(0, 0));
+		//}
+
+
+		//...
+		// si la demora esta por terminar
+		if (unCuerpo->GetDemora() < (0.1*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()))){
+
+			unCuerpo->SetVelocidadY(-40.f);
+			if (unCuerpo->estaEnPiso()) unCuerpo->setDemora(0);
+		}
+
+	}
+
+
+
+
+	return nuevoEstado;
+}
 
 bool Mundo::haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invertido)
 {
@@ -1116,104 +1223,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 
 			//tomas especiales
+			nuevoEstado = Mundo::ResolverDemorasEspeciales(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido);
 			
-			if (nuevoEstado.accion == BICICLETA)
-			{
-				if (! unCuerpo->GetInvertidoAux()){
-					unCuerpo->SetVelocidad(vector2D(SALTO_X / 6, -gravedad.y * difTiempo));
-					if (elOtroCuerpo->getEstadoAnterior().golpeado!=NOGOLPEADO){
-						unCuerpo->SetVelocidadX(2*DISTANCIA);
-					}
-					
-				}
-				else {
-					unCuerpo->SetVelocidad(vector2D(-SALTO_X / 6, -gravedad.y * difTiempo));
-					if (elOtroCuerpo->getEstadoAnterior().golpeado != NOGOLPEADO){
-						unCuerpo->SetVelocidadX(2*-DISTANCIA);
-					}
-					
-				}
-				//......
-				if (elOtroCuerpo->estaEnBorde() && (elOtroCuerpo->getEstado().golpeado == GOLPEADO ))
-				{ unCuerpo->SetVelocidadX(0); }
-
-				if (elOtroCuerpo->getEstado().golpeado == GOLPEADO && elOtroCuerpo->getEstado().accion == GUARDIA)
-				{
-					unCuerpo->SetVelocidadX(0);
-				}
-				//...
-				// si la demora esta por terminar
-				if (unCuerpo->GetDemora() < (0.3*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()))){
-					
-					unCuerpo->SetVelocidadY(-20.f);
-				}
-
-			}
-
-			//tomas 6
-
-			if (nuevoEstado.accion == FLYKICK)
-			{
-				if (!unCuerpo->GetInvertidoAux()){  //caso invertido
-					
-
-					if (elOtroCuerpo->getEstado().golpeado != NOGOLPEADO){ //si te pegue
-						
-						unCuerpo->SetVelocidad(vector2D(0, 0));
-						
-						
-						unCuerpo->setDemora((0.3*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())));
-						
-					}
-
-					else{  //si no te pegue
-					
-						unCuerpo->SetVelocidad(vector2D(SALTO_X / 6, -gravedad.y * difTiempo));
-					
-					}
-
-
-
-				}
-				else {
-					
-					if (elOtroCuerpo->getEstado().golpeado != NOGOLPEADO){
-						unCuerpo->SetVelocidad(vector2D(0, 0));
-						unCuerpo->setDemora((0.3*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())));
-						
-					}
-
-					else{
-
-						unCuerpo->SetVelocidad(vector2D(-SALTO_X / 6, -gravedad.y * difTiempo));
-
-					}
-
-				}
-
-				//......
-				//if (elOtroCuerpo->estaEnBorde() && (elOtroCuerpo->getEstado().golpeado == GOLPEADO))
-				//{
-				//	unCuerpo->SetVelocidad(vector2D(0, 0));
-				//}
-
-				//if (elOtroCuerpo->getEstado().golpeado == GOLPEADO && elOtroCuerpo->getEstado().accion == GUARDIA)
-				//{
-			//		unCuerpo->SetVelocidad(vector2D(0, 0));
-				//}
-
-
-				//...
-				// si la demora esta por terminar
-				if (unCuerpo->GetDemora() < (0.1*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()))){
-
-					unCuerpo->SetVelocidadY(-40.f);
-					if (unCuerpo->estaEnPiso()) unCuerpo->setDemora(0);
-				}
-
-			}
-
-
 			
 		}// cierra el if demora
 
