@@ -17,7 +17,7 @@ enum Acciones
 #define NOMBRE_COMBO_1 "Poder"  //todos
 #define NOMBRE_COMBO_2 "iceshoot"  //scorpion
 #define NOMBRE_COMBO_3 "Teleport" //scorpion
-#define NOMBRE_COMBO_4 "firewall"  //liukang
+#define NOMBRE_COMBO_4 "firewall"  //liukang //TODOS INVISIBLE
 #define NOMBRE_COMBO_5 "bicicleta" //liukang
 #define NOMBRE_COMBO_6 "flykick"  //liukang
 #define NOMBRE_COMBO_7 "subbarrida" //scorpion
@@ -37,7 +37,7 @@ enum Acciones
 
 enum Golpeado
 {
-	NOGOLPEADO, GOLPEADO, FALLECIDO,FALLECIDO_ROUND,DIZZY,TUMBANDOSE, TUMBADO
+	NOGOLPEADO, GOLPEADO, FALLECIDO,FALLECIDO_ROUND,DIZZY,TUMBANDOSE, TUMBADO,
 };
 
 enum TipoDeArmas

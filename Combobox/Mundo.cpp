@@ -781,8 +781,9 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	if ((unaToma->getNombre() == NOMBRE_COMBO_4) ){
 		ultimaToma = unaToma;
 
-		nuevoEstado.golpeado = TUMBANDOSE;
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		
+		unCuerpo->Invisible();
+		
 		
 
 	}
@@ -907,6 +908,13 @@ ESTADO Mundo::ResolverDemorasEspeciales(float difTiempo, Cuerpo *unCuerpo, Cuerp
 
 			unCuerpo->SetVelocidadY(-20.f);
 		}
+
+	}
+
+	//toma 4
+
+	if (unCuerpo->estaInvisible() && nuevoEstado.golpeado == GOLPEADO){
+		unCuerpo->Visible();
 
 	}
 
