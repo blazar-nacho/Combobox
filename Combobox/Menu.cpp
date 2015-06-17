@@ -6,6 +6,7 @@ Menu::Menu(Modo* unModo)
 {
 	modo = unModo;
 	vista = unModo->getRefVista();
+	mundo = unModo->getRefMundo();
 	controladorDeMouse = new ControladorDeMouse(); 
 	modoSeleccionado = NINGUNO;
 	torre = NINGUNA;
@@ -88,6 +89,7 @@ int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlad
 	}
 	modo->seleccionarModo(modoSeleccionado, torre);
 	vista->setModoActual(modoSeleccionado);
+	mundo->setModoActual(modoSeleccionado);
 	return estado;
 }
 

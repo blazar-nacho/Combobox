@@ -103,6 +103,9 @@ void Mundo::LiberarCuerpos()
 	}
 }
 
+void Mundo::setModoActual(MODOS_DE_JUEGO unModoActual){
+	modoActual = unModoActual;
+}
 
 std::pair<float, float> getPosicionAbsSensor(std::pair<float, float> posSensor, Cuerpo* unCuerpo, float anchoDelSensor, float altoDelSensor, bool invertido){
 	Sprite* elSprite = unCuerpo->getSprite();
