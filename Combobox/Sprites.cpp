@@ -716,6 +716,11 @@ Sprite::~Sprite()
 	}
 	Sensores.clear();
 
+	for (size_t j = 0; j < sensoresDisparo.size(); j++){
+		if (sensoresDisparo.at(j) != nullptr) delete sensoresDisparo.at(j);
+	}
+	sensoresDisparo.clear();
+
 }
 
 
