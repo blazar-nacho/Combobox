@@ -319,11 +319,13 @@ void Vista::crearPersonajes(){
 	AlfaVida = 200;
 	
 	if (!MODO_RAPIDO){
-		MatizColor matiz(SuperficieUno);
-		matiz.desplazarMatiz(colorPj1.at(0), colorPj1.at(1), colorPj1.at(2));
+		MatizColor *matiz = new MatizColor(SuperficieUno);
+		matiz->desplazarMatiz(colorPj1.at(0), colorPj1.at(1), colorPj1.at(2));
+		delete matiz;
 
-		MatizColor matiz2(SuperficieDos);
-		matiz2.desplazarMatiz(colorPj2.at(0), colorPj2.at(1), colorPj2.at(2));
+		MatizColor *matiz2 = new MatizColor(SuperficieDos);
+		matiz2->desplazarMatiz(colorPj2.at(0), colorPj2.at(1), colorPj2.at(2));
+		delete matiz2;
 	}
 
 	//Creación de la textura sobre la superficie
@@ -2493,9 +2495,9 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 				estadoUno.accion = FATALITY_END;
 				ESTADO estadoDos = personajesVista->at(1)->getEstado();
 				estadoDos.accion = FATALITY_END;
-				refMundo->getCuerpo(0)->setDemora(INT_MAX);
+				refMundo->getCuerpo(0)->setDemora(TIEMPOFATALITYFIN);
 				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
-				refMundo->getCuerpo(1)->setDemora(INT_MAX);
+				refMundo->getCuerpo(1)->setDemora(TIEMPOFATALITYFIN);
 				refMundo->setResolver(estadoDos, refMundo->getCuerpo(1));
 			}
 
