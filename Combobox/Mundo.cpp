@@ -862,7 +862,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	}
 	
 	//COMBO 8 - FATALITY BABALITY
-	if ((unaToma->getNombre() == NOMBRE_COMBO_9) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && ((otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY) || modoActual == PRACTICA)){
+	if ((unaToma->getNombre() == NOMBRE_COMBO_8) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && ((otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY) || modoActual == PRACTICA)){
 		ultimaToma = unaToma;
 
 		nuevoEstado.accion = FATALITY_RUN;
