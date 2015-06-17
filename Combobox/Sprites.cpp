@@ -63,6 +63,7 @@ Sprite::Sprite(std::string jsonSprites){
 
 	//XjoseCargaSprite 1
 	this->Dizzy = new std::vector<SDL_Rect*>();
+	this->Subbarrida = new std::vector<SDL_Rect*>();
 	this->Bicicleta = new std::vector<SDL_Rect*>();
 	this->Flykick = new std::vector<SDL_Rect*>();
 	this->Invisible = new std::vector<SDL_Rect*>();
@@ -243,6 +244,11 @@ Sprite::Sprite(std::string jsonSprites){
 	// Sensores Dizzy
 	cargarSensores("Dizzy", sprites);
 
+	// Sprites subbarrida
+	cargarSprites(Subbarrida, "Subbarrida", sprites);
+	// Sensores subbarrida
+	cargarSensores("Subbarrida", sprites);
+
 	//xjose cambiar estos nombres!
 	// Sprites BICICLETA 
 	cargarSprites(Bicicleta, "Toma2", sprites);
@@ -405,6 +411,9 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.golpeado == DIZZY){
 		return Dizzy;
 	}
+	if (unEstado.accion == SUBBARRIDA){
+		return Subbarrida;
+	}
 	if (unEstado.golpeado == TUMBADO){
 		return Tumbado;
 	}
@@ -476,6 +485,7 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 		if (estadoDelPersonaje.golpeado == DIZZY)
 			return (tiempoDizzy / (this->Gancho->size()) / MSxCUADRO);
 
+
 		if (estadoDelPersonaje.movimiento == AGACHADO)
 			return ((tiempoAgachadoGolpeado / (this->AgachadoGolpeado->size())) / MSxCUADRO);
 		if (estadoDelPersonaje.accion == GUARDIA)
@@ -484,6 +494,8 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	}
 	if (estadoDelPersonaje.accion == GANCHO)
 		return (tiempoGancho / (this->Gancho->size()) / MSxCUADRO);
+	if (estadoDelPersonaje.accion == SUBBARRIDA)
+		return (tiempoBarrida / (this->Gancho->size()) / MSxCUADRO);
 	
 	if (estadoDelPersonaje.golpeado == TUMBADO)
 		return (tiempoTumbado / (this->Gancho->size()) / MSxCUADRO);
@@ -731,6 +743,12 @@ Sprite::~Sprite()
 		delete Dizzy->at(i);
 	Dizzy->clear();
 	delete Dizzy;
+
+	//XjoseCargaSprite 3
+	for (size_t i = 0; i < Subbarrida->size(); i++)
+		delete Subbarrida->at(i);
+	Subbarrida->clear();
+	delete Subbarrida;
 
 	if (Fatality != nullptr) {
 		for (size_t i = 0; i < Fatality->size(); i++)

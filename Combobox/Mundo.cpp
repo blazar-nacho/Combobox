@@ -376,7 +376,25 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 		}
 	}
 
+	if (estadoEnemigo.accion == SUBBARRIDA){
 
+		//aca hay que aplicar un impulso
+		if (!(invertido)){
+
+			unCuerpo->mover(-DISTANCIA);
+			elOtroCuerpo->aplicarImpulso(vector2D(7 * SALTO_X, 0));
+
+
+
+		}
+		else{
+
+			unCuerpo->mover(DISTANCIA);
+			elOtroCuerpo->aplicarImpulso(vector2D(7 * -SALTO_X, 0));
+
+
+		}
+	}
 
 
 
@@ -824,6 +842,24 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 		unCuerpo->setDemora(6 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 	}
 
+
+           
+	//COMBO 7--- subbarrida
+	if ((unaToma->getNombre() == NOMBRE_COMBO_7) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion")){
+		ultimaToma = unaToma;
+		nuevoEstado.accion = SUBBARRIDA;
+
+		if (!invertido){
+
+			unCuerpo->aplicarImpulso(vector2D(SALTO_X, 0.1 * SALTO_Y));
+		}
+		else {
+
+			unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 0.1 * SALTO_Y));
+		}
+		unCuerpo->setInvertidoAux(invertido);
+		unCuerpo->setDemora(3 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
+	}
 	
 
 	//COMBO 9 - FATALITY ARCADE
@@ -982,7 +1018,55 @@ ESTADO Mundo::ResolverDemorasEspeciales(float difTiempo, Cuerpo *unCuerpo, Cuerp
 	}
 
 
+	//tomas 7
 
+	if (nuevoEstado.accion == SUBBARRIDA)
+	{
+		if (!unCuerpo->GetInvertidoAux()){  //caso invertido
+
+
+			if (elOtroCuerpo->getEstado().golpeado != NOGOLPEADO){ //si te pegue
+
+				unCuerpo->SetVelocidad(vector2D(0, 0));
+
+
+				unCuerpo->setDemora((0.3*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())));
+
+			}
+
+			else{  //si no te pegue
+
+				unCuerpo->SetVelocidad(vector2D(SALTO_X / 6, -gravedad.y * difTiempo));
+
+			}
+
+
+
+		}
+		else {
+
+			if (elOtroCuerpo->getEstado().golpeado != NOGOLPEADO){
+				unCuerpo->SetVelocidad(vector2D(0, 0));
+				unCuerpo->setDemora((0.3*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size())));
+
+			}
+
+			else{
+
+				unCuerpo->SetVelocidad(vector2D(-SALTO_X / 6, -gravedad.y * difTiempo));
+
+			}
+
+		}
+
+		
+		if (unCuerpo->GetDemora() < (0.1*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()))){
+
+			unCuerpo->SetVelocidadY(-40.f);
+			if (unCuerpo->estaEnPiso()) unCuerpo->setDemora(0);
+		}
+
+	}
 
 	return nuevoEstado;
 }
@@ -1436,7 +1520,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	//*******************************************************************************************************************************************************************
 	if (unCuerpo->EstaFrenado() ){
 		
-		if (!((nuevoEstado.accion == BICICLETA && estadoanterior.accion != BICICLETA) || (nuevoEstado.accion == FLYKICK && estadoanterior.accion != FLYKICK))){
+		if (!((nuevoEstado.accion == BICICLETA && estadoanterior.accion != BICICLETA) || (nuevoEstado.accion == FLYKICK && estadoanterior.accion != FLYKICK) || (nuevoEstado.accion == SUBBARRIDA && estadoanterior.accion != SUBBARRIDA))){
 
 			unCuerpo->SetVelocidadX(0.0f);
 		}

@@ -49,6 +49,7 @@ private:
 	std::vector<SDL_Rect*>* Cayendo;
 	std::vector<SDL_Rect*>* Tumbado;
 	//XjoseCargaSprite 4
+	std::vector<SDL_Rect*>* Subbarrida;
 	std::vector<SDL_Rect*>* Dizzy;
 	std::vector<SDL_Rect*>* Bicicleta;
 	std::vector<SDL_Rect*>* Flykick;
