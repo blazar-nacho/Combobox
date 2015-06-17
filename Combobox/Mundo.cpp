@@ -1209,6 +1209,13 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 
 					}
 
+					if (estadoanterior.golpeado == DIZZY && nuevoEstado.golpeado == NOGOLPEADO ){
+
+						nuevoEstado.golpeado = TUMBANDOSE;
+						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+
+					}
+
 					if (estadoanterior.accion == FATALITY_END && nuevoEstado.accion!=FATALITY_END){
 						nuevoEstado.golpeado = FALLECIDO;
 						
