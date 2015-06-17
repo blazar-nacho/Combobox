@@ -382,16 +382,16 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 		if (!(invertido)){
 
 			unCuerpo->mover(-DISTANCIA);
-			elOtroCuerpo->aplicarImpulso(vector2D(7 * SALTO_X, 0));
-
+			//elOtroCuerpo->aplicarImpulso(vector2D(7 * SALTO_X, 0));
+			elOtroCuerpo->setDemora(0);
 
 
 		}
 		else{
 
 			unCuerpo->mover(DISTANCIA);
-			elOtroCuerpo->aplicarImpulso(vector2D(7 * -SALTO_X, 0));
-
+			//elOtroCuerpo->aplicarImpulso(vector2D(7 * -SALTO_X, 0));
+			elOtroCuerpo->setDemora(0);
 
 		}
 	}
