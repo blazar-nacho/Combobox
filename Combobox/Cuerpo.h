@@ -142,6 +142,10 @@ public:
 			sensorActivoStr = "Dizzy";
 		}
 
+		//XjoseCargaSprite 8
+		if (estadoActual.accion == SUBBARRIDA){
+			sensorActivoStr = "Subbarrida";
+		}
 
 		if (estadoActual.accion != SIN_ACCION){
 			if (estadoActual.accion == GANCHO)
