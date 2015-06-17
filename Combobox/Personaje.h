@@ -40,10 +40,16 @@ enum Golpeado
 	NOGOLPEADO, GOLPEADO, FALLECIDO,FALLECIDO_ROUND,DIZZY
 };
 
+enum TipoDeArmas
+{
+	PROYECTIL, HIELO, ACIDO
+};
+
 struct ESTADO {
 	Movimientos movimiento;
 	Acciones accion;
 	Golpeado golpeado;
+	TipoDeArmas tipoarma;
 };
 
 class Personaje
