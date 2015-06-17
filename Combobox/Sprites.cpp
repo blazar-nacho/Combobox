@@ -394,6 +394,12 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.golpeado == DIZZY){
 		return Dizzy;
 	}
+	if (unEstado.golpeado == TUMBADO){
+		return Tumbado;
+	}
+	if (unEstado.golpeado == TUMBANDOSE){
+		return Cayendo;
+	}
 
 	if (unEstado.accion == FLYKICK){
 		return Flykick;
@@ -455,6 +461,12 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	//XjoseCargaSprite 6
 	if (estadoDelPersonaje.golpeado == DIZZY)
 		return (tiempoDizzy / (this->Gancho->size()) / MSxCUADRO);
+
+	if (estadoDelPersonaje.golpeado == TUMBADO)
+		return (tiempoTumbado / (this->Gancho->size()) / MSxCUADRO);
+
+	if (estadoDelPersonaje.golpeado == TUMBANDOSE)
+		return (tiempoTumbandose / (this->Gancho->size()) / MSxCUADRO);
 
 	if (estadoDelPersonaje.accion == PATADA_BAJA){
 		if (estadoDelPersonaje.movimiento == AGACHADO)
