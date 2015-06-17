@@ -2552,6 +2552,9 @@ Vista::~Vista()
 		if (inputs[i] != nullptr) delete inputs[i];
 	}
 
+	if (fatalityCreada)
+		delete fatality;
+
 	TTF_CloseFont(fuente);
 	TTF_Quit();
 	SDL_DestroyTexture(texturaSpriteUno);
