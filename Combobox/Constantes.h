@@ -14,9 +14,9 @@
 #define MODOVSCOM 2
 #define MODOPRACTICA 3
 
-#define MODO_DEBUG_SDL false
+#define MODO_DEBUG_SDL true
 #define MODO_COLOR false
-#define MODO_SONIDO false
+#define MODO_SONIDO true
 #define MODO_INMORTAL false //xjose lo uso para que nadie muera y poder testear tranquilo
 #define MODO_RAPIDO false
 
@@ -148,6 +148,8 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoGolpeado 500.0f
 #define tiempoSaltoGolpeado 1400.0f 
 #define tiempoAgachadoGolpeado 500.0f
+//XjoseCargaSprite 7
+#define tiempoDizzy 1000.f
 //FISICA - ARMAS
 #define tiempoArmaArrojable 700.0f
 

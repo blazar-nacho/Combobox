@@ -99,9 +99,9 @@
                 "sensores": [
                     {
                         "x": 59,
-                        "y": 105,
+                        "y": 95,
                         "ancho": 56,
-                        "alto": 70,
+                        "alto": 90,
                         "nSprite": 0,
                         "esHitBox": true
                     }
@@ -1639,7 +1639,7 @@
                     }
                 ]
             },
-            "Terminado": {
+            "Dizzy": {
                 "sensores": [
                     {
                         "x": 66,
@@ -1648,6 +1648,7 @@
                         "alto": 105,
                         "nSprite": 0,
                         "esHitBox": true
+											
                     },
                     {
                         "x": 77,

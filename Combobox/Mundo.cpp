@@ -794,7 +794,22 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 	}
 
-	//COMBO 5---
+
+	//COMBO 4---TEST
+	if ((unaToma->getNombre() == NOMBRE_COMBO_4) ){
+		ultimaToma = unaToma;
+
+		nuevoEstado.golpeado = DIZZY;
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+
+	}
+	
+
+
+
+
+
+	//COMBO 5--- BICICLETA
 	if (unaToma->getNombre() == NOMBRE_COMBO_5 && (unCuerpo->getRefPersonaje()->getNombre() == "Liu Kang")){
 		ultimaToma = unaToma;
 		nuevoEstado.accion = BICICLETA;
@@ -811,7 +826,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 		unCuerpo->setInvertidoAux(invertido);
 	}
 
-	//COMBO 6---
+	//COMBO 6--- FLYKICK
 	if ((unaToma->getNombre() == NOMBRE_COMBO_6) && (unCuerpo->getRefPersonaje()->getNombre() == "Liu Kang")){
 		ultimaToma = unaToma;
 		nuevoEstado.accion = FLYKICK;
@@ -1102,7 +1117,7 @@ void Mundo::setResolver(ESTADO resolverNuevo, Cuerpo* refCuerpo)
 
 
 ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nuevoEstado, bool invertido, bool SinVida){
-	
+	Sprite* elSprite = unCuerpo->getSprite();
 	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
 
 
@@ -1153,18 +1168,24 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 
 
 		//si termino pelea dizzy
+
+
+
+		//******************************************************************************
+		/*
 		if (Parser::getInstancia().getPelea()->terminoLaPelea()){
-			if (estadoanterior.golpeado != DIZZY){
-				nuevoEstado.golpeado = DIZZY;
-				unReloj->start();
-			}
+		if (estadoanterior.golpeado != DIZZY){
+		nuevoEstado.golpeado = DIZZY;
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		unReloj->start();
+		}
 		}
 
 		else {//termino el round
-			nuevoEstado.golpeado = FALLECIDO_ROUND;
+		nuevoEstado.golpeado = FALLECIDO_ROUND;
 		}
-
-
+		*/
+		//****************************************************************
 		if (Parser::getInstancia().getPelea()->terminoLaPelea()){
 
 
@@ -1186,25 +1207,34 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 			}
 			*/
 		}
-		
-	}
+
+		//}
+
+		/*
+		if (estadoanterior.golpeado == DIZZY ){
+		if (unReloj->getTicks() >= TIEMPO_DIZZY){
+		unReloj->stop();
+		Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
+		nuevoEstado.golpeado = FALLECIDO;
+		}
 
 
-	if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
+		}/*
+		if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
 		if (unReloj->getTicks() < TIEMPO_DIZZY){
-			nuevoEstado.movimiento = PARADO;
-			nuevoEstado.accion = SIN_ACCION;
-			nuevoEstado.golpeado = DIZZY;
+		nuevoEstado.movimiento = PARADO;
+		nuevoEstado.accion = SIN_ACCION;
+		nuevoEstado.golpeado = DIZZY;
 		}
 		else{
-			unReloj->stop();
-			Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
-			nuevoEstado.golpeado = FALLECIDO;
+		unReloj->stop();
+		Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
+		nuevoEstado.golpeado = FALLECIDO;
 		}
+		}*/
+
+
 	}
-
-
-
 
 	return nuevoEstado;
 }

@@ -135,6 +135,14 @@ public:
 				sensorActivoStr = "AgachadoGolpeado";
 			return;
 		}
+
+
+		//XjoseCargaSprite 8
+		if (estadoActual.golpeado == DIZZY){
+			sensorActivoStr = "Dizzy";
+		}
+
+
 		if (estadoActual.accion != SIN_ACCION){
 			if (estadoActual.accion == GANCHO)
 				sensorActivoStr = "Gancho";
@@ -196,6 +204,12 @@ public:
 			if (estadoActual.accion == ARMA_ARROJABLE){
 				sensorActivoStr = "Arma";
 			}
+			if (estadoActual.accion == GUARDIA){
+				sensorActivoStr = "defensa";
+				if (estadoActual.movimiento == AGACHADO) sensorActivoStr = "AgachadoDefensa";
+			}
+				
+
 		}
 		else{
 			if (estadoActual.movimiento == CAMINARDER)

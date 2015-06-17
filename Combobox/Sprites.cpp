@@ -55,8 +55,9 @@ Sprite::Sprite(std::string jsonSprites){
 	this->AgachadoPatadaBaja = new std::vector<SDL_Rect*>();
 	this->AgachadoPatadaAlta = new std::vector<SDL_Rect*>();
 	this->Disparo = new std::vector<SDL_Rect*>();
-	this->Terminado = new std::vector<SDL_Rect*>();
 
+	//XjoseCargaSprite 1
+	this->Dizzy = new std::vector<SDL_Rect*>();
 	this->Bicicleta = new std::vector<SDL_Rect*>();
 	this->Flykick = new std::vector<SDL_Rect*>();
 	this->Invisible = new std::vector<SDL_Rect*>();
@@ -211,21 +212,22 @@ Sprite::Sprite(std::string jsonSprites){
 	// Sensores Disparo
 	cargarSensores("Disparo", sprites);
 
-	// Sprites Terminado
-	cargarSprites(Terminado, "Terminado", sprites);
-	// Sensores Terminado
-	cargarSensores("Terminado", sprites);
+	//XjoseCargaSprite 2
+	// Sprites Dizzy
+	cargarSprites(Dizzy, "Dizzy", sprites);
+	// Sensores Dizzy
+	cargarSensores("Dizzy", sprites);
 
 	//xjose cambiar estos nombres!
 	// Sprites BICICLETA 
 	cargarSprites(Bicicleta, "Toma2", sprites);
-	// Sensores Terminado
+	// Sensores BICICLETA
 	cargarSensores("Toma2", sprites);
 
 	//xjose cambiar estos nombres!
 	// Sprites FLYKICK 
 	cargarSprites(Flykick, "Toma6", sprites);
-	// Sensores Terminado
+	// Sensores FLYKICK 
 	cargarSensores("Toma6", sprites);
 
 
@@ -375,6 +377,11 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 		return Bicicleta;
 	}
 
+	//XjoseCargaSprite 5
+	if (unEstado.golpeado == DIZZY){
+		return Dizzy;
+	}
+
 	if (unEstado.accion == FLYKICK){
 		return Flykick;
 	}
@@ -431,6 +438,10 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	}
 	if (estadoDelPersonaje.accion == GANCHO)
 		return (tiempoGancho / (this->Gancho->size()) / MSxCUADRO);
+
+	//XjoseCargaSprite 6
+	if (estadoDelPersonaje.golpeado == DIZZY)
+		return (tiempoDizzy / (this->Gancho->size()) / MSxCUADRO);
 
 	if (estadoDelPersonaje.accion == PATADA_BAJA){
 		if (estadoDelPersonaje.movimiento == AGACHADO)
@@ -647,10 +658,11 @@ Sprite::~Sprite()
 	Disparo->clear();
 	delete Disparo;
 
-	for (size_t i = 0; i < Terminado->size(); i++)
-		delete Terminado->at(i);
-	Terminado->clear();
-	delete Terminado;
+	//XjoseCargaSprite 3
+	for (size_t i = 0; i < Dizzy->size(); i++)
+		delete Dizzy->at(i);
+	Dizzy->clear();
+	delete Dizzy;
 
 	if (Fatality != nullptr) {
 		for (size_t i = 0; i < Fatality->size(); i++)
