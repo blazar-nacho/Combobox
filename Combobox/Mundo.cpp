@@ -1168,6 +1168,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	std::vector<Movimiento*> movimientosOtro = elOtroCuerpo->getControlador()->getMovimientos();
 		
 	
+
 	if (unCuerpo->EstaSuperpuesto() && ((!(unCuerpo->estaEnPiso() && elOtroCuerpo->estaEnPiso())) || (estadoanterior.golpeado == GOLPEADO) || estadoanterior.accion==ARMA )){
 
 		nuevoEstado = Mundo::moverCuerpos(unCuerpo, elOtroCuerpo, invertido, &movimientosOtro, nuevoEstado);
@@ -1186,15 +1187,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 	else{// NO HAY SUPERPOSICION, LO SIGUIENTE A RESOLVER ES LA COLISION
 		
-		//si el tipo ya esta golpeado o el otro no vuelvo a evaluar
+		//PRE: si el tipo ya esta golpeado o el otro no vuelvo a evaluar
 		// ademas, alguno tiene que estar haciendo algo.. habria que desconsiderar las guardias......
 		// es sucio pero es una optimizacion, sino aca va a entrar siempre para el otro cuerpo no golpeado
+		//POST: esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada
 		if (estadoanterior.golpeado != GOLPEADO && elOtroCuerpo->getEstado().golpeado != GOLPEADO && ((estadoanterior.accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))){
 			
 			nuevoEstado = Mundo::ResolverAtaques(unCuerpo, elOtroCuerpo, nuevoEstado, proyectilUno, proyectilDos, invertido);
 		}
 
-		//esto deja personaje estadoactual.golpeado=golpeado si hubo colision  y le aplica demora o si no hubo no setea nada
+		
 
 		// PASO 3 RESOLVEMOS LA LOGICA DE SALTOS
 
@@ -1203,16 +1205,12 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//tanto golpeado como golpeando no nos importa por que analizamos en principio la parte de .movimiento
 		// al llegar al piso primero suspender accion de golpe por si esta con una patada boladora
 		// y chequear superposicion
-
 		nuevoEstado = Mundo::ResolverSaltos(difTiempo, unCuerpo, elOtroCuerpo, nuevoEstado, invertido, &movimientos);
 
 
-		//AHORA HAY QUE ANALIZAR SI HAY DEMORA, LA DEMORA PUEDE SER POR UN UN ESTADO ANTERIOR O POR QUE SE APLICO EN EL ESTADO ACTUAL UN GOLPEADO
-		//casos:
-		//llevando a cabo una accion
-		// estoy golpeado
-		// me acaban de golpear
-		//si hay demora
+		// PASO 4  AHORA HAY QUE ANALIZAR SI HAY DEMORA, LA DEMORA PUEDE SER POR UN UN ESTADO ANTERIOR O POR QUE SE APLICO EN EL ESTADO ACTUAL UN GOLPEADO
+		
+		//casos://llevando a cabo una accion // estoy golpeado 	// me acaban de golpear //si hay demora
 		if (unCuerpo->HayDemora())
 		{
 			if ((!(nuevoEstado.golpeado == GOLPEADO && unCuerpo->getEstadoAnterior().golpeado == NOGOLPEADO)) && nuevoEstado.golpeado != FALLECIDO){
@@ -1238,6 +1236,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	} //cierra el else
 
+	
 	//Si estan superpuestos y los 2 sin ninguna accion, salvo guardia y caminando
 	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION || unCuerpo->getEstado().accion == GUARDIA || unCuerpo->getEstado().golpeado == GOLPEADO || unCuerpo->getEstado().movimiento == CAMINARDER || unCuerpo->getEstado().movimiento == CAMINARIZQ) && (elOtroCuerpo->getEstado().accion == SIN_ACCION || elOtroCuerpo->getEstado().accion == GUARDIA || elOtroCuerpo->getEstado().movimiento == CAMINARIZQ || elOtroCuerpo->getEstado().movimiento == CAMINARDER)){
 		unCuerpo->Superponer();
@@ -1246,6 +1245,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		unCuerpo->Separados();
 	}
 
+	//************************************
 
 	if (!(nuevoEstado.accion == ARMA_ARROJABLE)){
 		unCuerpo->getSensoresProyectil().at(0)->resetearPosicionInicial();
@@ -1259,6 +1259,8 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 
 
+	/************************************************************************/
+	//resolver cosas del round
 
 
 
@@ -1310,7 +1312,44 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 
 	
+	if (Parser::getInstancia().getPelea()->terminoLaPelea()){
 
+
+		if (Parser::getInstancia().getPelea()->getPersonajeGanador() == nullptr){
+
+			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
+			nuevoEstado.golpeado = FALLECIDO;
+		}
+		/*
+		if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
+		if (estadoanterior.golpeado != DIZZY){
+		nuevoEstado.golpeado = DIZZY;
+		unReloj->start();
+		}
+		}
+		else{
+		Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
+		nuevoEstado.golpeado = FALLECIDO;
+		}
+		*/
+	}
+
+	if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
+		if (unReloj->getTicks() < TIEMPO_DIZZY){
+			nuevoEstado.movimiento = PARADO;
+			nuevoEstado.accion = SIN_ACCION;
+			nuevoEstado.golpeado = DIZZY;
+		}
+		else{
+			unReloj->stop();
+			Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
+			nuevoEstado.golpeado = FALLECIDO;
+		}
+	}
+
+	/***********************************************************************************************************/
+
+		
 	if (unCuerpo->EstaFrenado() ){
 		
 		if (!((nuevoEstado.accion == BICICLETA && estadoanterior.accion != BICICLETA) || (nuevoEstado.accion == FLYKICK && estadoanterior.accion != FLYKICK))){
@@ -1334,40 +1373,11 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		
 	}
 	
-	if (Parser::getInstancia().getPelea()->terminoLaPelea()){
-
-
-		if (Parser::getInstancia().getPelea()->getPersonajeGanador() == nullptr){
-		
-			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
-			nuevoEstado.golpeado = FALLECIDO;
-		}
-		/*
-		if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
-			if (estadoanterior.golpeado != DIZZY){
-				nuevoEstado.golpeado = DIZZY;
-				unReloj->start();
-			}
-		}
-		else{
-			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
-			nuevoEstado.golpeado = FALLECIDO;
-		}
-		*/
-	}
 	
-	if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
-		if (unReloj->getTicks() < TIEMPO_DIZZY){
-			nuevoEstado.movimiento = PARADO;
-			nuevoEstado.accion = SIN_ACCION;
-			nuevoEstado.golpeado = DIZZY;
-		}
-		else{
-			unReloj->stop();
-			Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
-			nuevoEstado.golpeado = FALLECIDO;
-		}
-	}
+
+	
+	
+	
 	
 
 	unCuerpo->SetSensorActivoStr(nuevoEstado);
@@ -1377,8 +1387,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	
 	vector2D unaVelocidad = unCuerpo->getVelocidad();  //obtengo la velocidad actual
 	unCuerpo->sumarPosicion(unaVelocidad * difTiempo); //cambio la posicion
-	
-		unCuerpo->sumarVelocidad(gravedad * difTiempo); // aplico gravedad
+	unCuerpo->sumarVelocidad(gravedad * difTiempo); // aplico gravedad
 	
 	return nuevoEstado;
 }
