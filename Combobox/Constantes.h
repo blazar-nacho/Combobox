@@ -150,7 +150,7 @@ const float MSxCUADRO = 1000.0f / FPS;
 #define tiempoSaltoGolpeado 1400.0f 
 #define tiempoAgachadoGolpeado 500.0f
 #define tiempoTumbandose 1000.0f
-#define tiempoTumbado 500.0f
+#define tiempoTumbado 10000.0f
 //XjoseCargaSprite 7
 #define tiempoDizzy 1000.f
 
