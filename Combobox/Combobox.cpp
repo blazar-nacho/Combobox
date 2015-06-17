@@ -202,6 +202,7 @@ int _tmain(int argc, _TCHAR* argv[])
 						std::stringstream stream;
 						stream << Parser::getInstancia().getPelea()->getRoundActual()->getNumeroDeRound();
 						Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " empatado", Log::MODO_DEBUG);
+						stream.clear();
 					}
 					unaVista->resetContadorLogoPelea();
 					unMundo->reiniciar();

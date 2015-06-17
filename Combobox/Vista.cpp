@@ -1923,9 +1923,7 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 	DibujarCapasAnteriores(personajesVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
 
 	DibujarPersonajes(personajesVista);
-
 	
-
 	DibujarCapasPosteriores(personajesVista, anchoVentana, anchoVentanaPx, altoVentanaPx, anchoEscenario);
    
 	DibujarRondaPelea();
