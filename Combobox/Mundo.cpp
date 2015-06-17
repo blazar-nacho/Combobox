@@ -823,10 +823,10 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 		unCuerpo->setDemora(6 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 	}
 
-
+	
 
 	//COMBO 9 - FATALITY ARCADE
-	if ((unaToma->getNombre() == NOMBRE_COMBO_9) && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
+	if ((unaToma->getNombre() == NOMBRE_COMBO_9) && ((otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)|| modoActual == PRACTICA)){
 		ultimaToma = unaToma;
 
 		nuevoEstado.accion = FATALITY_RUN;
@@ -836,7 +836,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	}
 
 	//COMBO 10 - FATALITY FIRE
-	if ((unaToma->getNombre() == NOMBRE_COMBO_10) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
+	if ((unaToma->getNombre() == NOMBRE_COMBO_10) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && ((otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY) || modoActual == PRACTICA)){
 		ultimaToma = unaToma;
 
 		nuevoEstado.accion = FATALITY_RUN;
@@ -846,7 +846,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	}
 
 	//COMBO 11 - FATALITY GODHAND
-	if ((unaToma->getNombre() == NOMBRE_COMBO_11) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
+	if ((unaToma->getNombre() == NOMBRE_COMBO_11) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && ((otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY) || modoActual == PRACTICA)){
 		ultimaToma = unaToma;
 
 		nuevoEstado.accion = FATALITY_RUN;
@@ -856,7 +856,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	}
 
 	//COMBO 12 - FATALITY FIREKANG
-	if ((unaToma->getNombre() == NOMBRE_COMBO_12) && (unCuerpo->getRefPersonaje()->getNombre() == "Liu Kang") && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
+	if ((unaToma->getNombre() == NOMBRE_COMBO_12) && (unCuerpo->getRefPersonaje()->getNombre() == "Liu Kang") && ((otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY) || modoActual == PRACTICA)){
 		ultimaToma = unaToma;
 
 		nuevoEstado.accion = FATALITY_RUN;
@@ -867,20 +867,6 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 
 
 
-	/*
-	if ((unaToma->getNombre() == NOMBRE_COMBO_2) && !(unCuerpo->getEstado().accion == TELETRANSPORTACION)){
-	nuevoEstado.accion = TELETRANSPORTACION;
-	vector2D unVector = otroCuerpo->getPosicion();
-	if (!invertido){
-	unCuerpo->SetPosicion(unVector);
-	}
-	else {
-	unVector.x -= 10;
-	unCuerpo->SetPosicion(unVector);
-	}
-	//implementarlo cuando esten los sprites
-	}
-	*/
 		
 
 	return nuevoEstado;
