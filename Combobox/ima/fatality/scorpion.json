@@ -377,10 +377,10 @@
                 ],
                 "secuenciaSpritesPerdedor": [
                     {
-                        "x": 0,
+                        "x": 1260,
                         "y": 0,
-                        "ancho": 0,
-                        "alto": 0
+                        "ancho": 180,
+                        "alto": 180
                     }
                 ],                
                 "extraFX": 
@@ -389,12 +389,18 @@
                         "xInicial": "perdedor",
                         "delay": 40,
                         "secuencia": [
-                            {
-                                "x": 900,
-                                "y": 720,
-                                "ancho": 180,
-                                "alto": 180
-                            }
+                             {
+                         "x": 180,
+                          "y": 540,
+                          "ancho": 180,
+                          "alto": 180
+                       },
+                       {
+                            "x": 0,
+                            "y": 540,
+                            "ancho": 180,
+                            "alto": 180
+                       }
                         ]
                     }             
             }
