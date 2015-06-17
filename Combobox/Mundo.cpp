@@ -861,6 +861,15 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 		unCuerpo->setDemora(3 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
 	}
 	
+	//COMBO 8 - FATALITY BABALITY
+	if ((unaToma->getNombre() == NOMBRE_COMBO_9) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && ((otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY) || modoActual == PRACTICA)){
+		ultimaToma = unaToma;
+
+		nuevoEstado.accion = FATALITY_RUN;
+		nuevoEstado.fatality = BABALITY;
+		unCuerpo->setDemora(INT_MAX);
+		otroCuerpo->setDemora(INT_MAX);
+	}
 
 	//COMBO 9 - FATALITY ARCADE
 	if ((unaToma->getNombre() == NOMBRE_COMBO_9) && ((otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)|| modoActual == PRACTICA)){

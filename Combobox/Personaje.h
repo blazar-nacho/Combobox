@@ -47,7 +47,7 @@ enum TipoDeArmas
 
 enum Fatalitys
 {
-	ARCADE, FIRE, FIREKANG, GODHAND
+	ARCADE, FIRE, FIREKANG, GODHAND, BABALITY
 };
 
 struct ESTADO {

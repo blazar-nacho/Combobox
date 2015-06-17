@@ -366,7 +366,7 @@
             },
              {
                 "distancia": 100,
-                "delayPerdedor": 199,
+                "delayPerdedor": 50,
                 "secuenciaSpritesGanador": [
                     {
                         "x": 720,
@@ -385,9 +385,9 @@
                 ],                
                 "extraFX": 
                     {
-                        "yInicial": -200,
+                        "yInicial": 200,
                         "xInicial": "perdedor",
-                        "delay": 40,
+                        "delay": 30,
                         "secuencia": [
                              {
                          "x": 180,
@@ -395,11 +395,23 @@
                           "ancho": 180,
                           "alto": 180
                        },
-                       {
-                            "x": 0,
-                            "y": 540,
-                            "ancho": 180,
-                            "alto": 180
+                            {
+                                "x": 0,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 180
+                            },
+                            {
+                                "x": 180,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 180
+                            },
+                            {
+                         "x": 180,
+                          "y": 540,
+                          "ancho": 0,
+                          "alto": 0
                        }
                         ]
                     }             
