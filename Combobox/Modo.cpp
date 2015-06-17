@@ -2,9 +2,10 @@
 #include "Modo.h"
 
 
-Modo::Modo(Vista* unaVista)
+Modo::Modo(Vista* unaVista, Mundo* unMundo)
 {
 	laVista = unaVista;
+	elMundo = unMundo;
 	modosDeJuego = std::vector<ModoDeJuego*>();
 	modosDeJuego.push_back(new Modo1vs1());
 	modosDeJuego.push_back(new Modo1vsCom());
@@ -13,6 +14,10 @@ Modo::Modo(Vista* unaVista)
 
 Vista* Modo::getRefVista(){
 	return laVista;
+}
+
+Mundo* Modo::getRefMundo(){
+	return elMundo;
 }
 
 void Modo::seleccionarModo(MODOS_DE_JUEGO elModoActual, int unNivel){

@@ -411,7 +411,17 @@ public:
 	// devuelve el mayor ancho de sensor y su posicion en x
 	int getSensorLargo(float *posX);
 
+	void Visible();
+	void Invisible();
+	void liberarSprites();
+	void frenarSprites();
+
+	bool estaFrenadoSprites();
+	bool estaInvisible();
+
 private:
+	bool spritesFrenados;
+	bool esInvisible;
 	std::vector<Sensor*>* getSensoresActivos() const;
 	Controlador* controlador;
 	std::string nombre;

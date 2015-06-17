@@ -16,6 +16,7 @@ public:
 private:
 	Modo* modo;
 	Vista* vista;
+	Mundo* mundo;
 	MODOS_DE_JUEGO modoSeleccionado;
 	int torre;
 	int personaje1,personaje2;

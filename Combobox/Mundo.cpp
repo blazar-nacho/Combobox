@@ -103,6 +103,9 @@ void Mundo::LiberarCuerpos()
 	}
 }
 
+void Mundo::setModoActual(MODOS_DE_JUEGO unModoActual){
+	modoActual = unModoActual;
+}
 
 std::pair<float, float> getPosicionAbsSensor(std::pair<float, float> posSensor, Cuerpo* unCuerpo, float anchoDelSensor, float altoDelSensor, bool invertido){
 	Sprite* elSprite = unCuerpo->getSprite();
@@ -779,7 +782,8 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 		ultimaToma = unaToma;
 
 		nuevoEstado.golpeado = DIZZY;
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		unCuerpo->setDemora(5*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		
 
 	}
 	
