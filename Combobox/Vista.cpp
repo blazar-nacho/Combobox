@@ -2496,9 +2496,9 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 				ESTADO estadoDos = personajesVista->at(1)->getEstado();
 				estadoDos.accion = FATALITY_END;
 				refMundo->getCuerpo(0)->setDemora(TIEMPOFATALITYFIN);
-				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
+				refMundo->getCuerpo(0)->setEstadoAnterior(estadoUno);
 				refMundo->getCuerpo(1)->setDemora(TIEMPOFATALITYFIN);
-				refMundo->setResolver(estadoDos, refMundo->getCuerpo(1));
+				refMundo->getCuerpo(1)->setEstadoAnterior(estadoDos);
 			}
 
 			if (fatality->finalizo()){
@@ -2513,9 +2513,9 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 				ESTADO estadoDos = personajesVista->at(1)->getEstado();
 				estadoDos.accion = SIN_ACCION;
 				refMundo->getCuerpo(0)->setDemora(0);
-				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
+				refMundo->getCuerpo(0)->setEstadoAnterior(estadoUno);
 				refMundo->getCuerpo(1)->setDemora(0);
-				refMundo->setResolver(estadoDos, refMundo->getCuerpo(1));
+				refMundo->getCuerpo(1)->setEstadoAnterior(estadoDos);
 
 			}
 		}
