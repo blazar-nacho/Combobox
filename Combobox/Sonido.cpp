@@ -134,6 +134,6 @@ Sonido::~Sonido()
 			Mix_FreeChunk(it->second->at(j));
 		it->second->clear();
 	}
-	
+	acciones.clear();
 	Sonidos.clear();
 }

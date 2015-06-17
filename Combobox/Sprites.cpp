@@ -54,7 +54,12 @@ Sprite::Sprite(std::string jsonSprites){
 	this->SaltoDiagonalPatada = new std::vector<SDL_Rect*>();
 	this->AgachadoPatadaBaja = new std::vector<SDL_Rect*>();
 	this->AgachadoPatadaAlta = new std::vector<SDL_Rect*>();
-	this->Disparo = new std::vector<SDL_Rect*>();
+	this->DisparoProyectil = new std::vector<SDL_Rect*>();
+	this->DisparoAcido = new std::vector<SDL_Rect*>();
+	this->DisparoHielo = new std::vector<SDL_Rect*>();
+
+	this->Cayendo = new std::vector<SDL_Rect*>();
+	this->Tumbado = new std::vector<SDL_Rect*>();
 
 	//XjoseCargaSprite 1
 	this->Dizzy = new std::vector<SDL_Rect*>();
@@ -207,10 +212,30 @@ Sprite::Sprite(std::string jsonSprites){
 	// Sensores AgachadoPatadaAlta
 	cargarSensores("AgachadoPatadaAlta", sprites);
 
-	// Sprites Disparo
-	cargarSprites(Disparo, "Disparo", sprites);
-	// Sensores Disparo
-	cargarSensores("Disparo", sprites);
+	// Sprites DisparoProyectil
+	cargarSprites(DisparoProyectil, "DisparoProyectil", sprites);
+	// Sensores DisparoProyectil
+	cargarSensores("DisparoProyectil", sprites);
+
+	// Sprites DisparoAcido
+	cargarSprites(DisparoAcido, "DisparoAcido", sprites);
+	// Sensores DisparoAcido
+	cargarSensores("DisparoAcido", sprites);
+
+	// Sprites DisparoHielo
+	cargarSprites(DisparoHielo, "DisparoHielo", sprites);
+	// Sensores DisparoHielo
+	cargarSensores("DisparoHielo", sprites);
+
+	// Sprites Cayendo
+	cargarSprites(Cayendo, "Cayendo", sprites);
+	// Sensores Cayendo
+	cargarSensores("Cayendo", sprites);
+
+	// Sprites Tumbado
+	cargarSprites(Tumbado, "Tumbado", sprites);
+	// Sensores Tumbado
+	cargarSensores("Tumbado", sprites);
 
 	//XjoseCargaSprite 2
 	// Sprites Dizzy
@@ -253,9 +278,8 @@ void Sprite::cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz)
 		int altoSens = estadoSens[j].get("alto", 0).asFloat();
 		bool esHitBoxSens = estadoSens[j].get("esHitBox", false).asBool();
 		// se carga el sensor
-		if (unEstadoStr != "Disparo")
-			this->Sensores.back()->push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
-		else
+		this->Sensores.back()->push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
+		if ((unEstadoStr == "DisparoProyectil") || (unEstadoStr == "DisparoAcido") || (unEstadoStr == "DisparoHielo"))
 			sensoresDisparo.push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
 	}
 }
@@ -312,7 +336,7 @@ Json::Value	Sprite::ParsearSprites(std::string jsonSprites)
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string otrosSprites)
 {
 	if (otrosSprites == DISPARO_DEFAULT)
-		return Disparo;
+		return DisparoProyectil;
 
 	return nullptr;
 }
@@ -381,6 +405,12 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	if (unEstado.golpeado == DIZZY){
 		return Dizzy;
 	}
+	if (unEstado.golpeado == TUMBADO){
+		return Tumbado;
+	}
+	if (unEstado.golpeado == TUMBANDOSE){
+		return Cayendo;
+	}
 
 	if (unEstado.accion == FLYKICK){
 		return Flykick;
@@ -426,6 +456,18 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 	return Quieto;
 }
 
+std::vector<SDL_Rect*>* Sprite::listaDeCuadros(TipoDeArmas arma){
+	if (arma == PROYECTIL)
+		return DisparoProyectil;
+	if (arma == HIELO)
+		return DisparoHielo;
+	if (arma == ACIDO)
+		return DisparoAcido;
+
+	return DisparoProyectil;
+}
+
+
 int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	if (estadoDelPersonaje.golpeado == GOLPEADO){
 		if (estadoDelPersonaje.movimiento == SALTO || estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
@@ -442,6 +484,12 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	//XjoseCargaSprite 6
 	if (estadoDelPersonaje.golpeado == DIZZY)
 		return (tiempoDizzy / (this->Gancho->size()) / MSxCUADRO);
+
+	if (estadoDelPersonaje.golpeado == TUMBADO)
+		return (tiempoTumbado / (this->Gancho->size()) / MSxCUADRO);
+
+	if (estadoDelPersonaje.golpeado == TUMBANDOSE)
+		return (tiempoTumbandose / (this->Gancho->size()) / MSxCUADRO);
 
 	if (estadoDelPersonaje.accion == PATADA_BAJA){
 		if (estadoDelPersonaje.movimiento == AGACHADO)
@@ -653,10 +701,30 @@ Sprite::~Sprite()
 	AgachadoPatadaAlta->clear();
 	delete AgachadoPatadaAlta;
 
-	for (size_t i = 0; i < Disparo->size(); i++)
-		delete Disparo->at(i);
-	Disparo->clear();
-	delete Disparo;
+	for (size_t i = 0; i < DisparoProyectil->size(); i++)
+		delete DisparoProyectil->at(i);
+	DisparoProyectil->clear();
+	delete DisparoProyectil;
+
+	for (size_t i = 0; i < DisparoAcido->size(); i++)
+		delete DisparoAcido->at(i);
+	DisparoAcido->clear();
+	delete DisparoAcido;
+
+	for (size_t i = 0; i < DisparoHielo->size(); i++)
+		delete DisparoHielo->at(i);
+	DisparoHielo->clear();
+	delete DisparoHielo;
+
+	for (size_t i = 0; i < Cayendo->size(); i++)
+		delete Cayendo->at(i);
+	Cayendo->clear();
+	delete Cayendo;
+
+	for (size_t i = 0; i < Tumbado->size(); i++)
+		delete Tumbado->at(i);
+	Tumbado->clear();
+	delete Tumbado;
 
 	//XjoseCargaSprite 3
 	for (size_t i = 0; i < Dizzy->size(); i++)
@@ -692,6 +760,11 @@ Sprite::~Sprite()
 		delete Sensores[i];
 	}
 	Sensores.clear();
+
+	for (size_t j = 0; j < sensoresDisparo.size(); j++){
+		if (sensoresDisparo.at(j) != nullptr) delete sensoresDisparo.at(j);
+	}
+	sensoresDisparo.clear();
 
 }
 

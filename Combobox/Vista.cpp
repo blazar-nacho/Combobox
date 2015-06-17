@@ -45,6 +45,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		std::string icono(ICONO);
 		SDL_Surface* iconoSurf = IMG_Load(icono.c_str());
 		SDL_SetWindowIcon(ventana, iconoSurf);
+		SDL_FreeSurface(iconoSurf);
 
 		if (habilitarAceleracionDeHardware)
 			renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
@@ -167,6 +168,8 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		// Textura elección modo de juego
 		modoJuego = IMG_Load("ima/bkg/selectmodeofplay.png");
 		juegoModo = SDL_CreateTextureFromSurface(renderer, modoJuego);
+		SDL_FreeSurface(modoJuego);
+
 		int anchoVentanaPx = Parser::getInstancia().getVentana().getAnchoPx();
 		int altoVentanaPx = Parser::getInstancia().getVentana().getAltoPx();
 		rectanguloVentana = { 0, 0, anchoVentanaPx, altoVentanaPx };
@@ -510,7 +513,7 @@ void Vista::actualizar(){
 			if (personajesVista.at(1)->getEstado().accion == GANCHO){
 				golpeado = true;
 			}
-		}
+		}		
 		else{
 			if (personajesVista.at(1)->getEstado().golpeado == GOLPEADO && personajesVista.at(1)->getEstado().accion != GUARDIA){
 				if (personajesVista.at(0)->getEstado().accion == GANCHO){
@@ -518,6 +521,11 @@ void Vista::actualizar(){
 				}
 			}
 		}
+
+		// vibracion para la fatality
+		if (fatalityCreada)			
+				golpeado = fatality->vibrar();
+
 		
 		if ((personajesVista.at(0)->getEstado().golpeado == GOLPEADO) || (personajesVista.at(1)->getEstado().golpeado == GOLPEADO)){
 			AlfaInicial = AlfaInicial - AlfaAnterior;
@@ -2329,7 +2337,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		proyectilUno.x = personajeUno.x + manejadorULog.darLongPixels(personajesVista.at(0)->getAncho()) - refMundo->getProyectil(1)->getPosicion().first - refMundo->getProyectil(1)->getAncho();
 	proyectilUno.y = personajeUno.y + refMundo->getProyectil(1)->getPosicion().second;	
 	// obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
-	SDL_Rect* cuadroProyectilUnoSprite = personajesVista.at(0)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
+	TipoDeArmas disparoUno = personajesVista.at(0)->getEstado().tipoarma;	
+	SDL_Rect* cuadroProyectilUnoSprite = personajesVista.at(0)->getSprite()->listaDeCuadros(disparoUno)->back();
 	// ancho y alto del dibujo del sprite
 	proyectilUno.w = (int)refMundo->getProyectil(1)->getAncho();
 	proyectilUno.h = (int)refMundo->getProyectil(1)->getAlto();
@@ -2340,7 +2349,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		proyectilDos.x = personajeDos.x + refMundo->getProyectil(2)->getPosicion().first;
 	proyectilDos.y = personajeDos.y + refMundo->getProyectil(2)->getPosicion().second;
 	// obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
-	SDL_Rect* cuadroProyectilDosSprite = personajesVista.at(1)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
+	TipoDeArmas disparoDos = personajesVista.at(1)->getEstado().tipoarma;
+	SDL_Rect* cuadroProyectilDosSprite = personajesVista.at(1)->getSprite()->listaDeCuadros(disparoDos)->back();
 	proyectilDos.w = (int)refMundo->getProyectil(2)->getAncho(); 
 	proyectilDos.h = (int)refMundo->getProyectil(2)->getAlto(); 
 	
@@ -2465,6 +2475,11 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 			fatality->realizar(personajeUno, personajeDos);
 			texturaSpriteDos = fatality->getTexturaPerdedor();
 
+			if (fatality->vibrar())
+				habilitarVibracion();
+			else
+				deshabilitarVibracion();
+
 			if (fatality->efectuada()){
 				ESTADO estadoUno = personajesVista->at(0)->getEstado();
 				estadoUno.accion = FATALITY_END;
@@ -2505,10 +2520,8 @@ Vista::~Vista()
 		if (inputs[i] != nullptr) delete inputs[i];
 	}
 
-	if (fuente != NULL) {
-		TTF_CloseFont(fuente);
-		TTF_Quit();
-	}
+	TTF_CloseFont(fuente);
+	TTF_Quit();
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_DestroyTexture(texturaVerde);

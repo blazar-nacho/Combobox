@@ -10,6 +10,11 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 	renderer = rendererSDL;
 	retraso = RETRASO_SPRT;
 	retrasoExtra = 2*RETRASO_SPRT;
+	xExtra = 0;
+	yVelExtra = 0;
+	vibrando = false;
+	tiempoVibracion = TIEMPO_VIBRACION;
+
 	contador = CONTADOR_INI;
 
 	extraFXDest = new SDL_Rect();
@@ -209,6 +214,21 @@ void Fatality::dibujarExtraFX()
 			extraFXDest->x = cuadroGanador->x + xExtra + X_EXTRA_DESP;
 			if (extraFXDest->x > cuadroPerdedor->x) return;
 		}
+		else {
+			extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
+			yVelExtra += Y_EXTRA_VEL_INC;
+			extraFXDest->y =  yInicialExtra + yVelExtra;
+			if (extraFXDest->y >= cuadroPerdedor->y) {
+				extraFXDest->y = cuadroPerdedor->y;
+				if (tiempoVibracion > 0) {
+					vibrando = true;
+					tiempoVibracion--;
+				}
+				else  
+					vibrando = false;
+			}
+			
+		}
 		SDL_RenderCopy(renderer, texturaSDL, extraFX->at(cuadroActualExtraFX), extraFXDest);
 	}
 	else {
@@ -216,7 +236,21 @@ void Fatality::dibujarExtraFX()
 			xExtra -= 5 * DISTANCIA;
 			extraFXDest->x = cuadroGanador->x + xExtra + X_EXTRA_DESP_INV;
 			if (extraFXDest->x < cuadroPerdedor->x + X_EXTRA_FIN_INV) return;
-		}		
+		}
+		else {
+			extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
+			yVelExtra += Y_EXTRA_VEL_INC;
+			extraFXDest->y = yInicialExtra + yVelExtra;
+			if (extraFXDest->y >= cuadroPerdedor->y) {
+				extraFXDest->y = cuadroPerdedor->y;
+				if (tiempoVibracion > 0) {
+					vibrando = true;
+					tiempoVibracion--;
+				}
+				else
+					vibrando = false;
+			}
+		}
 		SDL_RenderCopyEx(renderer, texturaSDL, extraFX->at(cuadroActualExtraFX), extraFXDest, NULL, NULL, SDL_FLIP_HORIZONTAL);
 	}
 
@@ -250,6 +284,10 @@ std::string Fatality::getImagenDir() const{
 	return imagenDir;
 }
 
+bool Fatality::vibrar(){
+	return vibrando;
+}
+
 void Fatality::parsearFatality()
 {
 	fatalityGanador = new std::vector<SDL_Rect*>();
@@ -260,6 +298,7 @@ void Fatality::parsearFatality()
 
 	// Fatality aleatoria
 	size_t posAleatoria = rand() % (raiz["fatality"]["coordenadas"].size());
+	posAleatoria = 2;
 
 	imagenDir = raiz["fatality"].get("imagen", FATALITY_IMG_DEFAULT).asString();
 	distancia = raiz["fatality"]["coordenadas"][posAleatoria].get("distancia", FATALITY_DIST_DEFAULT).asFloat();

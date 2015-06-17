@@ -781,8 +781,8 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	if ((unaToma->getNombre() == NOMBRE_COMBO_4) ){
 		ultimaToma = unaToma;
 
-		nuevoEstado.golpeado = DIZZY;
-		unCuerpo->setDemora(5*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		nuevoEstado.golpeado = TUMBANDOSE;
+		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 		
 
 	}
@@ -1128,7 +1128,7 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 	Sprite* elSprite = unCuerpo->getSprite();
 	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
 
-
+	//CASO 1 SIN TIEMPO
 	//Si me quede sin tiempo resuelvo quien gano el round
 		
 	if (Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRound() >= Parser::getInstancia().getPelea()->getTiempoDelRound()){
@@ -1150,21 +1150,20 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		nuevoEstado.golpeado = FALLECIDO_ROUND;
 	}
 
-	// Si alguien se quedo sin vida evaluo
+	
 
 
 
 
-	//****************************************************************
-	// Se evalua vitalidad y demora de golpeado
-	//************************************************************************
-	// si la vitalidad es 0 o menos devuelve reiniciar, entonces alguien debe fallecer.
-	//Descuento vida y aplico demora de golpeado para el arma!
+	// CASO 2 ALGUIEN SE QUEDO SIN VIDA 
 
 	//xjose, guarda, aca entra una sola vez, una vez que estas en dizzy si le vuelven a pegar va a descontar vida y esto va a dar true
 	// hay que agregar algo mas
 	//estado.anterior!= dizzy   ??????
-	if (SinVida){
+
+	//entra solo una vez
+	if (SinVida && !Parser::getInstancia().getPelea()->terminoLaPelea()){
+		
 		//logueo
 		int numeroDeRound = Parser::getInstancia().getPelea()->getRoundActual()->getNumeroDeRound();
 		std::stringstream stream;
@@ -1174,49 +1173,74 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		//notifico quien gano y determina si termino la pelea
 		Parser::getInstancia().getPelea()->personajeGanoElRound(elOtroCuerpo->getRefPersonaje());
 
-
-		//si termino pelea dizzy
-
-
-
-		//******************************************************************************
-		/*
-		if (Parser::getInstancia().getPelea()->terminoLaPelea()){
-		if (estadoanterior.golpeado != DIZZY){
-		nuevoEstado.golpeado = DIZZY;
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-		unReloj->start();
-		}
-		}
-
-		else {//termino el round
+		if (!Parser::getInstancia().getPelea()->terminoLaPelea())
 		nuevoEstado.golpeado = FALLECIDO_ROUND;
-		}
-		*/
-		//****************************************************************
-		if (Parser::getInstancia().getPelea()->terminoLaPelea()){
+	}
+		
+		
+	if (Parser::getInstancia().getPelea()->terminoLaPelea() && estadoanterior.accion != FATALITY_RUN){
 
 
-			if (Parser::getInstancia().getPelea()->getPersonajeGanador() == nullptr){
-
-				Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
-				nuevoEstado.golpeado = FALLECIDO;
-			}
-			/*
+			//asigno
 			if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
-			if (estadoanterior.golpeado != DIZZY){
-			nuevoEstado.golpeado = DIZZY;
-			unReloj->start();
-			}
+				
+				//esto es para que no entre el otro personaje
+				if (nuevoEstado.golpeado == GOLPEADO   && estadoanterior.golpeado != DIZZY && estadoanterior.golpeado != TUMBANDOSE && estadoanterior.golpeado != TUMBADO){
+				
+					nuevoEstado.golpeado = DIZZY;
+					unCuerpo->setDemora(5 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+				}
+				else{ 
+					if (estadoanterior.golpeado == TUMBANDOSE && nuevoEstado.golpeado == NOGOLPEADO){
+						
+						nuevoEstado.golpeado = TUMBADO;
+						unCuerpo->setDemora(1000);
+					}
+
+					if (estadoanterior.golpeado == TUMBADO && nuevoEstado.golpeado == NOGOLPEADO){
+
+						nuevoEstado.golpeado = FALLECIDO;
+					}
+
+					if (nuevoEstado.golpeado == GOLPEADO && estadoanterior.golpeado != TUMBADO && estadoanterior.golpeado != TUMBANDOSE){
+						
+						nuevoEstado.golpeado = TUMBANDOSE;
+						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+
+					}
+
+					if (estadoanterior.golpeado == DIZZY && nuevoEstado.golpeado == NOGOLPEADO ){
+
+						nuevoEstado.golpeado = TUMBANDOSE;
+						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+
+					}
+
+					if (estadoanterior.accion == FATALITY_END && nuevoEstado.accion!=FATALITY_END){
+						nuevoEstado.golpeado = FALLECIDO;
+						
+					}
+					
+				}
+
+
 			}
 			else{
 			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
 			nuevoEstado.golpeado = FALLECIDO;
 			}
-			*/
 		}
 
-		//}
+
+
+		/*
+		
+		if (unReloj->getTicks() >= TIEMPO_DIZZY){
+		unReloj->stop();
+		*/
+
+
+		//}unReloj->start();
 
 		/*
 		if (estadoanterior.golpeado == DIZZY ){
@@ -1242,7 +1266,7 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		}*/
 
 
-	}
+	
 
 	return nuevoEstado;
 }
