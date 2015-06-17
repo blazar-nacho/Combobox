@@ -1194,7 +1194,7 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 					if (estadoanterior.golpeado == TUMBANDOSE && nuevoEstado.golpeado == NOGOLPEADO){
 						
 						nuevoEstado.golpeado = TUMBADO;
-						unCuerpo->setDemora(10000);
+						unCuerpo->setDemora(1000);
 					}
 
 					if (estadoanterior.golpeado == TUMBADO && nuevoEstado.golpeado == NOGOLPEADO){
@@ -1205,7 +1205,7 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 					if (nuevoEstado.golpeado == GOLPEADO && estadoanterior.golpeado != TUMBADO && estadoanterior.golpeado != TUMBANDOSE){
 						
 						nuevoEstado.golpeado = TUMBANDOSE;
-						unCuerpo->setDemora(10000);
+						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 
 					}
 
