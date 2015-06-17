@@ -1621,8 +1621,8 @@
                     }                    
                 ]
             },
-			"Cayendo": {
-                "sensores": [                   
+            "Cayendo": {
+                "sensores": [
                     {
                         "x": 20,
                         "y": 90,
@@ -1641,13 +1641,13 @@
                     }
                 ],
                 "secuenciaSprites": [
-					{
+                    {
                         "x": 2160,
                         "y": 1440,
                         "ancho": 180,
                         "alto": 180
                     },
-					{
+                    {
                         "x": 1980,
                         "y": 1440,
                         "ancho": 180,
@@ -1659,29 +1659,57 @@
                         "ancho": 180,
                         "alto": 180
                     },
-					{
+                    {
                         "x": 1620,
                         "y": 1440,
                         "ancho": 180,
                         "alto": 180
                     },
-					{
+                    {
                         "x": 1440,
                         "y": 1440,
                         "ancho": 180,
                         "alto": 180
                     },
-					{
+                    {
                         "x": 1260,
                         "y": 1440,
                         "ancho": 180,
                         "alto": 180
                     },
-					{
+                    {
                         "x": 1080,
                         "y": 1440,
                         "ancho": 180,
                         "alto": 180
+                    }
+                ]
+            },
+             "Subbarrida": {
+                "sensores": [
+                    {
+                        "x": 101,
+                        "y": 145,
+                        "ancho": 51,
+                        "alto": 25,
+                        "nSprite": 0,
+                        "esHitBox": false
+                    },
+                    {
+                        "x": 59,
+                        "y": 105,
+                        "ancho": 56,
+                        "alto": 70,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 2160,
+                        "y": 180,
+                        "ancho": 0,
+                        "alto": 0
                     }
                 ]
             },
