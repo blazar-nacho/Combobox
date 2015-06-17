@@ -7,6 +7,7 @@
 #include "Timer.h"
 #include "EventoDeMouse.h"
 #include "Fatality.h"
+#include "Input.h"
 
 class Vista
 {
@@ -43,6 +44,8 @@ public:
 
 private:
 	unsigned int mantenerElColor;
+	Input* inputs[8];
+	SDL_Rect cuadrados[8];
 	int vibraciones;
 	int retraso;
 	bool vibracion;

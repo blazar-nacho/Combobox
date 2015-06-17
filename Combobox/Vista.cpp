@@ -12,6 +12,13 @@
 
 Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 {	
+	for (size_t i = 0; i < 8; i++){
+		Input* unInput = new Input();
+		unInput->setColor({ 255, 255, 255, 255 });
+		unInput->setInput(" ");
+		inputs[i] = unInput;
+	}
+
 	*error = false;
 	//VIBRACION
 	vibraciones = 0;
@@ -257,13 +264,21 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		
 		//Carga de cuadrado redimension para texto de combos
 		cuadradoRedimension = ajusteResolucionBase800x600(0, 550, 75, 40);
+		cuadrados[0] = cuadradoRedimension;
 		cuadradoRedimension2 = ajusteResolucionBase800x600(75, 550, 75, 40);
+		cuadrados[1] = cuadradoRedimension2;
 		cuadradoRedimension3 = ajusteResolucionBase800x600(150, 550, 75, 40);
+		cuadrados[2] = cuadradoRedimension3;
 		cuadradoRedimension4 = ajusteResolucionBase800x600(225, 550, 75, 40);
+		cuadrados[3] = cuadradoRedimension4;
 		cuadradoRedimension5 = ajusteResolucionBase800x600(300, 550, 75, 40);
+		cuadrados[4] = cuadradoRedimension5;
 		cuadradoRedimension6 = ajusteResolucionBase800x600(375, 550, 75, 40);
+		cuadrados[5] = cuadradoRedimension6;
 		cuadradoRedimension7 = ajusteResolucionBase800x600(450, 550, 75, 40);
+		cuadrados[6] = cuadradoRedimension7;
 		cuadradoRedimension8 = ajusteResolucionBase800x600(525, 550, 75, 40);
+		cuadrados[7] = cuadradoRedimension8;
 
 		textoCombos = "-";
 
@@ -331,6 +346,14 @@ void Vista::reiniciarCamara(){
 	camaraXLog = -Parser::getInstancia().getEscenario().getAncho() / 2
 		+ Parser::getInstancia().getVentana().getAncho() / 2;
 	finishHim = DURACIONFINISHHIM;
+
+	for (size_t i = 0; i < 8; i++){
+		Input* unInput = new Input();
+		unInput->setColor({ 255, 255, 255, 255 });
+		unInput->setInput(" ");
+		if (inputs[i] != nullptr) delete inputs[i];
+		inputs[i] = unInput;
+	}
 }
 
 void Vista::reiniciarMenu(){
@@ -1954,36 +1977,71 @@ void Vista::alfa(Uint8 alfa){
 
 void Vista::DibujarInput(Controlador* unControlador){
 	ConversorAString* unConversor = new ConversorAString();
+	std::string unInput = " ";
+	std::string nombreDeLaToma = " ";
+	Toma* unaToma;
+	size_t i, j;
+	int cantidadDeMovimientosDeLaToma = 0;
+	bool inserto = false;
 
-	SDL_Color colorTexto;
-	unConversor->mantenerStringSegunSeparador(textoCombos, " - ");
 
 	MOV_TIPO unMovimiento = unControlador->getUltimoMovTipo();
 
 	if (unMovimiento != QUIETO){
-		textoCombos += unConversor->getTeclaComoStringDelMovimientoParaElConversorDeEventos(unMovimiento, unControlador->getConversorDeEventos()) + " - ";
+		unInput = unConversor->getTeclaComoStringDelMovimientoParaElConversorDeEventos(unMovimiento, unControlador->getConversorDeEventos()) + "-";
 	}
 
-	if (mantenerElColor != 0){
-		colorTexto = { 255, 0, 0, 0 };
-		mantenerElColor--;
-	}
-	else {
-		colorTexto = { 255, 255, 255, 255 };
-		mantenerElColor = 0;
-	}
-
+	j = 1;
 	if (refMundo->huboToma()){
-		textoCombos += refMundo->getToma()->getNombre() + " - ";
-		mantenerElColor = 100;
+		unaToma = refMundo->getToma();
+		cantidadDeMovimientosDeLaToma = unaToma->getMovimientos()->size();
+		nombreDeLaToma = unaToma->getNombre();
+		j = 0;
+	}
+	while (j < 2){
+		for (i = 0; i < 8 && !inserto; i++){
+			if (inputs[i]->getInput() == " ") {
+				inputs[i]->setInput(unInput);
+				inputs[i]->setColor({ 255, 255, 255, 255 });
+				inserto = true;
+			}
+		}
+
+		if (!inserto){
+			for (i = 0; i < 8; i++){
+				if (i != 7){
+					inputs[i]->setInput(inputs[i + 1]->getInput());
+					inputs[i]->setColor(inputs[i + 1]->getColor());
+				}
+				else{
+					inputs[i]->setInput(unInput);
+					inputs[i]->setColor({ 255, 255, 255, 255 });
+				}
+			}
+		}
+		unInput = nombreDeLaToma + "-";
+		inserto = false;
+		j++;
 	}
 
-	cargarTexto(textoCombos, colorTexto);
+	if (cantidadDeMovimientosDeLaToma > 0){
+		if (cantidadDeMovimientosDeLaToma > 7) cantidadDeMovimientosDeLaToma = 7;
+		cantidadDeMovimientosDeLaToma = 7 - cantidadDeMovimientosDeLaToma;
+		for (i = 7; i >= cantidadDeMovimientosDeLaToma; i--){
+			inputs[i]->setColor({ 255, 0, 0, 0 });
+		}
+	}
+	
+	for (i = 0; i < 8; i++){
+		cargarTexto(inputs[i]->getInput(), inputs[i]->getColor());
+		if (i > 0){
+			cuadrados[i].x = cuadrados[i - 1].x + cuadrados[i - 1].w;
+		}
+		cuadrados[i].w = anchoTexto;
+		cuadrados[i].h = altoTexto;
+		dibujarTexto(cuadrados[i], 255);
+	}
 
-	//Dibujar texturas del texto
-	cuadradoRedimension.w = anchoTexto;
-	cuadradoRedimension.h = altoTexto;
-	dibujarTexto(cuadradoRedimension, 255);
 	delete unConversor;
 
 }
@@ -2468,6 +2526,10 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 
 Vista::~Vista()
 {
+	for (size_t i = 0; i < 8; i++){
+		if (inputs[i] != nullptr) delete inputs[i];
+	}
+
 	if (fuente != NULL) {
 		TTF_CloseFont(fuente);
 		TTF_Quit();

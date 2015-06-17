@@ -188,6 +188,7 @@
     <ClInclude Include="include\SDL\SDL_video.h" />
     <ClInclude Include="include\SDL_image.h" />
     <ClInclude Include="include\SDL_ttf.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="ManejadorULogicas.h" />
     <ClInclude Include="MatizColor.h" />
@@ -238,6 +239,7 @@
     <ClCompile Include="Fatality.cpp" />
     <ClCompile Include="FechayHora.cpp" />
     <ClCompile Include="IA.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="MatizColor.cpp" />
     <ClCompile Include="Menu.cpp" />
