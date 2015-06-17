@@ -1170,10 +1170,12 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 			//asigno
 			if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
 				
+				int vitalidad = unCuerpo->getRefPersonaje()->getVida();
+
 				//esto es para que no entre el otro personaje
-				if (estadoanterior.golpeado != GOLPEADO   && estadoanterior.golpeado != DIZZY && estadoanterior.golpeado != TUMBANDOSE && estadoanterior.golpeado != TUMBADO){
-					int vitalidad = unCuerpo->getRefPersonaje()->getVida();
-					if (vitalidad <= 0){
+				if ( (vitalidad <= 0)  && estadoanterior.golpeado != DIZZY && estadoanterior.golpeado != TUMBANDOSE && estadoanterior.golpeado != TUMBADO){
+					
+					if (nuevoEstado.golpeado != GOLPEADO){
 						nuevoEstado.golpeado = DIZZY;
 						unCuerpo->setDemora(10 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 					}
@@ -1182,7 +1184,7 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 					if (estadoanterior.golpeado == TUMBANDOSE && nuevoEstado.golpeado == NOGOLPEADO){
 						
 						nuevoEstado.golpeado = TUMBADO;
-						unCuerpo->setDemora(300);
+						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 					}
 
 					if (estadoanterior.golpeado == TUMBADO && nuevoEstado.golpeado == NOGOLPEADO){
