@@ -63,6 +63,8 @@ private:
 	float yExtra;
 	float xExtra;
 	// dice donde se ubica inicialmente el efecto puede ser "ganador" o "perdedor"
+	// todos los efectos van hacia el perdedor así que o salen desde la posicion del ganador
+	// y le impactan o se efectuan directamente sobre el perdedor 
 	std::string xInicialExtra;
 	// true si la pos inicial del efecto es la del ganador false si es la del perdedor
 	bool xIniExtraEsGanador;

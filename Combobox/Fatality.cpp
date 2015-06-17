@@ -53,10 +53,10 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 
 void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorActual)
 {
-	// TODO:
+	// hace:
 	// chequear distancia
 	// acomodar jugador ganador a la distancia correcta
-	// desaparecer sprites originales Vista->setTexturaSpriteUno...
+	// desaparecer sprites originales Vista->texturaSpriteUno...
 	// reproducir secuenciaSpritesGanador en posicion del jugador ganador
 	// reproducir secuenciaSpritesPerdedor en posicion del jugador perdedor
 
