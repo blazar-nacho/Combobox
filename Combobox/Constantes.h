@@ -54,6 +54,7 @@ enum MODOS_DE_JUEGO { VS, COM, PRACTICA, NINGUNO };
 
 //Tiempos entre cada cartel fijos
 #define FINDELFIGHT 2.7f
+#define TIEMPOFATALITYFIN 1000
 
 //PERSONAJES
 #define NINGUNPJ 999

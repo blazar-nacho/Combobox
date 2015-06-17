@@ -2493,9 +2493,9 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 				estadoUno.accion = FATALITY_END;
 				ESTADO estadoDos = personajesVista->at(1)->getEstado();
 				estadoDos.accion = FATALITY_END;
-				refMundo->getCuerpo(0)->setDemora(INT_MAX);
+				refMundo->getCuerpo(0)->setDemora(TIEMPOFATALITYFIN);
 				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
-				refMundo->getCuerpo(1)->setDemora(INT_MAX);
+				refMundo->getCuerpo(1)->setDemora(TIEMPOFATALITYFIN);
 				refMundo->setResolver(estadoDos, refMundo->getCuerpo(1));
 			}
 
