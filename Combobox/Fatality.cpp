@@ -270,11 +270,11 @@ void Fatality::cargarTextura(std::vector<double> colorGanador)
 	SDL_Surface* superficieFatality = IMG_Load(imagenDir.c_str());
 
 	// desplazo el matiz para los cuadros de la fatality del personaje ganador
-	MatizColor matiz(superficieFatality);
+	MatizColor *matiz = new MatizColor(superficieFatality);
 	for (int i = 0; i < fatalityGanador->size(); i++)
-		matiz.desplazarMatiz(colorGanador.at(0), colorGanador.at(1), colorGanador.at(2), fatalityGanador->at(i));
+		matiz->desplazarMatiz(colorGanador.at(0), colorGanador.at(1), colorGanador.at(2), fatalityGanador->at(i));
 
-
+	delete matiz;
 	texturaSDL = SDL_CreateTextureFromSurface(renderer, superficieFatality);
 	// se queda con la textura libero la superficie
 	SDL_FreeSurface(superficieFatality);
