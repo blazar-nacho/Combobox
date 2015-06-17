@@ -6,9 +6,10 @@
 #define RANGO_DIST 2.5f
 #define RETRASO_SPRT 6
 #define CONTADOR_INI 200
-#define X_EXTRA_DESP 12
-#define X_EXTRA_DESP_INV 60
-#define X_EXTRA_FIN_INV 100
+#define X_EXTRA_DESP 12.0f
+#define X_EXTRA_DESP_INV 60.0f
+#define X_EXTRA_FIN_INV 100.0f
+#define Y_EXTRA_VEL_INC 20.0f
 
 class Fatality {
 public:
@@ -62,6 +63,7 @@ private:
 	float yInicialExtra;
 	float yExtra;
 	float xExtra;
+	float yVelExtra;
 	// dice donde se ubica inicialmente el efecto puede ser "ganador" o "perdedor"
 	// todos los efectos van hacia el perdedor así que o salen desde la posicion del ganador
 	// y le impactan o se efectuan directamente sobre el perdedor 
