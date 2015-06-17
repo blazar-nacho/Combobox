@@ -19,7 +19,34 @@ Cuerpo::Cuerpo(const defCuerpo unaDefCuerpo, Controlador* controladorNuevo)
 	estadoAnterior.golpeado = NOGOLPEADO;
 	estadoAnterior.movimiento = PARADO;
 	fatalityEst = defFatality();
+	spritesFrenados = false;
+	esInvisible = false;
 }
+
+void Cuerpo::frenarSprites(){
+	spritesFrenados = true;
+}
+
+void Cuerpo::liberarSprites(){
+	spritesFrenados = false;
+}
+
+void Cuerpo::Invisible(){
+	esInvisible = true;
+}
+
+void Cuerpo::Visible(){
+	esInvisible = false;
+}
+
+bool Cuerpo::estaFrenadoSprites(){
+	return spritesFrenados;
+}
+
+bool Cuerpo::estaInvisible(){
+	return esInvisible;
+}
+
 
 std::vector<Sensor*>* Cuerpo::getSensoresActivos() const
 {

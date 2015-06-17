@@ -395,7 +395,13 @@ void Vista::actualizar(){
 	personajesVista.push_back(Parser::getInstancia().getPelea()->getPersonaje2());
 	Ventana ventanaVista = Parser::getInstancia().getVentana();
 	
+	//Frenar o no sprites
+	frenarsprite1 = refMundo->getCuerpo(0)->estaFrenadoSprites();
+	frenarsprite2 = refMundo->getCuerpo(1)->estaFrenadoSprites();
 	
+	//Invisibles o no
+	Invisible1 = refMundo->getCuerpo(0)->estaInvisible();
+	Invisible2 = refMundo->getCuerpo(1)->estaInvisible();
 
 	//Parametros de la ventana
 
@@ -587,35 +593,6 @@ bool estaEnRectangulo(SDL_Rect rectangulo, EventoDeMouse *unEventoDeMouse){
 	if (((unEventoDeMouse->getX() >= rectangulo.x) && (unEventoDeMouse->getX() <= (rectangulo.x + rectangulo.w))) && ((unEventoDeMouse->getY() >= rectangulo.y) && (unEventoDeMouse->getY() <= (rectangulo.y + rectangulo.h))))
 		return true;
 		return false;
-}
-
-void Vista::FrenarSprites(Personaje* unPersonaje){
-	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje1())
-		frenarsprite1 = true;
-	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje2())
-		frenarsprite2 = true;
-}
-
-void Vista::LiberarSprites(Personaje* unPersonaje){
-	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje1())
-		frenarsprite1 = false;
-	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje2())
-		frenarsprite2 = false;
-
-}
-
-void Vista::Invisible(Personaje* unPersonaje){
-	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje1())
-		Invisible1 = true;
-	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje2())
-		Invisible2 = true;
-}
-
-void Vista::Visible(Personaje* unPersonaje){
-	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje1())
-		Invisible1 = false;
-	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje2())
-		Invisible2 = false;
 }
 
 std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPersonaje){
