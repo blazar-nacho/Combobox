@@ -256,7 +256,15 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		SDL_FreeSurface(FinishHim);
 		
 		//Carga de cuadrado redimension para texto de combos
-		cuadradoRedimension = ajusteResolucionBase800x600(0, 550, 100, 50);
+		cuadradoRedimension = ajusteResolucionBase800x600(0, 550, 75, 40);
+		cuadradoRedimension2 = ajusteResolucionBase800x600(75, 550, 75, 40);
+		cuadradoRedimension3 = ajusteResolucionBase800x600(150, 550, 75, 40);
+		cuadradoRedimension4 = ajusteResolucionBase800x600(225, 550, 75, 40);
+		cuadradoRedimension5 = ajusteResolucionBase800x600(300, 550, 75, 40);
+		cuadradoRedimension6 = ajusteResolucionBase800x600(375, 550, 75, 40);
+		cuadradoRedimension7 = ajusteResolucionBase800x600(450, 550, 75, 40);
+		cuadradoRedimension8 = ajusteResolucionBase800x600(525, 550, 75, 40);
+
 		textoCombos = "-";
 
 		//Contadores de efectos
@@ -1903,7 +1911,6 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 	if (Parser::getInstancia().getPelea()->getRoundActual()->getPersonajeGanador() == personajesVista.at(1)){
 		DibujarGanador(GANOJUGADOR2);
 	}
-
 }
 
 void Vista::alfa(Uint8 alfa){

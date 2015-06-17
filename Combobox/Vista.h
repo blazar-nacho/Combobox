@@ -129,6 +129,13 @@ private:
 	std::string nombreTextoPj1;
 	std::string nombreTextoPj2;
 	SDL_Rect cuadradoRedimension;
+	SDL_Rect cuadradoRedimension2;
+	SDL_Rect cuadradoRedimension3;
+	SDL_Rect cuadradoRedimension4;
+	SDL_Rect cuadradoRedimension5;
+	SDL_Rect cuadradoRedimension6;
+	SDL_Rect cuadradoRedimension7;
+	SDL_Rect cuadradoRedimension8;
 
 	std::string textoCombos;
 
