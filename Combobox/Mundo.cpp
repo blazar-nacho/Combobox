@@ -1111,6 +1111,7 @@ void Mundo::setResolver(ESTADO resolverNuevo, Cuerpo* refCuerpo)
 
 
 ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nuevoEstado, bool invertido, bool SinVida){
+	
 	Sprite* elSprite = unCuerpo->getSprite();
 	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
 
@@ -1163,13 +1164,10 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		nuevoEstado.golpeado = FALLECIDO_ROUND;
 	}
 		
-	if (estadoanterior.accion == FATALITY_END){
-		int x = 10;
-	}
-	if (estadoanterior.accion == FATALITY_END && nuevoEstado.accion != FATALITY_END){
-		nuevoEstado.golpeado = FALLECIDO;
+	
+	
 
-	}
+	
 	if (Parser::getInstancia().getPelea()->terminoLaPelea() && estadoanterior.accion != FATALITY_RUN){
 
 
@@ -1177,47 +1175,54 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 			if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
 				
 				int vitalidad = unCuerpo->getRefPersonaje()->getVida();
+				
+				if ((vitalidad <= 0)){
 
-				//esto es para que no entre el otro personaje
-				if ( (vitalidad <= 0)  && estadoanterior.golpeado != DIZZY && estadoanterior.golpeado != TUMBANDOSE && estadoanterior.golpeado != TUMBADO){
+					//esto es para que no entre el otro personaje
+					if ( (vitalidad <= 0)  && estadoanterior.golpeado != DIZZY && estadoanterior.golpeado != TUMBANDOSE && estadoanterior.golpeado != TUMBADO){
 					
-					if (nuevoEstado.golpeado != GOLPEADO){
-						nuevoEstado.golpeado = DIZZY;
-						unCuerpo->setDemora(10 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+						if (nuevoEstado.golpeado != GOLPEADO){
+							nuevoEstado.golpeado = DIZZY;
+							unCuerpo->setDemora(10 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+						}
+					}
+					else{ 
+						if (estadoanterior.golpeado == TUMBANDOSE && nuevoEstado.golpeado == NOGOLPEADO){
+						
+							nuevoEstado.golpeado = TUMBADO;
+							unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+						}
+
+						if (estadoanterior.golpeado == TUMBADO && nuevoEstado.golpeado == NOGOLPEADO){
+
+							nuevoEstado.golpeado = FALLECIDO;
+						}
+
+						if (nuevoEstado.golpeado == GOLPEADO && estadoanterior.golpeado != TUMBADO && estadoanterior.golpeado != TUMBANDOSE){
+						
+							nuevoEstado.golpeado = TUMBANDOSE;
+							unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+
+						}
+
+						if (estadoanterior.golpeado == DIZZY && nuevoEstado.golpeado == NOGOLPEADO ){
+
+							nuevoEstado.golpeado = TUMBANDOSE;
+							unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+
+						}
 					}
 				}
-				else{ 
-					if (estadoanterior.golpeado == TUMBANDOSE && nuevoEstado.golpeado == NOGOLPEADO){
-						
-						nuevoEstado.golpeado = TUMBADO;
-						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-					}
 
-					if (estadoanterior.golpeado == TUMBADO && nuevoEstado.golpeado == NOGOLPEADO){
-
+				else //este es el que gano la pelea
+				{
+					if (estadoanterior.accion == FATALITY_END && nuevoEstado.accion != FATALITY_END){
 						nuevoEstado.golpeado = FALLECIDO;
 					}
-
-					if (nuevoEstado.golpeado == GOLPEADO && estadoanterior.golpeado != TUMBADO && estadoanterior.golpeado != TUMBANDOSE){
-						
-						nuevoEstado.golpeado = TUMBANDOSE;
-						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-
-					}
-
-					if (estadoanterior.golpeado == DIZZY && nuevoEstado.golpeado == NOGOLPEADO ){
-
-						nuevoEstado.golpeado = TUMBANDOSE;
-						unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-
-					}
-
-					
-					
 				}
 
 
-			}
+			}// no hay ganador de pelea
 			else{
 			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
 			nuevoEstado.golpeado = FALLECIDO;
@@ -1226,37 +1231,7 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 
 
 
-		/*
 		
-		if (unReloj->getTicks() >= TIEMPO_DIZZY){
-		unReloj->stop();
-		*/
-
-
-		//}unReloj->start();
-
-		/*
-		if (estadoanterior.golpeado == DIZZY ){
-		if (unReloj->getTicks() >= TIEMPO_DIZZY){
-		unReloj->stop();
-		Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
-		nuevoEstado.golpeado = FALLECIDO;
-		}
-
-
-		}/*
-		if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
-		if (unReloj->getTicks() < TIEMPO_DIZZY){
-		nuevoEstado.movimiento = PARADO;
-		nuevoEstado.accion = SIN_ACCION;
-		nuevoEstado.golpeado = DIZZY;
-		}
-		else{
-		unReloj->stop();
-		Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
-		nuevoEstado.golpeado = FALLECIDO;
-		}
-		}*/
 
 
 	
