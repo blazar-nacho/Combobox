@@ -151,7 +151,7 @@ ESTADO Mundo::ResolverColisiones(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool in
 	std::pair<float, float> posAbsSensoresCuerpo;
 
 	//si otrocuerpo esta haciendo algo y yo no estoy golpeado, evaluo
-	if ((elOtroCuerpo->getEstado().accion != SIN_ACCION) && estadoanterior.golpeado == NOGOLPEADO){
+	if ((elOtroCuerpo->getEstado().accion != SIN_ACCION) && (estadoanterior.golpeado == NOGOLPEADO || estadoanterior.golpeado == DIZZY)){
 		for (unsigned i = 0; i < sensoresCuerpo->size(); i++){
 			for (unsigned j = 0; j < sensoresOtroCuerpo->size(); j++){
 				ManejadorULogicas manejadorUnidades;
@@ -1185,16 +1185,18 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 			if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
 				
 				//esto es para que no entre el otro personaje
-				if (nuevoEstado.golpeado == GOLPEADO   && estadoanterior.golpeado != DIZZY && estadoanterior.golpeado != TUMBANDOSE && estadoanterior.golpeado != TUMBADO){
-				
-					nuevoEstado.golpeado = DIZZY;
-					unCuerpo->setDemora(5 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+				if (estadoanterior.golpeado != GOLPEADO   && estadoanterior.golpeado != DIZZY && estadoanterior.golpeado != TUMBANDOSE && estadoanterior.golpeado != TUMBADO){
+					int vitalidad = unCuerpo->getRefPersonaje()->getVida();
+					if (vitalidad <= 0){
+						nuevoEstado.golpeado = DIZZY;
+						unCuerpo->setDemora(10 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+					}
 				}
 				else{ 
 					if (estadoanterior.golpeado == TUMBANDOSE && nuevoEstado.golpeado == NOGOLPEADO){
 						
 						nuevoEstado.golpeado = TUMBADO;
-						unCuerpo->setDemora(1000);
+						unCuerpo->setDemora(300);
 					}
 
 					if (estadoanterior.golpeado == TUMBADO && nuevoEstado.golpeado == NOGOLPEADO){
@@ -1396,7 +1398,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		//casos://llevando a cabo una accion // estoy golpeado 	// me acaban de golpear //si hay demora
 		if (unCuerpo->HayDemora())
 		{
-			if ((!(nuevoEstado.golpeado == GOLPEADO && unCuerpo->getEstadoAnterior().golpeado == NOGOLPEADO)) && nuevoEstado.golpeado != FALLECIDO){
+			if ((!(nuevoEstado.golpeado == GOLPEADO && (unCuerpo->getEstadoAnterior().golpeado == NOGOLPEADO || unCuerpo->getEstadoAnterior().golpeado == DIZZY))) && nuevoEstado.golpeado != FALLECIDO){
 				unCuerpo->DisminuirDemora();
 				nuevoEstado = unCuerpo->getEstadoAnterior();
 			} //en el caso de que se cumpla, el tipo sale de aca con el estado actual que es golpeado!
