@@ -1138,7 +1138,9 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 	// si la vitalidad es 0 o menos devuelve reiniciar, entonces alguien debe fallecer.
 	//Descuento vida y aplico demora de golpeado para el arma!
 
-
+	//xjose, guarda, aca entra una sola vez, una vez que estas en dizzy si le vuelven a pegar va a descontar vida y esto va a dar true
+	// hay que agregar algo mas
+	//estado.anterior!= dizzy   ??????
 	if (SinVida){
 		//logueo
 		int numeroDeRound = Parser::getInstancia().getPelea()->getRoundActual()->getNumeroDeRound();
@@ -1184,23 +1186,24 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 			}
 			*/
 		}
-
-		if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
-			if (unReloj->getTicks() < TIEMPO_DIZZY){
-				nuevoEstado.movimiento = PARADO;
-				nuevoEstado.accion = SIN_ACCION;
-				nuevoEstado.golpeado = DIZZY;
-			}
-			else{
-				unReloj->stop();
-				Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
-				nuevoEstado.golpeado = FALLECIDO;
-			}
-		}
-
-	
-
+		
 	}
+
+
+	if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
+		if (unReloj->getTicks() < TIEMPO_DIZZY){
+			nuevoEstado.movimiento = PARADO;
+			nuevoEstado.accion = SIN_ACCION;
+			nuevoEstado.golpeado = DIZZY;
+		}
+		else{
+			unReloj->stop();
+			Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
+			nuevoEstado.golpeado = FALLECIDO;
+		}
+	}
+
+
 
 
 	return nuevoEstado;
