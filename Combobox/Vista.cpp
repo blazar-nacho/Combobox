@@ -2339,7 +2339,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		proyectilUno.x = personajeUno.x + manejadorULog.darLongPixels(personajesVista.at(0)->getAncho()) - refMundo->getProyectil(1)->getPosicion().first - refMundo->getProyectil(1)->getAncho();
 	proyectilUno.y = personajeUno.y + refMundo->getProyectil(1)->getPosicion().second;	
 	// obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
-	SDL_Rect* cuadroProyectilUnoSprite = personajesVista.at(0)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
+	TipoDeArmas disparoUno = personajesVista.at(0)->getEstado().tipoarma;	
+	SDL_Rect* cuadroProyectilUnoSprite = personajesVista.at(0)->getSprite()->listaDeCuadros(disparoUno)->back();
 	// ancho y alto del dibujo del sprite
 	proyectilUno.w = (int)refMundo->getProyectil(1)->getAncho();
 	proyectilUno.h = (int)refMundo->getProyectil(1)->getAlto();
@@ -2350,7 +2351,8 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 		proyectilDos.x = personajeDos.x + refMundo->getProyectil(2)->getPosicion().first;
 	proyectilDos.y = personajeDos.y + refMundo->getProyectil(2)->getPosicion().second;
 	// obtiene el sprite del disparo, tomo el ultimo de los sprites del disparo
-	SDL_Rect* cuadroProyectilDosSprite = personajesVista.at(1)->getSprite()->listaDeCuadros(DISPARO_DEFAULT)->back();
+	TipoDeArmas disparoDos = personajesVista.at(1)->getEstado().tipoarma;
+	SDL_Rect* cuadroProyectilDosSprite = personajesVista.at(1)->getSprite()->listaDeCuadros(disparoDos)->back();
 	proyectilDos.w = (int)refMundo->getProyectil(2)->getAncho(); 
 	proyectilDos.h = (int)refMundo->getProyectil(2)->getAlto(); 
 	

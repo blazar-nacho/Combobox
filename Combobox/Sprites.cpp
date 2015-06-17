@@ -54,7 +54,9 @@ Sprite::Sprite(std::string jsonSprites){
 	this->SaltoDiagonalPatada = new std::vector<SDL_Rect*>();
 	this->AgachadoPatadaBaja = new std::vector<SDL_Rect*>();
 	this->AgachadoPatadaAlta = new std::vector<SDL_Rect*>();
-	this->Disparo = new std::vector<SDL_Rect*>();
+	this->DisparoProyectil = new std::vector<SDL_Rect*>();
+	this->DisparoAcido = new std::vector<SDL_Rect*>();
+	this->DisparoHielo = new std::vector<SDL_Rect*>();
 
 	this->Cayendo = new std::vector<SDL_Rect*>();
 	this->Tumbado = new std::vector<SDL_Rect*>();
@@ -210,10 +212,20 @@ Sprite::Sprite(std::string jsonSprites){
 	// Sensores AgachadoPatadaAlta
 	cargarSensores("AgachadoPatadaAlta", sprites);
 
-	// Sprites Disparo
-	cargarSprites(Disparo, "Disparo", sprites);
-	// Sensores Disparo
-	cargarSensores("Disparo", sprites);
+	// Sprites DisparoProyectil
+	cargarSprites(DisparoProyectil, "DisparoProyectil", sprites);
+	// Sensores DisparoProyectil
+	cargarSensores("DisparoProyectil", sprites);
+
+	// Sprites DisparoAcido
+	cargarSprites(DisparoAcido, "DisparoAcido", sprites);
+	// Sensores DisparoAcido
+	cargarSensores("DisparoAcido", sprites);
+
+	// Sprites DisparoHielo
+	cargarSprites(DisparoHielo, "DisparoHielo", sprites);
+	// Sensores DisparoHielo
+	cargarSensores("DisparoHielo", sprites);
 
 	// Sprites Cayendo
 	cargarSprites(Cayendo, "Cayendo", sprites);
@@ -266,9 +278,8 @@ void Sprite::cargarSensores(std::string unEstadoStr, Json::Value spritesRaiz)
 		int altoSens = estadoSens[j].get("alto", 0).asFloat();
 		bool esHitBoxSens = estadoSens[j].get("esHitBox", false).asBool();
 		// se carga el sensor
-		if (unEstadoStr != "Disparo")
-			this->Sensores.back()->push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
-		else
+		this->Sensores.back()->push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
+		if ((unEstadoStr == "DisparoProyectil") || (unEstadoStr == "DisparoAcido") || (unEstadoStr == "DisparoHielo"))
 			sensoresDisparo.push_back(new Sensor(XYSens, anchoSens, altoSens, esHitBoxSens, unEstadoStr));
 	}
 }
@@ -325,7 +336,7 @@ Json::Value	Sprite::ParsearSprites(std::string jsonSprites)
 std::vector<SDL_Rect*>* Sprite::listaDeCuadros(std::string otrosSprites)
 {
 	if (otrosSprites == DISPARO_DEFAULT)
-		return Disparo;
+		return DisparoProyectil;
 
 	return nullptr;
 }
@@ -438,6 +449,18 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 
 	return Quieto;
 }
+
+std::vector<SDL_Rect*>* Sprite::listaDeCuadros(TipoDeArmas arma){
+	if (arma == PROYECTIL)
+		return DisparoProyectil;
+	if (arma == HIELO)
+		return DisparoHielo;
+	if (arma == ACIDO)
+		return DisparoAcido;
+
+	return DisparoProyectil;
+}
+
 
 int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	if (estadoDelPersonaje.golpeado == GOLPEADO){
@@ -666,10 +689,20 @@ Sprite::~Sprite()
 	AgachadoPatadaAlta->clear();
 	delete AgachadoPatadaAlta;
 
-	for (size_t i = 0; i < Disparo->size(); i++)
-		delete Disparo->at(i);
-	Disparo->clear();
-	delete Disparo;
+	for (size_t i = 0; i < DisparoProyectil->size(); i++)
+		delete DisparoProyectil->at(i);
+	DisparoProyectil->clear();
+	delete DisparoProyectil;
+
+	for (size_t i = 0; i < DisparoAcido->size(); i++)
+		delete DisparoAcido->at(i);
+	DisparoAcido->clear();
+	delete DisparoAcido;
+
+	for (size_t i = 0; i < DisparoHielo->size(); i++)
+		delete DisparoHielo->at(i);
+	DisparoHielo->clear();
+	delete DisparoHielo;
 
 	for (size_t i = 0; i < Cayendo->size(); i++)
 		delete Cayendo->at(i);
