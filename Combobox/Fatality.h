@@ -5,7 +5,7 @@
 #define DIST 4.0f
 #define RANGO_DIST 2.5f
 #define RETRASO_SPRT 6
-#define CONTADOR_INI 200
+#define CONTADOR_INI 400
 #define X_EXTRA_DESP 12.0f
 #define X_EXTRA_DESP_INV 60.0f
 #define X_EXTRA_FIN_INV 100.0f
