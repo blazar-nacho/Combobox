@@ -12,6 +12,8 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 	retrasoExtra = 2*RETRASO_SPRT;
 	xExtra = 0;
 	yVelExtra = 0;
+	vibrando = false;
+	tiempoVibracion = TIEMPO_VIBRACION;
 
 	contador = CONTADOR_INI;
 
@@ -216,8 +218,16 @@ void Fatality::dibujarExtraFX()
 			extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
 			yVelExtra += Y_EXTRA_VEL_INC;
 			extraFXDest->y =  yInicialExtra + yVelExtra;
-			if (extraFXDest->y >= cuadroPerdedor->y) 
+			if (extraFXDest->y >= cuadroPerdedor->y) {
 				extraFXDest->y = cuadroPerdedor->y;
+				if (tiempoVibracion > 0) {
+					vibrando = true;
+					tiempoVibracion--;
+				}
+				else  
+					vibrando = false;
+			}
+			
 		}
 		SDL_RenderCopy(renderer, texturaSDL, extraFX->at(cuadroActualExtraFX), extraFXDest);
 	}
@@ -231,8 +241,15 @@ void Fatality::dibujarExtraFX()
 			extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
 			yVelExtra += Y_EXTRA_VEL_INC;
 			extraFXDest->y = yInicialExtra + yVelExtra;
-			if (extraFXDest->y >= cuadroPerdedor->y)
+			if (extraFXDest->y >= cuadroPerdedor->y) {
 				extraFXDest->y = cuadroPerdedor->y;
+				if (tiempoVibracion > 0) {
+					vibrando = true;
+					tiempoVibracion--;
+				}
+				else
+					vibrando = false;
+			}
 		}
 		SDL_RenderCopyEx(renderer, texturaSDL, extraFX->at(cuadroActualExtraFX), extraFXDest, NULL, NULL, SDL_FLIP_HORIZONTAL);
 	}
@@ -265,6 +282,10 @@ void Fatality::cargarTextura(std::vector<double> colorGanador)
 
 std::string Fatality::getImagenDir() const{
 	return imagenDir;
+}
+
+bool Fatality::vibrar(){
+	return vibrando;
 }
 
 void Fatality::parsearFatality()

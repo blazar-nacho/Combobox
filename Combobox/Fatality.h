@@ -10,6 +10,7 @@
 #define X_EXTRA_DESP_INV 60.0f
 #define X_EXTRA_FIN_INV 100.0f
 #define Y_EXTRA_VEL_INC 20.0f
+#define TIEMPO_VIBRACION 15
 
 class Fatality {
 public:
@@ -29,6 +30,10 @@ public:
 
 	SDL_Texture* getTexturaPerdedor();
 	std::string getImagenDir() const;
+
+	// devuelve true si la pantalla debe vibrar
+	bool vibrar();
+
 
 	~Fatality();
 
@@ -72,6 +77,8 @@ private:
 	bool xIniExtraEsGanador;
 	int delayExtra;
 	int retrasoExtra;
+	bool vibrando;
+	int tiempoVibracion;
 
 	std::vector<SDL_Rect*> *Caminar;
 	std::vector<SDL_Rect*> *CaminarAtras;
