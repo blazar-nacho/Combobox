@@ -16,7 +16,7 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 	vibrando = false;
 	tiempoVibracion = TIEMPO_VIBRACION;
 
-	contador = TIEMPOFATALITYFIN;
+	contador = CONTADOR_INI; // TIEMPOFATALITYFIN;
 
 	extraFXDest = new SDL_Rect();
 
@@ -80,12 +80,13 @@ void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorA
 	contador--;
 
 	
-	dibujarExtraFX();
+	
 
 	if (!estaInvertido)
 		SDL_RenderCopy(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), cuadroGanador);
 	else
 		SDL_RenderCopyEx(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
+
 
 	if (delayPerdedor == 0) {
 		// seteo invisible al perdedor
@@ -95,13 +96,14 @@ void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorA
 		SDL_RenderCopy(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), cuadroPerdedor);
 	else
 		SDL_RenderCopyEx(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), cuadroPerdedor, NULL, NULL, SDL_FLIP_HORIZONTAL);
-
+		
 		if ((cuadroActualPerdedor < fatalityPerdedor->size() - 1) && (retraso == 0))
 			cuadroActualPerdedor++;
 	}
 	else
 		delayPerdedor--;
 
+	dibujarExtraFX();
 
 	if ((cuadroActualGanador < fatalityGanador->size() - 1) && (retraso == 0))
 		cuadroActualGanador++;
@@ -216,17 +218,25 @@ void Fatality::dibujarExtraFX()
 			if (extraFXDest->x > cuadroPerdedor->x) return;
 		}
 		else {
-			extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
-			yVelExtra += Y_EXTRA_VEL_INC;
-			extraFXDest->y =  yInicialExtra + yVelExtra;
-			if (extraFXDest->y >= cuadroPerdedor->y) {
-				extraFXDest->y = cuadroPerdedor->y;
-				if (tiempoVibracion > 0) {
-					vibrando = true;
-					tiempoVibracion--;
+			if (fatalitNum == 0) {
+				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
+				extraFXDest->y = yInicialExtra;
+				extraFXDest->w = cuadroGanador->w;
+				extraFXDest->h = 2*cuadroGanador->h;
+			}
+			else {
+				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
+				yVelExtra += Y_EXTRA_VEL_INC;
+				extraFXDest->y = yInicialExtra + yVelExtra;
+				if (extraFXDest->y >= cuadroPerdedor->y) {
+					extraFXDest->y = cuadroPerdedor->y;
+					if (tiempoVibracion > 0) {
+						vibrando = true;
+						tiempoVibracion--;
+					}
+					else
+						vibrando = false;
 				}
-				else  
-					vibrando = false;
 			}
 			
 		}
@@ -239,17 +249,25 @@ void Fatality::dibujarExtraFX()
 			if (extraFXDest->x < cuadroPerdedor->x + X_EXTRA_FIN_INV) return;
 		}
 		else {
-			extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
-			yVelExtra += Y_EXTRA_VEL_INC;
-			extraFXDest->y = yInicialExtra + yVelExtra;
-			if (extraFXDest->y >= cuadroPerdedor->y) {
-				extraFXDest->y = cuadroPerdedor->y;
-				if (tiempoVibracion > 0) {
-					vibrando = true;
-					tiempoVibracion--;
+			if (fatalitNum == 0) {
+				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
+				extraFXDest->y = yInicialExtra;
+				extraFXDest->w = cuadroGanador->w;
+				extraFXDest->h = 2 * cuadroGanador->h;
+			}
+			else {
+				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
+				yVelExtra += Y_EXTRA_VEL_INC;
+				extraFXDest->y = yInicialExtra + yVelExtra;
+				if (extraFXDest->y >= cuadroPerdedor->y) {
+					extraFXDest->y = cuadroPerdedor->y;
+					if (tiempoVibracion > 0) {
+						vibrando = true;
+						tiempoVibracion--;
+					}
+					else
+						vibrando = false;
 				}
-				else
-					vibrando = false;
 			}
 		}
 		SDL_RenderCopyEx(renderer, texturaSDL, extraFX->at(cuadroActualExtraFX), extraFXDest, NULL, NULL, SDL_FLIP_HORIZONTAL);
@@ -305,8 +323,8 @@ void Fatality::parsearFatality()
 
 
 	if (raiz["fatality"]["coordenadas"].size() > fatalitNum) {
-		distancia = raiz["fatality"]["coordenadas"][posAleatoria].get("distancia", FATALITY_DIST_DEFAULT).asFloat();
-		delayPerdedor = raiz["fatality"]["coordenadas"][posAleatoria].get("delayPerdedor", 0).asInt();
+		distancia = raiz["fatality"]["coordenadas"][fatalitNum].get("distancia", FATALITY_DIST_DEFAULT).asFloat();
+		delayPerdedor = raiz["fatality"]["coordenadas"][fatalitNum].get("delayPerdedor", 0).asInt();
 	}
 	// esto no debería pasar, si se le paso una fatality con un numero mayor a lo posible devuelve una aleatoria
 	else {
@@ -317,21 +335,33 @@ void Fatality::parsearFatality()
 
 	// Jason Value de fatality 
 	Json::Value fatalityJV = raiz["fatality"]["coordenadas"];
-
+	Json::Value estadoSprites;
 	// carga los cuadros de los sprites del vencedor
-	Json::Value estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["secuenciaSpritesGanador"];
+	if (raiz["fatality"]["coordenadas"].size() > fatalitNum) 
+		estadoSprites = raiz["fatality"]["coordenadas"][fatalitNum]["secuenciaSpritesGanador"];
+	else 
+		estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["secuenciaSpritesGanador"];
+
 	for (size_t i = 0; i < estadoSprites.size(); i++)
 		fatalityGanador->push_back(crearCuadro(estadoSprites[i]));
 
 	jugadorGanador->getSprite()->setFatality(fatalityGanador);
 
 	// carga los cuadros de los sprites del vencido
-	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["secuenciaSpritesPerdedor"];
+	if (raiz["fatality"]["coordenadas"].size() > fatalitNum)
+		estadoSprites = raiz["fatality"]["coordenadas"][fatalitNum]["secuenciaSpritesPerdedor"];
+	else
+		estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["secuenciaSpritesPerdedor"];
+
 	for (size_t i = 0; i < estadoSprites.size(); i++)
 		fatalityPerdedor->push_back(crearCuadro(estadoSprites[i]));
 
 	// carga los cuadros de los sprites extras, efectos
-	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["extraFX"];
+	if (raiz["fatality"]["coordenadas"].size() > fatalitNum)
+		estadoSprites = raiz["fatality"]["coordenadas"][fatalitNum]["extraFX"];
+	else
+		estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["extraFX"];
+
 	yInicialExtra = estadoSprites.get("yInicial", 100).asFloat();
 	xInicialExtra = estadoSprites.get("xInicial", "ganador").asString();
 	xIniExtraEsGanador = (xInicialExtra == "ganador");
