@@ -2464,7 +2464,12 @@ void Vista::deshabilitarVibracion(){
 void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect* personajeUno, SDL_Rect* personajeDos)
 {
 	//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
-	Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
+	Personaje* ganador;
+	if (modoActual == PRACTICA)
+		ganador = personajesVista->at(0);
+	else
+		ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
+	
 	if ((personajesVista->at(0)->getEstado().accion == FATALITY_RUN) || (personajesVista->at(1)->getEstado().accion == FATALITY_RUN) ||
 		(personajesVista->at(0)->getEstado().accion == FATALITY_END) || (personajesVista->at(1)->getEstado().accion == FATALITY_END)){
 		if (!fatalityCreada){
