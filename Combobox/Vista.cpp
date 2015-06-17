@@ -319,11 +319,13 @@ void Vista::crearPersonajes(){
 	AlfaVida = 200;
 	
 	if (!MODO_RAPIDO){
-		MatizColor matiz(SuperficieUno);
-		matiz.desplazarMatiz(colorPj1.at(0), colorPj1.at(1), colorPj1.at(2));
+		MatizColor *matiz = new MatizColor(SuperficieUno);
+		matiz->desplazarMatiz(colorPj1.at(0), colorPj1.at(1), colorPj1.at(2));
+		delete matiz;
 
-		MatizColor matiz2(SuperficieDos);
-		matiz2.desplazarMatiz(colorPj2.at(0), colorPj2.at(1), colorPj2.at(2));
+		MatizColor *matiz2 = new MatizColor(SuperficieDos);
+		matiz2->desplazarMatiz(colorPj2.at(0), colorPj2.at(1), colorPj2.at(2));
+		delete matiz2;
 	}
 
 	//Creación de la textura sobre la superficie
