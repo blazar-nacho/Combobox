@@ -10,7 +10,7 @@
         "coordenadas": [
             {
                 "distancia": 100,
-                "delayPerdedor": 70,
+                "delayPerdedor": 90,
                 "secuenciaSpritesGanador": [
                     {
                         "x": 1080,
@@ -191,10 +191,11 @@
                         "alto": 180
                     }
                 ],
-                "extraFx": 
+                "extraFX": 
                     {
-                        "yInicial": 100,
+                        "yInicial": 90,
                         "xInicial": "ganador",
+                        "delay": 60,
                         "secuencia": [
                             {
                                 "x": 1576,
@@ -292,40 +293,17 @@
                         "alto": 180
                     }
                 ],
-                "extraFx": 
+                "extraFX": 
                     {
-                        "yInicial": 100,
+                        "yInicial": 50,
                         "xInicial": "ganador",
+                        "delay": 20,
                         "secuencia": [
                             {
-                                "x": 1576,
-                                "y": 800,
-                                "ancho": 124,
-                                "alto": 50
-                            },
-                            {
-                                "x": 1452,
-                                "y": 800,
-                                "ancho": 124,
-                                "alto": 50
-                            },
-                            {
-                                "x": 1328,
-                                "y": 800,
-                                "ancho": 124,
-                                "alto": 50
-                            },
-                            {
-                                "x": 1204,
-                                "y": 800,
-                                "ancho": 124,
-                                "alto": 50
-                            },
-                            {
-                                "x": 1080,
-                                "y": 800,
-                                "ancho": 124,
-                                "alto": 50
+                                "x": 0,
+                                "y": 0,
+                                "ancho": 0,
+                                "alto": 0
                             }
                         ]
                     }             

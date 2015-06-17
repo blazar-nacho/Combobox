@@ -9,7 +9,10 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 	cuerpoPerdedor = cuerpoPerdedorNuevo;
 	renderer = rendererSDL;
 	retraso = RETRASO_SPRT;
+	retrasoExtra = 2*RETRASO_SPRT;
 	contador = CONTADOR_INI;
+
+	extraFXDest = new SDL_Rect();
 
 	parsearFatality();
 	distanciaCorrecta = false;
@@ -22,6 +25,8 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 
 	xJugGanador = jugadorGanador->getPosicionUn().first;
 	xJugPerdedor = jugadorPerdedor->getPosicionUn().first;
+
+	estaInvertido = xJugGanador > xJugPerdedor;
 
 	ESTADO caminarEst;
 	caminarEst.accion = SIN_ACCION;
@@ -42,6 +47,7 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 
 	cuadroActualGanador = 0;	
 	cuadroActualPerdedor = 0;
+	cuadroActualExtraFX = 0;
 
 }
 
@@ -68,7 +74,9 @@ void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorA
 	contador--;
 
 	
-	if (xJugGanador < xJugPerdedor)
+	dibujarExtraFX();
+
+	if (!estaInvertido)
 		SDL_RenderCopy(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), cuadroGanador);
 	else
 		SDL_RenderCopyEx(renderer, texturaSDL, fatalityGanador->at(cuadroActualGanador), cuadroGanador, NULL, NULL, SDL_FLIP_HORIZONTAL);
@@ -77,7 +85,7 @@ void Fatality::realizar(SDL_Rect *cuadroGanadorActual, SDL_Rect *cuadroPerdedorA
 		// seteo invisible al perdedor
 		texturaPerdedorBloqueada = true;		
 
-	if (xJugGanador < xJugPerdedor)
+		if (!estaInvertido)
 		SDL_RenderCopy(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), cuadroPerdedor);
 	else
 		SDL_RenderCopyEx(renderer, texturaSDL, fatalityPerdedor->at(cuadroActualPerdedor), cuadroPerdedor, NULL, NULL, SDL_FLIP_HORIZONTAL);
@@ -184,6 +192,44 @@ void Fatality::ubicarGanador()
 
 }
 
+void Fatality::dibujarExtraFX()
+{	
+	if (delayExtra > 0) {
+		delayExtra--;
+		return;
+	}	
+
+	yExtra += 2*DISTANCIA;
+	extraFXDest->y = cuadroGanador->y + yExtra;		
+
+
+	if (!estaInvertido) {
+		if (xIniExtraEsGanador) {
+			xExtra += 5*DISTANCIA;
+			extraFXDest->x = cuadroGanador->x + xExtra + X_EXTRA_DESP;
+			if (extraFXDest->x > cuadroPerdedor->x) return;
+		}
+		SDL_RenderCopy(renderer, texturaSDL, extraFX->at(cuadroActualExtraFX), extraFXDest);
+	}
+	else {
+		if (xIniExtraEsGanador) {
+			xExtra -= 5 * DISTANCIA;
+			extraFXDest->x = cuadroGanador->x + xExtra + X_EXTRA_DESP_INV;
+			if (extraFXDest->x < cuadroPerdedor->x + X_EXTRA_FIN_INV) return;
+		}		
+		SDL_RenderCopyEx(renderer, texturaSDL, extraFX->at(cuadroActualExtraFX), extraFXDest, NULL, NULL, SDL_FLIP_HORIZONTAL);
+	}
+
+	if ((cuadroActualExtraFX < extraFX->size() - 1) && (retrasoExtra == 0))
+		cuadroActualExtraFX++;
+
+	if (retrasoExtra == 0)
+		retrasoExtra = 2 * RETRASO_SPRT;
+	else
+		retrasoExtra--;
+}
+
+
 void Fatality::cargarTextura(std::vector<double> colorGanador)
 {
 
@@ -239,10 +285,15 @@ void Fatality::parsearFatality()
 	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["extraFX"];
 	yInicialExtra = estadoSprites.get("yInicial", 100).asFloat();
 	xInicialExtra = estadoSprites.get("xInicial", "ganador").asString();
-	retrasoExtra = estadoSprites.get("yInicial", 20).asInt();
+	xIniExtraEsGanador = (xInicialExtra == "ganador");
+	delayExtra = estadoSprites.get("delay", 20).asInt();
 	estadoSprites = estadoSprites["secuencia"];
 	for (size_t i = 0; i < estadoSprites.size(); i++)
 		extraFX->push_back(crearCuadro(estadoSprites[i]));
+	
+	extraFXDest->w = 2*extraFX->at(0)->w;
+	extraFXDest->h = 2*extraFX->at(0)->h;
+	yExtra = yInicialExtra;
 
 	jugadorPerdedor->getSprite()->setFatality(fatalityPerdedor);
 
@@ -288,4 +339,7 @@ Fatality::~Fatality(){
 		delete extraFX->at(i);
 	extraFX->clear();
 	delete extraFX;
+
+	delete extraFXDest;
+
 }
