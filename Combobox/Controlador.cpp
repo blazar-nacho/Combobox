@@ -2057,6 +2057,7 @@ int Controlador::cambiar(){
 		otroMovimiento->setMovimiento(QUIETO);
 		movimientos.push_back(otroMovimiento);
 	}
+	else delete otroMovimiento;
 
 	return CONTINUAR;
 	
