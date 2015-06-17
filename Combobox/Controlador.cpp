@@ -69,7 +69,7 @@ void Controlador::mantenerMovimientosActivos(){
 		for (size_t i = 1; i < movimientosActivos.size(); i++){
 			movimientosAuxilares.push_back(movimientosActivos.at(i));
 		}
-		delete movimientosActivos.at(0);
+		//delete movimientosActivos.at(0);
 		movimientosActivos.clear();
 		movimientosActivos = movimientosAuxilares;
 	}
@@ -84,7 +84,7 @@ void Controlador::mantenerMovimientos(){
 		for (size_t i = (movimientos.size() - (CANTIDAD_MAXIMA_EVENTOS / 2) - 1); i < movimientos.size(); i++){
 			movimientosAuxilares.push_back(movimientos.at(i));
 		}
-		delete movimientos.at(0);
+		//delete movimientos.at(0);
 		movimientos.clear();
 		movimientos = movimientosAuxilares;
 	}
