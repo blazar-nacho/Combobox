@@ -7,6 +7,7 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 	cuerpoGanador = cuerpoGanadorNuevo;
 	jugadorPerdedor = jugadorPerdedorNuevo;
 	cuerpoPerdedor = cuerpoPerdedorNuevo;
+	fatalitNum = obtenerNumFatality(jugadorGanador->getEstado());
 	renderer = rendererSDL;
 	retraso = RETRASO_SPRT;
 	retrasoExtra = 2*RETRASO_SPRT;
@@ -298,11 +299,20 @@ void Fatality::parsearFatality()
 
 	// Fatality aleatoria
 	size_t posAleatoria = rand() % (raiz["fatality"]["coordenadas"].size());
-	posAleatoria = 2;
+	//posAleatoria = 0;
 
 	imagenDir = raiz["fatality"].get("imagen", FATALITY_IMG_DEFAULT).asString();
-	distancia = raiz["fatality"]["coordenadas"][posAleatoria].get("distancia", FATALITY_DIST_DEFAULT).asFloat();
-	delayPerdedor = raiz["fatality"]["coordenadas"][posAleatoria].get("delayPerdedor", 0).asInt();
+
+
+	if (raiz["fatality"]["coordenadas"].size() > fatalitNum) {
+		distancia = raiz["fatality"]["coordenadas"][posAleatoria].get("distancia", FATALITY_DIST_DEFAULT).asFloat();
+		delayPerdedor = raiz["fatality"]["coordenadas"][posAleatoria].get("delayPerdedor", 0).asInt();
+	}
+	// esto no debería pasar, si se le paso una fatality con un numero mayor a lo posible devuelve una aleatoria
+	else {
+		distancia = raiz["fatality"]["coordenadas"][posAleatoria].get("distancia", FATALITY_DIST_DEFAULT).asFloat();
+		delayPerdedor = raiz["fatality"]["coordenadas"][posAleatoria].get("delayPerdedor", 0).asInt();
+	}
 
 
 	// Jason Value de fatality 
@@ -338,6 +348,21 @@ void Fatality::parsearFatality()
 
 }
 
+
+size_t Fatality::obtenerNumFatality(ESTADO estadoPersonaje)
+{
+	if (estadoPersonaje.fatality == FIRE)
+		return 0;
+	if (estadoPersonaje.fatality == FIREKANG)
+		return 0;
+	if (estadoPersonaje.fatality == GODHAND)
+		return 1;
+	if (estadoPersonaje.fatality == ARCADE)
+		return 2;
+
+	// default
+	return 0;
+}
 
 
 Json::Value	Fatality::ParsearRaizJson(std::string fatalityJsonDir)

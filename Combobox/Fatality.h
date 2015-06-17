@@ -51,6 +51,7 @@ private:
 	bool fatalityFinalizada;
 	// true si ya la termino de realizar pero sigue mostrandose 
 	bool fatalityEfectuada;
+	size_t fatalitNum;
 
 	std::vector<SDL_Rect*> *fatalityGanador;
 	int cuadroActualGanador;
@@ -109,4 +110,6 @@ private:
 	void ubicarGanador();
 
 	void dibujarExtraFX();
+
+	size_t obtenerNumFatality(ESTADO);
 };
