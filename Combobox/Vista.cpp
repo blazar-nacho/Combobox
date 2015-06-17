@@ -350,6 +350,14 @@ void Vista::reiniciarCamara(){
 		+ Parser::getInstancia().getVentana().getAncho() / 2;
 	finishHim = DURACIONFINISHHIM;
 
+	// se limitan los personajes
+	float anchoVentana = Parser::getInstancia().getVentana().getAncho();
+	float bordeizq = -camaraXLog;
+	float bordeder = anchoVentana - camaraXLog;
+	//Se les pone el borde
+	refMundo->getCuerpo(0)->setBorde(bordeizq, bordeder);
+	refMundo->getCuerpo(1)->setBorde(bordeizq, bordeder);
+
 	for (size_t i = 0; i < 8; i++){
 		Input* unInput = new Input();
 		unInput->setColor({ 255, 255, 255, 255 });

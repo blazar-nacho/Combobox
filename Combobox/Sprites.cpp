@@ -472,6 +472,10 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	if (estadoDelPersonaje.golpeado == GOLPEADO){
 		if (estadoDelPersonaje.movimiento == SALTO || estadoDelPersonaje.movimiento == SALTODIAGIZQ || estadoDelPersonaje.movimiento == SALTODIAGDER)
 			return ((tiempoSaltoGolpeado / (this->SaltoGolpeado->size())) / MSxCUADRO);
+		//XjoseCargaSprite 6
+		if (estadoDelPersonaje.golpeado == DIZZY)
+			return (tiempoDizzy / (this->Gancho->size()) / MSxCUADRO);
+
 		if (estadoDelPersonaje.movimiento == AGACHADO)
 			return ((tiempoAgachadoGolpeado / (this->AgachadoGolpeado->size())) / MSxCUADRO);
 		if (estadoDelPersonaje.accion == GUARDIA)
@@ -480,11 +484,7 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	}
 	if (estadoDelPersonaje.accion == GANCHO)
 		return (tiempoGancho / (this->Gancho->size()) / MSxCUADRO);
-
-	//XjoseCargaSprite 6
-	if (estadoDelPersonaje.golpeado == DIZZY)
-		return (tiempoDizzy / (this->Gancho->size()) / MSxCUADRO);
-
+	
 	if (estadoDelPersonaje.golpeado == TUMBADO)
 		return (tiempoTumbado / (this->Gancho->size()) / MSxCUADRO);
 
