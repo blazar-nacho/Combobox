@@ -6,7 +6,9 @@
 #define RANGO_DIST 2.5f
 #define RETRASO_SPRT 6
 #define CONTADOR_INI 200
-
+#define X_EXTRA_DESP 12
+#define X_EXTRA_DESP_INV 60
+#define X_EXTRA_FIN_INV 100
 
 class Fatality {
 public:
@@ -52,10 +54,19 @@ private:
 	SDL_Rect* cuadroPerdedor;
 	int retraso;
 
+	bool estaInvertido;
+
 	std::vector<SDL_Rect*> *extraFX;
+	SDL_Rect* extraFXDest;
 	int cuadroActualExtraFX;
 	float yInicialExtra;
+	float yExtra;
+	float xExtra;
+	// dice donde se ubica inicialmente el efecto puede ser "ganador" o "perdedor"
 	std::string xInicialExtra;
+	// true si la pos inicial del efecto es la del ganador false si es la del perdedor
+	bool xIniExtraEsGanador;
+	int delayExtra;
 	int retrasoExtra;
 
 	std::vector<SDL_Rect*> *Caminar;
@@ -85,4 +96,6 @@ private:
 
 	// mueve de a un paso al jugador ganador hasta la posicion de fatality	
 	void ubicarGanador();
+
+	void dibujarExtraFX();
 };
