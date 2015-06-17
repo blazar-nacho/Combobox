@@ -269,6 +269,12 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 
 		//Contadores de efectos
 		finishHim = DURACIONFINISHHIM;
+
+		//booleanos de frenado de sprites
+		frenarsprite1 = false;
+		frenarsprite2 = false;
+		Invisible1 = false;
+		Invisible2 = false;
 }
 
 bool Vista::cambiaColorPersonaje(){
@@ -558,6 +564,35 @@ bool estaEnRectangulo(SDL_Rect rectangulo, EventoDeMouse *unEventoDeMouse){
 	if (((unEventoDeMouse->getX() >= rectangulo.x) && (unEventoDeMouse->getX() <= (rectangulo.x + rectangulo.w))) && ((unEventoDeMouse->getY() >= rectangulo.y) && (unEventoDeMouse->getY() <= (rectangulo.y + rectangulo.h))))
 		return true;
 		return false;
+}
+
+void Vista::FrenarSprites(Personaje* unPersonaje){
+	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje1())
+		frenarsprite1 = true;
+	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje2())
+		frenarsprite2 = true;
+}
+
+void Vista::LiberarSprites(Personaje* unPersonaje){
+	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje1())
+		frenarsprite1 = false;
+	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje2())
+		frenarsprite2 = false;
+
+}
+
+void Vista::Invisible(Personaje* unPersonaje){
+	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje1())
+		Invisible1 = true;
+	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje2())
+		Invisible2 = true;
+}
+
+void Vista::Visible(Personaje* unPersonaje){
+	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje1())
+		Invisible1 = false;
+	if (unPersonaje == Parser::getInstancia().getPelea()->getPersonaje2())
+		Invisible2 = false;
 }
 
 std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPersonaje){
@@ -2221,7 +2256,7 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	else{
 		cuadroActualUno = listaDeCuadrosUno->at(numeroDeCuadroUno / (tiempoSecuenciaSpritesUno));
 	}
-
+	if (!frenarsprite1)
 	numeroDeCuadroUno++;
 
 	personajeUno.w = (int)round(relacionAnchoUno*cuadroActualUno->w);
@@ -2245,12 +2280,12 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 	else{
 		cuadroActualDos = listaDeCuadrosDos->at(numeroDeCuadroDos / (tiempoSecuenciaSpritesDos));
 	}
+	if (!frenarsprite2)
 	numeroDeCuadroDos++; 
 	
 	personajeDos.w = (int)round(relacionAnchoDos*cuadroActualDos->w);
 	personajeDos.h = (int)round(relacionAltoDos*cuadroActualDos->h);
 	
-
 	SDL_Rect proyectilUno;
 	SDL_Rect proyectilDos;
 
@@ -2286,22 +2321,24 @@ void Vista::DibujarPersonajes(std::vector<Personaje*> personajesVista)
 
 	//Se cargan ambos acorde a su posición relativa
 	if (invertido){
+		if (!Invisible1)
 		SDL_RenderCopyEx(renderer, texturaSpriteUno, cuadroActualUno, &personajeUno, 0, NULL, SDL_FLIP_HORIZONTAL);
 		// dibuja el proyectil si está activado
 		if (refMundo->getProyectil(1)->estaActivo())
 			SDL_RenderCopyEx(renderer, texturaSpriteUno, cuadroProyectilUnoSprite, &proyectilUno, 0, NULL, SDL_FLIP_HORIZONTAL);
-		
+		if (!Invisible2)
 		SDL_RenderCopy(renderer, texturaSpriteDos, cuadroActualDos, &PersonajeDosMovimiento);
 		// dibuja el proyectil si está activado
 		if (refMundo->getProyectil(2)->estaActivo())
 			SDL_RenderCopy(renderer, texturaSpriteDos, cuadroProyectilDosSprite, &proyectilDos);
 	}
 	else{
+		if (!Invisible1)
 		SDL_RenderCopy(renderer, texturaSpriteUno, cuadroActualUno, &PersonajeUnoMovimiento);
 		// dibuja el proyectil si está activado
 		if (refMundo->getProyectil(1)->estaActivo())
 			SDL_RenderCopy(renderer, texturaSpriteUno, cuadroProyectilUnoSprite, &proyectilUno);
-
+		if (!Invisible2)
 		SDL_RenderCopyEx(renderer, texturaSpriteDos, cuadroActualDos, &personajeDos, 0, NULL, SDL_FLIP_HORIZONTAL);
 		// dibuja el proyectil si está activado
 		if (refMundo->getProyectil(2)->estaActivo())

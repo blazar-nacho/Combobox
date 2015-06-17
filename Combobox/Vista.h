@@ -26,6 +26,10 @@ public:
 	std::string Vista::entradaTexto(SDL_Rect rectanguloDestino, std::string textoPersonaje);
 	void Vista::resetContadorLogoPelea();
 	void setModoActual(MODOS_DE_JUEGO modoActual);
+	void Vista::FrenarSprites(Personaje* unPersonaje);
+	void Vista::LiberarSprites(Personaje* unPersonaje);
+	void Vista::Invisible(Personaje* unPersonaje);
+	void Vista::Visible(Personaje* unPersonaje);
 
 	void habilitarVibracion();
 	void deshabilitarVibracion();
@@ -50,6 +54,11 @@ private:
 	int opcionPersonaje;
 	bool opcion1Seleccionada;
 	bool opcion2Seleccionada;
+
+	bool frenarsprite1;
+	bool frenarsprite2;
+	bool Invisible1;
+	bool Invisible2;
 	// hInicial, hFinal, desplazamiento
 	std::vector<double> colorPj1;
 	std::vector<double> colorPj2;
