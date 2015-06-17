@@ -2464,18 +2464,22 @@ void Vista::deshabilitarVibracion(){
 void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect* personajeUno, SDL_Rect* personajeDos)
 {
 	//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
-	//Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
+	Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
 	if ((personajesVista->at(0)->getEstado().accion == FATALITY_RUN) || (personajesVista->at(1)->getEstado().accion == FATALITY_RUN) ||
 		(personajesVista->at(0)->getEstado().accion == FATALITY_END) || (personajesVista->at(1)->getEstado().accion == FATALITY_END)){
 		if (!fatalityCreada){
 
-			//if (ganador == personajesVista[0]) // CAMBIO
-			fatality = new Fatality(personajesVista->at(0), refMundo->getCuerpo(0), texturaSpriteUno, personajesVista->at(1), refMundo->getCuerpo(1), texturaSpriteDos, renderer, refMundo, colorPj1);
-			//else // CAMBIO
-			//	fatality = new Fatality(personajesVista->at(1), refMundo->getCuerpo(0), texturaSpriteDos, personajesVista->at(0), refMundo->getCuerpo(0), texturaSpriteUno, renderer, refMundo, colorPj2);
+			if (ganador == personajesVista->at(0)) {
+				fatality = new Fatality(personajesVista->at(0), refMundo->getCuerpo(0), texturaSpriteUno, personajesVista->at(1), refMundo->getCuerpo(1), texturaSpriteDos, renderer, refMundo, colorPj1);
+				texturaSpriteUno = nullptr;
+			}
+			else {
+				fatality = new Fatality(personajesVista->at(1), refMundo->getCuerpo(0), texturaSpriteDos, personajesVista->at(0), refMundo->getCuerpo(0), texturaSpriteUno, renderer, refMundo, colorPj2);
+				texturaSpriteDos = nullptr;
+			}
 			fatalityCreada = true;
 			// le paso el control de la textura uno a la fatility
-			texturaSpriteUno = nullptr;
+			
 		}
 		else {
 			refMundo->getCuerpo(0)->setDemora(INT_MAX);			
@@ -2483,7 +2487,11 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 
 			// ejecuta un paso de la fatality
 			fatality->realizar(personajeUno, personajeDos);
-			texturaSpriteDos = fatality->getTexturaPerdedor();
+
+			if (ganador == personajesVista->at(0)) 
+				texturaSpriteDos = fatality->getTexturaPerdedor();
+			else 
+				texturaSpriteUno = fatality->getTexturaPerdedor();
 
 			if (fatality->vibrar())
 				habilitarVibracion();
@@ -2491,14 +2499,28 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 				deshabilitarVibracion();
 
 			if (fatality->efectuada()){
-				ESTADO estadoUno = personajesVista->at(0)->getEstado();
-				estadoUno.accion = FATALITY_END;
-				ESTADO estadoDos = personajesVista->at(1)->getEstado();
-				estadoDos.accion = FATALITY_END;
-				refMundo->getCuerpo(0)->setDemora(TIEMPOFATALITYFIN);
-				refMundo->getCuerpo(0)->setEstadoAnterior(estadoUno);
-				refMundo->getCuerpo(1)->setDemora(TIEMPOFATALITYFIN);
-				refMundo->getCuerpo(1)->setEstadoAnterior(estadoDos);
+				if (ganador == personajesVista->at(0)) {
+					ESTADO estadoUno = personajesVista->at(0)->getEstado();
+					estadoUno.accion = FATALITY_END;
+					ESTADO estadoDos = personajesVista->at(1)->getEstado();
+					estadoDos.golpeado = DIZZY;
+					refMundo->getCuerpo(0)->setDemora(TIEMPOFATALITYFIN);
+					refMundo->getCuerpo(0)->setEstadoAnterior(estadoUno);
+					refMundo->getCuerpo(1)->setDemora(INT_MAX);
+					refMundo->getCuerpo(1)->setEstadoAnterior(estadoDos);
+
+				}
+				else {
+					ESTADO estadoDos = personajesVista->at(0)->getEstado();
+					estadoDos.accion = FATALITY_END;
+					ESTADO estadoUno = personajesVista->at(1)->getEstado();
+					estadoUno.golpeado = DIZZY;
+					refMundo->getCuerpo(1)->setDemora(TIEMPOFATALITYFIN);
+					refMundo->getCuerpo(1)->setEstadoAnterior(estadoUno);
+					refMundo->getCuerpo(0)->setDemora(INT_MAX);
+					refMundo->getCuerpo(0)->setEstadoAnterior(estadoDos);
+				}
+				
 			}
 
 			if (fatality->finalizo()){
