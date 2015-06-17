@@ -275,50 +275,171 @@
                     }
             },
             {
-                "distancia": 100,
-                "delayPerdedor": 70,
-                "secuenciaSpritesGanador": [
+               "distancia": 100,
+                "delayPerdedor": 90,
+                "secuenciaSpritesGanador": [                    
+                    {
+                        "x": 900,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
                     {
                         "x": 720,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 540,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 360,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 180,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 0,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 0,
+                        "ancho": 0,
+                        "alto": 0
                     }
+
                 ],
                 "secuenciaSpritesPerdedor": [
                     {
+                        "x": 1620,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1440,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
                         "x": 540,
-                        "y": 540,
+                        "y": 180,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 360,
-                        "y": 540,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 180,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1620,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1440,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1260,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 1080,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 900,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 720,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 540,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 360,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 180,
+                        "y": 360,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 360,
                         "ancho": 180,
                         "alto": 180
                     }
@@ -337,53 +458,133 @@
                         "alto": 180
                     }
                 ],
-                "extraFX": {
-                    "yInicial": 50,
-                    "xInicial": "ganador",
-                    "delay": 20,
-                    "secuencia": [
-                        {
-                            "x": 0,
-                            "y": 0,
-                            "ancho": 0,
-                            "alto": 0
-                        }
-                    ]
-                }
+                "extraFX": 
+                    {
+                        "yInicial": -180,
+                        "xInicial": "perdedor",
+                        "delay": 60,
+                        "secuencia": [
+                            {
+                                "x": 1800,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 1620,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 1440,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 1260,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 1080,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 900,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 720,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 540,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 360,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 180,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 0,
+                                "y": 540,
+                                "ancho": 180,
+                                "alto": 360
+                            },
+                            {
+                                "x": 0,
+                                "y": 540,
+                                "ancho": 0,
+                                "alto": 0
+                            }
+                            
+                        ]
+                    }
             },
             {
                 "distancia": 100,
                 "delayPerdedor": 199,
                 "secuenciaSpritesGanador": [
+                     {
+                        "x": 900,
+                        "y": 0,
+                        "ancho": 180,
+                        "alto": 180
+                    },
                     {
                         "x": 720,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 540,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 360,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 180,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
                     },
                     {
                         "x": 0,
-                        "y": 720,
+                        "y": 0,
                         "ancho": 180,
                         "alto": 180
+                    },
+                    {
+                        "x": 0,
+                        "y": 0,
+                        "ancho": 0,
+                        "alto": 0
                     }
                 ],
                 "secuenciaSpritesPerdedor": [

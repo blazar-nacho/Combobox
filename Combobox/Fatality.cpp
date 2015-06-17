@@ -218,7 +218,7 @@ void Fatality::dibujarExtraFX()
 			if (extraFXDest->x > cuadroPerdedor->x) return;
 		}
 		else {
-			if (fatalitNum == 0) {
+			if ((fatalitNum == 0) || (fatalitNum == 1)) {
 				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
 				extraFXDest->y = yInicialExtra;
 				extraFXDest->w = cuadroGanador->w;
@@ -249,7 +249,7 @@ void Fatality::dibujarExtraFX()
 			if (extraFXDest->x < cuadroPerdedor->x + X_EXTRA_FIN_INV) return;
 		}
 		else {
-			if (fatalitNum == 0) {
+			if ((fatalitNum == 0) || (fatalitNum == 1)){
 				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
 				extraFXDest->y = yInicialExtra;
 				extraFXDest->w = cuadroGanador->w;
@@ -316,8 +316,8 @@ void Fatality::parsearFatality()
 	Json::Value raiz = ParsearRaizJson(jugadorGanador->getFatalityDir());
 
 	// Fatality aleatoria
-	size_t posAleatoria = rand() % (raiz["fatality"]["coordenadas"].size());
-	//posAleatoria = 0;
+	size_t posAleatoria = rand() % (raiz["fatality"]["coordenadas"].size());	
+	//fatalitNum = 1;
 
 	imagenDir = raiz["fatality"].get("imagen", FATALITY_IMG_DEFAULT).asString();
 
