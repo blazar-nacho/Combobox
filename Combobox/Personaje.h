@@ -10,7 +10,7 @@ enum Movimientos
 enum Acciones
 {
 	SIN_ACCION, GUARDIA, GANCHO, PATADA_ALTA, PATADA_BAJA, GOLPE_ALTO1, GOLPE_ALTO2, GOLPE_BAJO, ARMA_ARROJABLE, ICESHOOT,TELEPORT,FIREWALL,
-	BICICLETA,FLYKICK,SUBBARRIDA,POWERBALL,ARPON,FATALITY1, FATALITY_EST,FATALITY3, FIN_FATALITY
+	BICICLETA, FLYKICK, SUBBARRIDA, POWERBALL, ARPON, FATALITY_RUN, FATALITY_END
 };
 
 /*
@@ -22,10 +22,10 @@ enum Acciones
 #define NOMBRE_COMBO_6 "flykick"  //liukang
 #define NOMBRE_COMBO_7 "subbarrida" //scorpion
 #define NOMBRE_COMBO_8 "powerball" //scorpion
-#define NOMBRE_COMBO_9 "arpon" //scorpion
-#define NOMBRE_COMBO_10 "fatality"
-#define NOMBRE_COMBO_11 "fatality2"
-#define NOMBRE_COMBO_12 "fatality3"
+#define NOMBRE_COMBO_9 "ARCADE" //AMBOS
+#define NOMBRE_COMBO_10 "FIRE"  // scorpion
+#define NOMBRE_COMBO_11 "GODHAND" //scorpion 
+#define NOMBRE_COMBO_12 "FIREKANG" //liukang
 
 */
 
@@ -45,11 +45,17 @@ enum TipoDeArmas
 	PROYECTIL, HIELO, ACIDO
 };
 
+enum Fatalitys
+{
+	ARCADE, FIRE, FIREKANG, GODHAND
+};
+
 struct ESTADO {
 	Movimientos movimiento;
 	Acciones accion;
 	Golpeado golpeado;
 	TipoDeArmas tipoarma;
+	Fatalitys fatality;
 };
 
 class Personaje

@@ -16,7 +16,7 @@
 
 #define MODO_DEBUG_SDL true
 #define MODO_COLOR false
-#define MODO_SONIDO true
+#define MODO_SONIDO false
 #define MODO_INMORTAL false //xjose lo uso para que nadie muera y poder testear tranquilo
 #define MODO_RAPIDO false
 

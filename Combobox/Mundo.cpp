@@ -742,28 +742,7 @@ ESTADO Mundo::ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCu
 
 			}
 
-			//COMBO 1---PODER (ARMA ARROJABLE)
-			if ((movimientos->back()->getMovimiento() == ARMA) && !(unCuerpo->getEstado().accion == ARMA_ARROJABLE)){
-				nuevoEstado.accion = ARMA_ARROJABLE;
-				unCuerpo->getSensoresProyectil().at(0)->activarSensor();
-				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-			}
-
-			//COMBO 5---
-			if (movimientos->back()->getMovimiento() == COMBO2){
-				nuevoEstado.accion = BICICLETA;
-
-				if (!invertido){
-
-					unCuerpo->aplicarImpulso(vector2D(SALTO_X, 7 * SALTO_Y));
-				}
-				else {
-
-					unCuerpo->aplicarImpulso(vector2D(-SALTO_X, 7 * SALTO_Y));
-				}
-				unCuerpo->setDemora(2 * (elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros((nuevoEstado))->size()));
-			}
-
+			
 
 			////////////////////////////////////////////////////////////////////////////////////////////
 			//TOMAS
@@ -803,14 +782,12 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 		ultimaToma = unaToma;
 
 		nuevoEstado.golpeado = DIZZY;
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		unCuerpo->setDemora(5*(elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+		
 
 	}
 	
-
-
-
-
+	
 
 	//COMBO 5--- BICICLETA
 	if (unaToma->getNombre() == NOMBRE_COMBO_5 && (unCuerpo->getRefPersonaje()->getNombre() == "Liu Kang")){
@@ -847,17 +824,45 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 	}
 
 
-	//FARTALITY-- Combo 10
-	if ((unaToma->getNombre() == NOMBRE_COMBO_10) && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
+
+	//COMBO 9 - FATALITY ARCADE
+	if ((unaToma->getNombre() == NOMBRE_COMBO_9) && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
 		ultimaToma = unaToma;
 
-		//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
-		
+		nuevoEstado.accion = FATALITY_RUN;
+		nuevoEstado.fatality = ARCADE;
+		unCuerpo->setDemora(INT_MAX);
+		otroCuerpo->setDemora(INT_MAX);
+	}
 
-			nuevoEstado.accion = FATALITY_EST;
-			unCuerpo->setDemora(INT_MAX);
-			
-		//}
+	//COMBO 10 - FATALITY FIRE
+	if ((unaToma->getNombre() == NOMBRE_COMBO_10) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
+		ultimaToma = unaToma;
+
+		nuevoEstado.accion = FATALITY_RUN;
+		nuevoEstado.fatality = FIRE;
+		unCuerpo->setDemora(INT_MAX);
+		otroCuerpo->setDemora(INT_MAX);
+	}
+
+	//COMBO 11 - FATALITY GODHAND
+	if ((unaToma->getNombre() == NOMBRE_COMBO_11) && (unCuerpo->getRefPersonaje()->getNombre() == "Scorpion") && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
+		ultimaToma = unaToma;
+
+		nuevoEstado.accion = FATALITY_RUN;
+		nuevoEstado.fatality = GODHAND;
+		unCuerpo->setDemora(INT_MAX);
+		otroCuerpo->setDemora(INT_MAX);
+	}
+
+	//COMBO 12 - FATALITY FIREKANG
+	if ((unaToma->getNombre() == NOMBRE_COMBO_12) && (unCuerpo->getRefPersonaje()->getNombre() == "Liu Kang") && (otroCuerpo->getEstado().golpeado == DIZZY || otroCuerpo->getEstadoAnterior().golpeado == DIZZY)){
+		ultimaToma = unaToma;
+
+		nuevoEstado.accion = FATALITY_RUN;
+		nuevoEstado.fatality = FIREKANG;
+		unCuerpo->setDemora(INT_MAX);
+		otroCuerpo->setDemora(INT_MAX);
 	}
 
 
