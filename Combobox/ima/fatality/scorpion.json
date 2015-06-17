@@ -1,13 +1,12 @@
 {
     "fatality": {
         "imagen": "ima/fatality/scorpion.png",
-		"salto": 
-					{
-                        "x": 1260,
-                        "y": 0,
-                        "ancho": 180,
-                        "alto": 180
-                    },
+        "salto": {
+            "x": 1260,
+            "y": 0,
+            "ancho": 180,
+            "alto": 180
+        },
         "coordenadas": [
             {
                 "distancia": 100,
@@ -192,39 +191,43 @@
                         "alto": 180
                     }
                 ],
-				"extraFx": [
+                "extraFx": 
                     {
-                        "x": 1576,
-                        "y": 800,
-                        "ancho": 124,
-                        "alto": 50
-                    },
-					{
-                        "x": 1452,
-                        "y": 800,
-                        "ancho": 124,
-                        "alto": 50
-                    },
-					{
-                        "x": 1328,
-                        "y": 800,
-                        "ancho": 124,
-                        "alto": 50
-                    },
-					{
-                        "x": 1204,
-                        "y": 800,
-                        "ancho": 124,
-                        "alto": 50
-                    },
-					{
-                        "x": 1080,
-                        "y": 800,
-                        "ancho": 124,
-                        "alto": 50
+                        "yInicial": 100,
+                        "xInicial": "ganador",
+                        "secuencia": [
+                            {
+                                "x": 1576,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            },
+                            {
+                                "x": 1452,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            },
+                            {
+                                "x": 1328,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            },
+                            {
+                                "x": 1204,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            },
+                            {
+                                "x": 1080,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            }
+                        ]
                     }
-				]
-
             },
             {
                 "distancia": 100,
@@ -288,10 +291,48 @@
                         "ancho": 180,
                         "alto": 180
                     }
-                ]
+                ],
+                "extraFx": 
+                    {
+                        "yInicial": 100,
+                        "xInicial": "ganador",
+                        "retraso": 20,
+                        "secuencia": [
+                            {
+                                "x": 1576,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            },
+                            {
+                                "x": 1452,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            },
+                            {
+                                "x": 1328,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            },
+                            {
+                                "x": 1204,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            },
+                            {
+                                "x": 1080,
+                                "y": 800,
+                                "ancho": 124,
+                                "alto": 50
+                            }
+                        ]
+                    }             
             }
-    
-		]
-	}
-}
+
+        ]
+    }
+    }
 				

@@ -235,8 +235,12 @@ void Fatality::parsearFatality()
 	for (size_t i = 0; i < estadoSprites.size(); i++)
 		fatalityPerdedor->push_back(crearCuadro(estadoSprites[i]));
 
-	// carga los cuadros de los sprites del vencido
+	// carga los cuadros de los sprites extras, efectos
 	estadoSprites = raiz["fatality"]["coordenadas"][posAleatoria]["extraFX"];
+	yInicialExtra = estadoSprites.get("yInicial", 100).asFloat();
+	xInicialExtra = estadoSprites.get("xInicial", "ganador").asString();
+	retrasoExtra = estadoSprites.get("yInicial", 20).asInt();
+	estadoSprites = estadoSprites["secuencia"];
 	for (size_t i = 0; i < estadoSprites.size(); i++)
 		extraFX->push_back(crearCuadro(estadoSprites[i]));
 
