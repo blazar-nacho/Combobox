@@ -1622,8 +1622,7 @@
                 ]
             },
 			"Cayendo": {
-                "sensores": [
-                    "sensores": [
+                "sensores": [                   
                     {
                         "x": 20,
                         "y": 90,
