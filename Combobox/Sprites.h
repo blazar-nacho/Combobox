@@ -50,7 +50,7 @@ private:
 	std::vector<SDL_Rect*>* Tumbado;
 	std::vector<SDL_Rect*>* Subbarrida;
 	//XjoseCargaSprite 4
-	std::vector<SDL_Rect*>* Subbarrida;
+	
 	std::vector<SDL_Rect*>* Dizzy;
 	std::vector<SDL_Rect*>* Bicicleta;
 	std::vector<SDL_Rect*>* Flykick;
