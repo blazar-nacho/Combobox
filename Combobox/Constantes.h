@@ -43,6 +43,10 @@ enum MODOS_DE_JUEGO { VS, COM, PRACTICA, NINGUNO };
 #define EXP 3
 #define NINGUNA 999
 
+//Duracion contadores efectos
+#define DURACIONFINISHHIM 70
+
+
 //ResultadosPelea
 #define GANOJUGADOR1 0
 #define GANOJUGADOR2 1

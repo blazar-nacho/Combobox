@@ -132,7 +132,7 @@ private:
 
 	std::string textoCombos;
 
-	Timer efectosTimer;
+	Timer finishhimTimer;
 	Timer menuTimer;
 	TTF_Font* fuente = NULL;
 	int posBarraDeVida1;
@@ -152,6 +152,9 @@ private:
 	int anchoRojoImagenBarra1;
 	int anchoRojoImagenBarra2;
 	
+	//contadores efectos
+	int finishHim;
+
 	std::vector<Capa*> capasVista;
 	int numeroDeCuadroUno;
 	std::vector<SDL_Rect*>* listaDeCuadrosUno;

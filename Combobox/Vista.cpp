@@ -259,7 +259,8 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		cuadradoRedimension = ajusteResolucionBase800x600(0, 550, 100, 50);
 		textoCombos = "-";
 
-
+		//Contadores de efectos
+		finishHim = DURACIONFINISHHIM;
 }
 
 bool Vista::cambiaColorPersonaje(){
@@ -315,6 +316,7 @@ void Vista::setColorPj2(std::vector<double> unColor)
 void Vista::reiniciarCamara(){
 	camaraXLog = -Parser::getInstancia().getEscenario().getAncho() / 2
 		+ Parser::getInstancia().getVentana().getAncho() / 2;
+	finishHim = DURACIONFINISHHIM;
 }
 
 void Vista::reiniciarMenu(){
@@ -334,7 +336,7 @@ void Vista::reiniciarMenu(){
 	SDL_DestroyTexture(texturaSpriteDos);
 	muestra1 = { 212, 195, 63, 129 };
 	muestra2 = { 528, 195, 63, 129 };
-
+	finishHim = DURACIONFINISHHIM;
 	rectDificultad = ajusteResolucionBase800x600(278, 15, 200, 200);
 
 	//textura 
@@ -1885,10 +1887,23 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
    
 	DibujarRondaPelea();
 	DibujarNombres();
-	//TODO Para pruebas
-	DibujarFinishHim();
+
+
+	if ((personajesVista.at(0)->getEstado().golpeado == DIZZY || personajesVista.at(1)->getEstado().golpeado == DIZZY) && (finishHim>0)){
+		finishHim--;
+		DibujarFinishHim();
+	}
+
+	if (personajesVista.at(0)->getEstado().accion == FIN_FATALITY || personajesVista.at(1)->getEstado().accion == FIN_FATALITY)
 	DibujarFatality();
-	DibujarGanador(GANOJUGADOR2);
+
+	if (Parser::getInstancia().getPelea()->getRoundActual()->getPersonajeGanador() == personajesVista.at(0)){
+		DibujarGanador(GANOJUGADOR1);
+	}
+	if (Parser::getInstancia().getPelea()->getRoundActual()->getPersonajeGanador() == personajesVista.at(1)){
+		DibujarGanador(GANOJUGADOR2);
+	}
+
 }
 
 void Vista::alfa(Uint8 alfa){
@@ -2047,26 +2062,17 @@ void Vista::DibujarReloj(){
 }
 
 void Vista::DibujarFinishHim(){
-	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
-	SDL_Rect rFinishHim = ajusteResolucionBase800x600(235, 172, 300, 150);
-
-	if ((segundosTranscurridos >= 2.7) && (segundosTranscurridos < 4)){
+		SDL_Rect rFinishHim = ajusteResolucionBase800x600(135, 172, 500, 100);
 		SDL_SetRenderTarget(renderer, texturaFinishHim);
 		SDL_RenderCopy(renderer, texturaFinishHim, NULL, &rFinishHim);
-	}
-
 }
-void Vista::DibujarFatality(){
-	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 
+void Vista::DibujarFatality(){
 	SDL_Rect rFatality = ajusteResolucionBase800x600(225, 165, 360, 164);
-	if ((segundosTranscurridos >= 4) && (segundosTranscurridos < 5.5)){
 		SDL_SetRenderTarget(renderer, texturaFatality);
 		SDL_RenderCopy(renderer, texturaFatality, NULL, &rFatality);
-	}
 }
 void Vista::DibujarGanador(int resultado){
-	float segundosTranscurridos = Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRoundFloat();
 	
 	SDL_Rect rGanador = ajusteResolucionBase800x600(50, 500, 200, 50);
 	SDL_Rect rGanador2 = ajusteResolucionBase800x600(550, 500, 200, 50);
@@ -2079,21 +2085,15 @@ void Vista::DibujarGanador(int resultado){
 		
 	if (resultado == GANOJUGADOR1){
 		cargarTexto(nombre, color);
-	if ((segundosTranscurridos >= 5.5) && (segundosTranscurridos < 7)){
 		dibujarTexto(rGanador, 255);
-	}
 	}
 	if (resultado == GANOJUGADOR2){
 		cargarTexto(nombre2, color);
-		if ((segundosTranscurridos >= 5.5) && (segundosTranscurridos < 7)){
 			dibujarTexto(rGanador2, 255);
-		}
 	}
 	if (resultado == EMPATE){
 		cargarTexto(empate, color);
-		if ((segundosTranscurridos >= 5.5) && (segundosTranscurridos < 7)){
 			dibujarTexto(rEmpate, 255);
-		}
 	}
 }
 
