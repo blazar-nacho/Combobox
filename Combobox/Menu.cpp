@@ -31,6 +31,14 @@ int Menu::seleccionarModo(Controlador* unControlador, Controlador* otroControlad
 		int estado2 = otroControlador->cambiar();
 		controladorDeMouse->actualizar();
 
+		if (estado == FIN || estado2 == FIN){
+			return FIN;
+		}
+		
+		if (estado == REINICIAR || estado2 == REINICIAR){
+			return REINICIAR;
+		}
+
 		if (modoSeleccionado == COM){
 			if (personajes.seleccionados == NO)
 				personajes = personajes = vista->elegirPersonajes(unControlador, personajes, controladorDeMouse->getEventoDeMouse(), nombreP1, nombreP2);

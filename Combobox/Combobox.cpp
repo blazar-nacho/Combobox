@@ -84,6 +84,16 @@ int _tmain(int argc, _TCHAR* argv[])
 			Menu* menu = new Menu(new Modo(unaVista));
 			int resultadoModo = menu->seleccionarModo(Parser::getInstancia().getControlador1(), Parser::getInstancia().getControlador2());
 
+			if (resultadoModo == FIN){
+				accion = FIN;
+				break;
+			}
+
+			if (resultadoModo == REINICIAR){
+				accion = REINICIAR;
+				break;
+			}
+
 			controladorUno = menu->getModo()->getControlador1();
 			controladorDos = menu->getModo()->getControlador2();
 
