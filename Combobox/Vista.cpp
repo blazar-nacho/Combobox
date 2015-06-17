@@ -510,7 +510,7 @@ void Vista::actualizar(){
 			if (personajesVista.at(1)->getEstado().accion == GANCHO){
 				golpeado = true;
 			}
-		}
+		}		
 		else{
 			if (personajesVista.at(1)->getEstado().golpeado == GOLPEADO && personajesVista.at(1)->getEstado().accion != GUARDIA){
 				if (personajesVista.at(0)->getEstado().accion == GANCHO){
@@ -518,6 +518,11 @@ void Vista::actualizar(){
 				}
 			}
 		}
+
+		// vibracion para la fatality
+		if (fatalityCreada)			
+				golpeado = fatality->vibrar();
+
 		
 		if ((personajesVista.at(0)->getEstado().golpeado == GOLPEADO) || (personajesVista.at(1)->getEstado().golpeado == GOLPEADO)){
 			AlfaInicial = AlfaInicial - AlfaAnterior;
@@ -2466,6 +2471,11 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 			// ejecuta un paso de la fatality
 			fatality->realizar(personajeUno, personajeDos);
 			texturaSpriteDos = fatality->getTexturaPerdedor();
+
+			if (fatality->vibrar())
+				habilitarVibracion();
+			else
+				deshabilitarVibracion();
 
 			if (fatality->efectuada()){
 				ESTADO estadoUno = personajesVista->at(0)->getEstado();
