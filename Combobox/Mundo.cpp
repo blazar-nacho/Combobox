@@ -1163,7 +1163,13 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 		nuevoEstado.golpeado = FALLECIDO_ROUND;
 	}
 		
-		
+	if (estadoanterior.accion == FATALITY_END){
+		int x = 10;
+	}
+	if (estadoanterior.accion == FATALITY_END && nuevoEstado.accion != FATALITY_END){
+		nuevoEstado.golpeado = FALLECIDO;
+
+	}
 	if (Parser::getInstancia().getPelea()->terminoLaPelea() && estadoanterior.accion != FATALITY_RUN){
 
 
@@ -1206,10 +1212,7 @@ ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nue
 
 					}
 
-					if (estadoanterior.accion == FATALITY_END && nuevoEstado.accion!=FATALITY_END){
-						nuevoEstado.golpeado = FALLECIDO;
-						
-					}
+					
 					
 				}
 
