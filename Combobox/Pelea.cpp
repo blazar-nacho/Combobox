@@ -48,7 +48,8 @@ Personaje* Pelea::getPersonaje2(){
 	return personaje2;
 }
 
-
+//para el reloj y setea al personaje ganador
+//si paso la cantidad de rounds setea pelea terminada
 void Pelea::personajeGanoElRound(Personaje* unPersonaje){
 	reloj->stop();
 	if (rounds.size() <= cantidadDeRounds){

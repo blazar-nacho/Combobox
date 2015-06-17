@@ -61,4 +61,5 @@ private:
 	ESTADO ResolverAcciones(float difTiempo, Cuerpo *unCuerpo, Cuerpo *otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<Movimiento*>* movimientos);
 	ESTADO ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerpo, ESTADO nuevoEstado, bool invertido, std::vector<Movimiento*>* movimientos, Toma* unaToma);
 	ESTADO ResolverDemorasEspeciales(float difTiempo, Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, ESTADO nuevoEstado, bool invertido);
+	ESTADO ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nuevoEstado, bool invertido,bool SinVida);
 };

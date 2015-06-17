@@ -241,7 +241,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 				else{
 					unCuerpo->mover(2 * DISTANCIA);
 					elOtroCuerpo->mover(2 * -DISTANCIA);
-					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+					//unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 				}
 			}
 			else{
@@ -272,7 +272,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 						else{
 							unCuerpo->mover(3 * DISTANCIA);
 							elOtroCuerpo->mover(2 * -DISTANCIA);
-							unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+							//unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 						}
 					}
 				}
@@ -293,7 +293,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 				
 				else
 					unCuerpo->mover(DISTANCIA);
-				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+				//unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			}
 			else{// no esta en guardia analizar golpes
 				
@@ -320,7 +320,7 @@ ESTADO Mundo::ResolverGolpes(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, bool invert
 
 					else
 						unCuerpo->mover(3*DISTANCIA);
-					unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
+					//unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 
 				}
 
@@ -1100,6 +1100,113 @@ void Mundo::setResolver(ESTADO resolverNuevo, Cuerpo* refCuerpo)
 	resolverRefCuerpo = refCuerpo;
 }
 
+
+ESTADO Mundo::ResolverBatalla(Cuerpo* unCuerpo, Cuerpo* elOtroCuerpo, ESTADO nuevoEstado, bool invertido, bool SinVida){
+	
+	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
+
+
+	//Si me quede sin tiempo resuelvo quien gano el round
+		
+	if (Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRound() >= Parser::getInstancia().getPelea()->getTiempoDelRound()){
+		int numeroDeRound = Parser::getInstancia().getPelea()->getRoundActual()->getNumeroDeRound();
+		std::stringstream stream;
+		Personaje* personaje = Parser::getInstancia().getPelea()->getPersonajeGanador();
+		stream << numeroDeRound;
+
+		if (unCuerpo->getRefPersonaje()->getVida() < elOtroCuerpo->getRefPersonaje()->getVida()) {
+			Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " para " + elOtroCuerpo->getRefPersonaje()->getNombreActual(), Log::MODO_DEBUG);
+			Parser::getInstancia().getPelea()->personajeGanoElRound(elOtroCuerpo->getRefPersonaje());
+		}
+
+		if (unCuerpo->getRefPersonaje()->getVida() > elOtroCuerpo->getRefPersonaje()->getVida()) {
+			Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " para " + unCuerpo->getRefPersonaje()->getNombreActual(), Log::MODO_DEBUG);
+			Parser::getInstancia().getPelea()->personajeGanoElRound(unCuerpo->getRefPersonaje());
+		}
+
+		nuevoEstado.golpeado = FALLECIDO_ROUND;
+	}
+
+	// Si alguien se quedo sin vida evaluo
+
+
+
+
+	//****************************************************************
+	// Se evalua vitalidad y demora de golpeado
+	//************************************************************************
+	// si la vitalidad es 0 o menos devuelve reiniciar, entonces alguien debe fallecer.
+	//Descuento vida y aplico demora de golpeado para el arma!
+
+
+	if (SinVida){
+		//logueo
+		int numeroDeRound = Parser::getInstancia().getPelea()->getRoundActual()->getNumeroDeRound();
+		std::stringstream stream;
+		stream << numeroDeRound;
+		Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " para " + elOtroCuerpo->getRefPersonaje()->getNombreActual(), Log::MODO_DEBUG);
+
+		//notifico quien gano y determina si termino la pelea
+		Parser::getInstancia().getPelea()->personajeGanoElRound(elOtroCuerpo->getRefPersonaje());
+
+
+		//si termino pelea dizzy
+		if (Parser::getInstancia().getPelea()->terminoLaPelea()){
+			if (estadoanterior.golpeado != DIZZY){
+				nuevoEstado.golpeado = DIZZY;
+				unReloj->start();
+			}
+		}
+
+		else {//termino el round
+			nuevoEstado.golpeado = FALLECIDO_ROUND;
+		}
+
+
+		if (Parser::getInstancia().getPelea()->terminoLaPelea()){
+
+
+			if (Parser::getInstancia().getPelea()->getPersonajeGanador() == nullptr){
+
+				Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
+				nuevoEstado.golpeado = FALLECIDO;
+			}
+			/*
+			if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
+			if (estadoanterior.golpeado != DIZZY){
+			nuevoEstado.golpeado = DIZZY;
+			unReloj->start();
+			}
+			}
+			else{
+			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
+			nuevoEstado.golpeado = FALLECIDO;
+			}
+			*/
+		}
+
+		if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
+			if (unReloj->getTicks() < TIEMPO_DIZZY){
+				nuevoEstado.movimiento = PARADO;
+				nuevoEstado.accion = SIN_ACCION;
+				nuevoEstado.golpeado = DIZZY;
+			}
+			else{
+				unReloj->stop();
+				Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
+				nuevoEstado.golpeado = FALLECIDO;
+			}
+		}
+
+	
+
+	}
+
+
+	return nuevoEstado;
+}
+
+
 ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 {
 	ESTADO estadoanterior = unCuerpo->getEstadoAnterior();
@@ -1107,7 +1214,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	nuevoEstado.movimiento = PARADO;
 	nuevoEstado.accion = SIN_ACCION;
 	nuevoEstado.golpeado = NOGOLPEADO;
-
+	bool SinVida = false;
 	////////////////////////////////////////////
 	/*
 	cambioGolpeAlto = false;
@@ -1132,7 +1239,7 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		if (!unCuerpo->HayDemoraAire()){ unCuerpo->setDemora(0); }
 
 	}
-///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////
 
 	Sprite* elSprite = unCuerpo->getSprite();
 
@@ -1171,7 +1278,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	std::vector<Movimiento*> movimientosOtro = elOtroCuerpo->getControlador()->getMovimientos();
 		
 	
-
+	//********************************************************************************************************************************************************************
+	// LOGICA DE SEPARACION, GOLPES, ACCIONES
+	//*******************************************************************************************************************************************************************
 	if (unCuerpo->EstaSuperpuesto() && ((!(unCuerpo->estaEnPiso() && elOtroCuerpo->estaEnPiso())) || (estadoanterior.golpeado == GOLPEADO) || estadoanterior.accion==ARMA )){
 
 		nuevoEstado = Mundo::moverCuerpos(unCuerpo, elOtroCuerpo, invertido, &movimientosOtro, nuevoEstado);
@@ -1197,6 +1306,12 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		if (estadoanterior.golpeado != GOLPEADO && elOtroCuerpo->getEstado().golpeado != GOLPEADO && ((estadoanterior.accion != SIN_ACCION) || (elOtroCuerpo->getEstado().accion != SIN_ACCION))){
 			
 			nuevoEstado = Mundo::ResolverAtaques(unCuerpo, elOtroCuerpo, nuevoEstado, proyectilUno, proyectilDos, invertido);
+			if ((nuevoEstado.golpeado == GOLPEADO) && (estadoanterior.golpeado != GOLPEADO)){
+				
+				unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size())); //demora general para todo
+				SinVida = unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado()); //descuento vida
+			}
+
 		}
 
 		
@@ -1239,6 +1354,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 
 	} //cierra el else
 
+	//********************************************************************************************************************************************************************
+	// LOGICA DE SEPARACION POST ACCIONES
+	//*******************************************************************************************************************************************************************
 	
 	//Si estan superpuestos y los 2 sin ninguna accion, salvo guardia y caminando
 	if (haySuperposicion(unCuerpo, elOtroCuerpo, invertido) && (unCuerpo->getEstado().accion == SIN_ACCION || unCuerpo->getEstado().accion == GUARDIA || unCuerpo->getEstado().golpeado == GOLPEADO || unCuerpo->getEstado().movimiento == CAMINARDER || unCuerpo->getEstado().movimiento == CAMINARIZQ) && (elOtroCuerpo->getEstado().accion == SIN_ACCION || elOtroCuerpo->getEstado().accion == GUARDIA || elOtroCuerpo->getEstado().movimiento == CAMINARIZQ || elOtroCuerpo->getEstado().movimiento == CAMINARDER)){
@@ -1248,7 +1366,11 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		unCuerpo->Separados();
 	}
 
-	//************************************
+
+
+	//********************************************************************************************************************************************************************
+	// LOGICA DE PROYECTILES
+	//*******************************************************************************************************************************************************************
 
 	if (!(nuevoEstado.accion == ARMA_ARROJABLE)){
 		unCuerpo->getSensoresProyectil().at(0)->resetearPosicionInicial();
@@ -1261,106 +1383,16 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 		unCuerpo->getSensoresProyectil().at(0)->moverProyectil(VELOCIDADPROYECTIL);
 	}
 
-
-	/************************************************************************/
-	//resolver cosas del round
-
-
-
 	
-	//cosas para ver quien gano el round
-	if (Parser::getInstancia().getPelea()->getSegundosTranscurridosDelRound() >= Parser::getInstancia().getPelea()->getTiempoDelRound()){
-		int numeroDeRound = Parser::getInstancia().getPelea()->getRoundActual()->getNumeroDeRound();
-		std::stringstream stream;
-		Personaje* personaje = Parser::getInstancia().getPelea()->getPersonajeGanador();
-		stream << numeroDeRound;
-
-		if (unCuerpo->getRefPersonaje()->getVida() < elOtroCuerpo->getRefPersonaje()->getVida()) {
-			Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " para " + elOtroCuerpo->getRefPersonaje()->getNombreActual(), Log::MODO_DEBUG);
-			Parser::getInstancia().getPelea()->personajeGanoElRound(elOtroCuerpo->getRefPersonaje());
-		}
-
-		if (unCuerpo->getRefPersonaje()->getVida() > elOtroCuerpo->getRefPersonaje()->getVida()) {
-			Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " para " + unCuerpo->getRefPersonaje()->getNombreActual(), Log::MODO_DEBUG);
-			Parser::getInstancia().getPelea()->personajeGanoElRound(unCuerpo->getRefPersonaje());
-		}
-
-		nuevoEstado.golpeado = FALLECIDO_ROUND;
-	}
-
-
-	//****************************************************************
-	// Se evalua vitalidad y demora de golpeado
-	//************************************************************************
-	// si la vitalidad es 0 o menos devuelve reiniciar, entonces alguien debe fallecer.
-	//Descuento vida y aplico demora de golpeado para el arma!
-	if ((nuevoEstado.golpeado == GOLPEADO) && (estadoanterior.golpeado != GOLPEADO)){
+	//********************************************************************************************************************************************************************
+	// LOGICA DE MANEJO DE PELEA  (QUIEN GANO ROUND, FIN DE PELEA, ETC)
+	//*******************************************************************************************************************************************************************
+    
+	nuevoEstado = ResolverBatalla(unCuerpo, elOtroCuerpo, nuevoEstado, invertido, SinVida);
 		
-		
-		bool SinVida = unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado()); //descuento vida
-		
-		if (SinVida){
-			
-			int numeroDeRound = Parser::getInstancia().getPelea()->getRoundActual()->getNumeroDeRound();
-			std::stringstream stream;
-			stream << numeroDeRound;
-			Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " para " + elOtroCuerpo->getRefPersonaje()->getNombreActual(), Log::MODO_DEBUG);
-			Parser::getInstancia().getPelea()->personajeGanoElRound(elOtroCuerpo->getRefPersonaje());
-			
-			if (Parser::getInstancia().getPelea()->terminoLaPelea() ){
-				if (estadoanterior.golpeado != DIZZY){
-					nuevoEstado.golpeado = DIZZY;
-					unReloj->start();
-				}
-			}
-			else {
-				nuevoEstado.golpeado = FALLECIDO_ROUND;
-			}
-		}
-	
-	
-	
-	}
-
-	
-	if (Parser::getInstancia().getPelea()->terminoLaPelea()){
-
-
-		if (Parser::getInstancia().getPelea()->getPersonajeGanador() == nullptr){
-
-			Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
-			nuevoEstado.golpeado = FALLECIDO;
-		}
-		/*
-		if (Parser::getInstancia().getPelea()->getPersonajeGanador() != nullptr){
-		if (estadoanterior.golpeado != DIZZY){
-		nuevoEstado.golpeado = DIZZY;
-		unReloj->start();
-		}
-		}
-		else{
-		Log::getInstancia().logearMensajeEnModo("Pelea empatada", Log::MODO_DEBUG);
-		nuevoEstado.golpeado = FALLECIDO;
-		}
-		*/
-	}
-
-	if (estadoanterior.golpeado == DIZZY || nuevoEstado.golpeado == DIZZY){
-		if (unReloj->getTicks() < TIEMPO_DIZZY){
-			nuevoEstado.movimiento = PARADO;
-			nuevoEstado.accion = SIN_ACCION;
-			nuevoEstado.golpeado = DIZZY;
-		}
-		else{
-			unReloj->stop();
-			Log::getInstancia().logearMensajeEnModo("Gano personaje " + Parser::getInstancia().getPelea()->getPersonajeGanador()->getNombreActual(), Log::MODO_DEBUG);
-			nuevoEstado.golpeado = FALLECIDO;
-		}
-	}
-
-	/***********************************************************************************************************/
-
-		
+	//********************************************************************************************************************************************************************
+	// LOGICA DE BORDES PARA ALGUNOS PODERES
+	//*******************************************************************************************************************************************************************
 	if (unCuerpo->EstaFrenado() ){
 		
 		if (!((nuevoEstado.accion == BICICLETA && estadoanterior.accion != BICICLETA) || (nuevoEstado.accion == FLYKICK && estadoanterior.accion != FLYKICK))){
@@ -1385,10 +1417,10 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	}
 	
 	
-
-	
-	
-	
+		
+	//********************************************************************************************************************************************************************
+	// LOGICA DE CALCULO DE VELOCIDADES Y POSICIONES // SENSORES TAMBIEN
+	//*******************************************************************************************************************************************************************	
 	
 
 	unCuerpo->SetSensorActivoStr(nuevoEstado);
