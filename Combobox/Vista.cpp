@@ -354,6 +354,9 @@ void Vista::reiniciarCamara(){
 		if (inputs[i] != nullptr) delete inputs[i];
 		inputs[i] = unInput;
 	}
+
+	SDL_DestroyTexture(texturaSpriteUno);
+	SDL_DestroyTexture(texturaSpriteDos);
 }
 
 void Vista::reiniciarMenu(){
@@ -2507,10 +2510,8 @@ Vista::~Vista()
 		if (inputs[i] != nullptr) delete inputs[i];
 	}
 
-	if (fuente != NULL) {
-		TTF_CloseFont(fuente);
-		TTF_Quit();
-	}
+	TTF_CloseFont(fuente);
+	TTF_Quit();
 	SDL_DestroyTexture(texturaSpriteUno);
 	SDL_DestroyTexture(texturaSpriteDos);
 	SDL_DestroyTexture(texturaVerde);
