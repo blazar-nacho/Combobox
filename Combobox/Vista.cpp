@@ -45,6 +45,7 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		std::string icono(ICONO);
 		SDL_Surface* iconoSurf = IMG_Load(icono.c_str());
 		SDL_SetWindowIcon(ventana, iconoSurf);
+		SDL_FreeSurface(iconoSurf);
 
 		if (habilitarAceleracionDeHardware)
 			renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE);
@@ -167,6 +168,8 @@ Vista::Vista(Mundo* unMundo, bool* error, bool habilitarAceleracionDeHardware)
 		// Textura elección modo de juego
 		modoJuego = IMG_Load("ima/bkg/selectmodeofplay.png");
 		juegoModo = SDL_CreateTextureFromSurface(renderer, modoJuego);
+		SDL_FreeSurface(modoJuego);
+
 		int anchoVentanaPx = Parser::getInstancia().getVentana().getAnchoPx();
 		int altoVentanaPx = Parser::getInstancia().getVentana().getAltoPx();
 		rectanguloVentana = { 0, 0, anchoVentanaPx, altoVentanaPx };
@@ -354,9 +357,6 @@ void Vista::reiniciarCamara(){
 		if (inputs[i] != nullptr) delete inputs[i];
 		inputs[i] = unInput;
 	}
-
-	SDL_DestroyTexture(texturaSpriteUno);
-	SDL_DestroyTexture(texturaSpriteDos);
 }
 
 void Vista::reiniciarMenu(){
