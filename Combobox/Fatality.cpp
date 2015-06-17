@@ -218,11 +218,13 @@ void Fatality::dibujarExtraFX()
 			if (extraFXDest->x > cuadroPerdedor->x) return;
 		}
 		else {
-			if ((fatalitNum == 0) || (fatalitNum == 1)) {
+			if ((fatalitNum == 0) || (fatalitNum == 1) || (fatalitNum == 3)) {
 				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
 				extraFXDest->y = yInicialExtra;
 				extraFXDest->w = cuadroGanador->w;
 				extraFXDest->h = 2*cuadroGanador->h;
+				if (fatalitNum == 3)
+					extraFXDest->h = cuadroGanador->h;
 			}
 			else {
 				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
@@ -249,11 +251,13 @@ void Fatality::dibujarExtraFX()
 			if (extraFXDest->x < cuadroPerdedor->x + X_EXTRA_FIN_INV) return;
 		}
 		else {
-			if ((fatalitNum == 0) || (fatalitNum == 1)){
+			if ((fatalitNum == 0) || (fatalitNum == 1) || (fatalitNum == 3)){
 				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
 				extraFXDest->y = yInicialExtra;
 				extraFXDest->w = cuadroGanador->w;
 				extraFXDest->h = 2 * cuadroGanador->h;
+				if (fatalitNum == 3)
+					extraFXDest->h = cuadroGanador->h;
 			}
 			else {
 				extraFXDest->x = cuadroPerdedor->x + X_EXTRA_DESP / 2;
@@ -317,7 +321,7 @@ void Fatality::parsearFatality()
 
 	// Fatality aleatoria
 	size_t posAleatoria = rand() % (raiz["fatality"]["coordenadas"].size());	
-	//fatalitNum = 1;
+	//fatalitNum = 3;
 
 	imagenDir = raiz["fatality"].get("imagen", FATALITY_IMG_DEFAULT).asString();
 
@@ -389,6 +393,8 @@ size_t Fatality::obtenerNumFatality(ESTADO estadoPersonaje)
 		return 1;
 	if (estadoPersonaje.fatality == ARCADE)
 		return 2;
+	if (estadoPersonaje.fatality == BABALITY)
+		return 3;
 
 	// default
 	return 0;
