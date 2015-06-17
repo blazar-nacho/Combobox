@@ -2530,14 +2530,29 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 				delete fatality;
 				fatalityCreada = false;
 
-				ESTADO estadoUno = personajesVista->at(0)->getEstado();
-				estadoUno.accion = SIN_ACCION;
-				ESTADO estadoDos = personajesVista->at(1)->getEstado();
-				estadoDos.accion = SIN_ACCION;
-				refMundo->getCuerpo(0)->setDemora(0);
-				refMundo->getCuerpo(0)->setEstadoAnterior(estadoUno);
-				refMundo->getCuerpo(1)->setDemora(0);
-				refMundo->getCuerpo(1)->setEstadoAnterior(estadoDos);
+
+				if (ganador == personajesVista->at(0)) {
+					ESTADO estadoUno = personajesVista->at(0)->getEstado();
+					estadoUno.accion = SIN_ACCION;
+					ESTADO estadoDos = personajesVista->at(1)->getEstado();
+					estadoDos.golpeado = DIZZY;
+					refMundo->getCuerpo(0)->setDemora(0);
+					refMundo->getCuerpo(0)->setEstadoAnterior(estadoUno);
+					refMundo->getCuerpo(1)->setDemora(10);
+					refMundo->getCuerpo(1)->setEstadoAnterior(estadoDos);
+
+				}
+				else {
+					ESTADO estadoDos = personajesVista->at(0)->getEstado();
+					estadoDos.accion = SIN_ACCION;
+					ESTADO estadoUno = personajesVista->at(1)->getEstado();
+					estadoUno.golpeado = DIZZY;
+					refMundo->getCuerpo(1)->setDemora(10);
+					refMundo->getCuerpo(1)->setEstadoAnterior(estadoUno);
+					refMundo->getCuerpo(0)->setDemora(0);
+					refMundo->getCuerpo(0)->setEstadoAnterior(estadoDos);
+				}
+			
 
 			}
 		}

@@ -16,7 +16,7 @@ Fatality::Fatality(Personaje* jugadorGanadorNuevo, Cuerpo* cuerpoGanadorNuevo, S
 	vibrando = false;
 	tiempoVibracion = TIEMPO_VIBRACION;
 
-	contador = TIEMPOFATALITYFIN;
+	contador = CONTADOR_INI; //TIEMPOFATALITYFIN;
 
 	extraFXDest = new SDL_Rect();
 
