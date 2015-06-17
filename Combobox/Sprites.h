@@ -7,6 +7,7 @@
 // por dependencia circular declaro y despues 
 // se define en Personaje.h
 struct ESTADO;
+enum TipoDeArmas;
 
 class Sprite{
 private:	
@@ -42,7 +43,9 @@ private:
 	std::vector<SDL_Rect*>* SaltoDiagonalPatada;
 	std::vector<SDL_Rect*>* AgachadoPatadaBaja;
 	std::vector<SDL_Rect*>* AgachadoPatadaAlta;
-	std::vector<SDL_Rect*>* Disparo;
+	std::vector<SDL_Rect*>* DisparoProyectil;
+	std::vector<SDL_Rect*>* DisparoAcido;
+	std::vector<SDL_Rect*>* DisparoHielo;
 	std::vector<SDL_Rect*>* Cayendo;
 	std::vector<SDL_Rect*>* Tumbado;
 	//XjoseCargaSprite 4
@@ -70,6 +73,7 @@ public:
 	Sprite(std::string);
 	std::vector<SDL_Rect*>* listaDeCuadros(ESTADO unEstado);
 	std::vector<SDL_Rect*>* listaDeCuadros(std::string otrosSprites);
+	std::vector<SDL_Rect*>* Sprite::listaDeCuadros(TipoDeArmas arma);
 	Json::Value	ParsearSprites(std::string);
 	std::vector<std::vector<Sensor*>*> getSensores() const;
 	std::vector<Sensor*> getSensoresDisparo() const;
