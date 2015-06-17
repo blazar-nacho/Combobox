@@ -838,6 +838,7 @@ ESTADO Mundo::ResolverTomas(float difTiempo, Cuerpo *unCuerpo, Cuerpo* otroCuerp
 
 			nuevoEstado.accion = FATALITY_EST;
 			unCuerpo->setDemora(INT_MAX);
+			
 		//}
 	}
 
@@ -989,8 +990,9 @@ bool Mundo::haySuperposicion(Cuerpo *unCuerpo, Cuerpo *elOtroCuerpo, bool invert
 	return false;
 }
 
-ESTADO Mundo::ResolverArma(Cuerpo* elOtroCuerpo, Cuerpo* unCuerpo, Sensor* proyectil, bool invertido, ESTADO nuevoEstado){
 
+ESTADO Mundo::ResolverArma(Cuerpo* elOtroCuerpo, Cuerpo* unCuerpo, Sensor* proyectil, bool invertido, ESTADO nuevoEstado){
+	Sprite* elSprite = unCuerpo->getSprite();
 	ManejadorULogicas manejadorUnidades;
 
 	std::vector<Sensor*>* sensoresCuerpo = unCuerpo->getSensores();
@@ -1010,6 +1012,7 @@ ESTADO Mundo::ResolverArma(Cuerpo* elOtroCuerpo, Cuerpo* unCuerpo, Sensor* proye
 		posAbsSensoresCuerpo = getPosicionAbsSensor(sensoresCuerpo->at(j)->getPosicion(), unCuerpo, sensoresCuerpo->at(j)->getAncho(), sensoresCuerpo->at(j)->getAlto(), invertido);
 		if (hayInterseccion(posAbsSensorProyectil, manejadorUnidades.darLongUnidades(anchoEngloba), manejadorUnidades.darLongUnidades(proyectil->getAlto()), posAbsSensoresCuerpo, manejadorUnidades.darLongUnidades(sensoresCuerpo->at(j)->getAncho()), manejadorUnidades.darLongUnidades(sensoresCuerpo->at(j)->getAlto()))){
 			nuevoEstado.golpeado = GOLPEADO;
+			unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
 			proyectil->desactivarSensor();
 
 			//aplico reacciones
@@ -1290,15 +1293,20 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 	// Se evalua vitalidad y demora de golpeado
 	//************************************************************************
 	// si la vitalidad es 0 o menos devuelve reiniciar, entonces alguien debe fallecer.
+	//Descuento vida y aplico demora de golpeado para el arma!
 	if ((nuevoEstado.golpeado == GOLPEADO) && (estadoanterior.golpeado != GOLPEADO)){
-		unCuerpo->setDemora((elSprite->getConstantes(nuevoEstado))*(elSprite->listaDeCuadros(nuevoEstado)->size()));
-		if ((unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado())) == REINICIAR){
+		
+		
+		bool SinVida = unCuerpo->getRefPersonaje()->descontarVida(unCuerpo->getEstado(), elOtroCuerpo->getEstado()); //descuento vida
+		
+		if (SinVida){
 			
 			int numeroDeRound = Parser::getInstancia().getPelea()->getRoundActual()->getNumeroDeRound();
 			std::stringstream stream;
 			stream << numeroDeRound;
 			Log::getInstancia().logearMensajeEnModo("Round " + stream.str() + " para " + elOtroCuerpo->getRefPersonaje()->getNombreActual(), Log::MODO_DEBUG);
 			Parser::getInstancia().getPelea()->personajeGanoElRound(elOtroCuerpo->getRefPersonaje());
+			
 			if (Parser::getInstancia().getPelea()->terminoLaPelea() ){
 				if (estadoanterior.golpeado != DIZZY){
 					nuevoEstado.golpeado = DIZZY;
@@ -1309,6 +1317,9 @@ ESTADO Mundo::Resolver(float difTiempo, Cuerpo *unCuerpo)
 				nuevoEstado.golpeado = FALLECIDO_ROUND;
 			}
 		}
+	
+	
+	
 	}
 
 	
