@@ -418,7 +418,7 @@ std::vector<SDL_Rect*>* Sprite::listaDeCuadros(ESTADO unEstado){
 		return Agacharse;
 	}
 
-	if (unEstado.accion == FATALITY_EST){
+	if (unEstado.accion == FATALITY_RUN){
 
 		return Fatality;
 	}
@@ -498,7 +498,7 @@ int Sprite::getConstantes(ESTADO estadoDelPersonaje){
 	if (estadoDelPersonaje.movimiento == PARADO)
 		return (tiempoQuieto / (this->Quieto->size()) / MSxCUADRO);
 
-	if (estadoDelPersonaje.accion == FATALITY_EST)
+	if (estadoDelPersonaje.accion == FATALITY_RUN)
 		return (tiempoFatality / (this->Fatality->size()) / MSxCUADRO);
 }
 

@@ -1960,7 +1960,7 @@ void Vista::Dibujar(std::vector<Personaje*> personajesVista)
 		DibujarFinishHim();
 	}
 
-	if (personajesVista.at(0)->getEstado().accion == FIN_FATALITY || personajesVista.at(1)->getEstado().accion == FIN_FATALITY)
+	if (personajesVista.at(0)->getEstado().accion == FATALITY_END || personajesVista.at(1)->getEstado().accion == FATALITY_END)
 	DibujarFatality();
 
 	if (Parser::getInstancia().getPelea()->getRoundActual()->getPersonajeGanador() == personajesVista.at(0)){
@@ -2470,8 +2470,8 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 {
 	//if (Parser::getInstancia().getPelea()->terminoLaPelea()) {
 	//Personaje* ganador = Parser::getInstancia().getPelea()->getPersonajeGanador();
-	if ((personajesVista->at(0)->getEstado().accion == FATALITY_EST) || (personajesVista->at(1)->getEstado().accion == FATALITY_EST) ||
-		(personajesVista->at(0)->getEstado().accion == FIN_FATALITY) || (personajesVista->at(1)->getEstado().accion == FIN_FATALITY)){
+	if ((personajesVista->at(0)->getEstado().accion == FATALITY_RUN) || (personajesVista->at(1)->getEstado().accion == FATALITY_RUN) ||
+		(personajesVista->at(0)->getEstado().accion == FATALITY_END) || (personajesVista->at(1)->getEstado().accion == FATALITY_END)){
 		if (!fatalityCreada){
 
 			//if (ganador == personajesVista[0]) // CAMBIO
@@ -2492,9 +2492,9 @@ void Vista::RealizarFatality(std::vector<Personaje*>* personajesVista, SDL_Rect*
 
 			if (fatality->efectuada()){
 				ESTADO estadoUno = personajesVista->at(0)->getEstado();
-				estadoUno.accion = FIN_FATALITY;
+				estadoUno.accion = FATALITY_END;
 				ESTADO estadoDos = personajesVista->at(1)->getEstado();
-				estadoDos.accion = FIN_FATALITY;
+				estadoDos.accion = FATALITY_END;
 				refMundo->getCuerpo(0)->setDemora(INT_MAX);
 				refMundo->setResolver(estadoUno, refMundo->getCuerpo(0));
 				refMundo->getCuerpo(1)->setDemora(INT_MAX);
