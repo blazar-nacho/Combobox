@@ -1699,6 +1699,79 @@
                     }
                 ]
             },
+			"Tumbado": {
+                "sensores": [
+                    {
+                        "x": 95,
+                        "y": 105,
+                        "ancho": 60,
+                        "alto": 60,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1980,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    }                    
+                ]
+            },
+			"Cayendo": {
+                "sensores": [
+                    "sensores": [
+                    {
+                        "x": 20,
+                        "y": 90,
+                        "ancho": 80,
+                        "alto": 90,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    },
+                    {
+                        "x": 95,
+                        "y": 105,
+                        "ancho": 60,
+                        "alto": 60,
+                        "nSprite": 0,
+                        "esHitBox": true
+                    }
+                ],
+                "secuenciaSprites": [
+                    {
+                        "x": 1800,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+					{
+                        "x": 1620,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+					{
+                        "x": 1440,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+					{
+                        "x": 1260,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    },
+					{
+                        "x": 1080,
+                        "y": 1440,
+                        "ancho": 180,
+                        "alto": 180
+                    }
+                ]
+            },
             "Disparo": {
                 "sensores": [
                     {
